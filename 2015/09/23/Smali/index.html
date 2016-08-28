@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Smali | EverNever</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="QROM逆向工程之 - Smali文档结构介绍
+在逆向工程适配过程中，直接打交道的就是smali文件，所以明确smali文档结构，对以后的适配过程有很大的帮助。在适配的过程可以根据smali文件的格式反应对应的java源文件，其实samli文件在读起来和java其实差不多，只是java源文件很容易看清代码执行的逻辑，而smali只能进行局部的判断。在机型适配的过程中根据可以相关指令判获取类的继承信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Smali">
+<meta property="og:url" content="http://yoursite.com/2015/09/23/Smali/index.html">
+<meta property="og:site_name" content="EverNever">
+<meta property="og:description" content="QROM逆向工程之 - Smali文档结构介绍
+在逆向工程适配过程中，直接打交道的就是smali文件，所以明确smali文档结构，对以后的适配过程有很大的帮助。在适配的过程可以根据smali文件的格式反应对应的java源文件，其实samli文件在读起来和java其实差不多，只是java源文件很容易看清代码执行的逻辑，而smali只能进行局部的判断。在机型适配的过程中根据可以相关指令判获取类的继承信">
+<meta property="og:updated_time" content="2015-09-28T03:25:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Smali">
+<meta name="twitter:description" content="QROM逆向工程之 - Smali文档结构介绍
+在逆向工程适配过程中，直接打交道的就是smali文件，所以明确smali文档结构，对以后的适配过程有很大的帮助。在适配的过程可以根据smali文件的格式反应对应的java源文件，其实samli文件在读起来和java其实差不多，只是java源文件很容易看清代码执行的逻辑，而smali只能进行局部的判断。在机型适配的过程中根据可以相关指令判获取类的继承信">
+  
+    <link rel="alternative" href="/atom.xml" title="EverNever" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="//assets/blogImg/ever.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">EverNever_NCWU</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">菜鸟的成长之路</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Ever-Never" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="https://weibo.com/EverNeverNCWU" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/TPS/" style="font-size: 10px;">TPS</a> <a href="/tags/coron/" style="font-size: 10px;">coron</a> <a href="/tags/dd/" style="font-size: 10px;">dd</a> <a href="/tags/fastboot/" style="font-size: 10px;">fastboot</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/mi3/" style="font-size: 10px;">mi3</a> <a href="/tags/patchrom/" style="font-size: 10px;">patchrom</a> <a href="/tags/recovery/" style="font-size: 10px;">recovery</a> <a href="/tags/recovery-fstab/" style="font-size: 10px;">recovery.fstab</a> <a href="/tags/reject/" style="font-size: 10px;">reject</a> <a href="/tags/smali/" style="font-size: 10px;">smali</a> <a href="/tags/tps/" style="font-size: 10px;">tps</a> <a href="/tags/window/" style="font-size: 10px;">window</a> <a href="/tags/windowmanger/" style="font-size: 10px;">windowmanger</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yun-percy.github.io">振云的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://Yusan.github.com/">雨伞的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">一个菜鸟程序员,非计算机专业毕业,对程序有浓厚的兴趣.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">EverNever_NCWU</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img lazy-src="//assets/blogImg/ever.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">EverNever_NCWU</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">菜鸟的成长之路</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Ever-Never" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/EverNeverNCWU" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Smali" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/23/Smali/" class="article-date">
+  	<time datetime="2015-09-23T08:27:49.000Z" itemprop="datePublished">2015年9月23日</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Smali
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smali/">smali</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="QROM逆向工程之-Smali文档结构介绍"><a href="#QROM逆向工程之-Smali文档结构介绍" class="headerlink" title="QROM逆向工程之 - Smali文档结构介绍"></a>QROM逆向工程之 - Smali文档结构介绍</h1><blockquote>
+<p>在逆向工程适配过程中，直接打交道的就是smali文件，所以明确smali文档结构，对以后的适配过程有很大的帮助。在适配的过程可以根据smali文件的格式反应对应的java源文件，其实samli文件在读起来和java其实差不多，只是java源文件很容易看清代码执行的逻辑，而smali只能进行局部的判断。在机型适配的过程中根据可以相关指令判获取类的继承信息，实现的接口信息，字段的权限和类型，方法的权限参数类型和返回值。</p>
+</blockquote>
+<h2 id="Smali格式结构"><a href="#Smali格式结构" class="headerlink" title="Smali格式结构"></a>Smali格式结构</h2><h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><p>无论是普通类、抽象类、接口类或者内部类，反编译出来的代码中，都是以单独的Smali文件存放的，每个文件的的前三行描述改类的信息，包括权限信息、继承信息和源文件信息。<strong><em>#号之后为注释内容</em></strong>格式，格式如下。</p>
+<hr>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">.class</span><span class="keyword"> public</span> <span class="class">Lcom/android/server/SystemServer;</span> <span class="comment">#.class &lt;访问权限&gt; [修饰关键字] &lt;类名&gt;</span></div><div class="line"><span class="keyword">.super</span> <span class="class">Ljava/lang/Object;</span>                       <span class="comment">#&lt;父类名&gt;</span></div><div class="line"><span class="keyword">.source</span> <span class="string">"SystemServer.java"</span>                     <span class="comment">#&lt;源文件名&gt;</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<ul>
+<li>第一行“.class”指令指定了当前类的类名。在本例中,类的访问权限为 public,类名为<br>“Lcom/android/server/SystemServer;”,<strong>类名开头的 L 是遵循 Dalvik 字节码的相关约定,表示后面跟随的字符串为<br>一个类</strong>。  </li>
+<li>第 2 行的<strong>“.super ”</strong>指令指定了当前类的父类。本例中的“SystemServer;”的父类为<br>“Lcom/android/server/SystemServer”</li>
+<li>第 3 行的<strong>“.source”</strong>指令指定了当前类的源文件名。经过混淆的 dex 文件,反编译出来<br>的 smali 代码可能没有源文件信息,因此“.source”行的代码可能为空。    </li>
+</ul>
+<hr>
+<p>Smali 文件中字段的声明使用“.field”指令。字段有静态字段与实例字段两种。静态字段的声明格式如下。</p>
+<hr>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#static fields</span></div><div class="line"><span class="keyword">.field</span> &lt;访问权限&gt;<span class="keyword"> static</span> [修饰关键字] &lt;字段名&gt;:&lt;字段类型</div><div class="line"><span class="comment">#instance fields</span></div><div class="line"><span class="keyword">.field</span> &lt;访问权限&gt; [修饰关键字] &lt;字段名&gt;:&lt;字段类型</div></pre></td></tr></table></figure>
+<p>比如说下面的例子，最上面的是静态字段的声明，下面是实例字段的声明 ，<strong>其中[ ]中为可选项</strong>。<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># static fields</span></div><div class="line"><span class="keyword">.field</span><span class="keyword"> private</span><span class="keyword"> static</span><span class="keyword"> final</span> ENCRYPTED_STATE:<span class="class">Ljava/lang/String;</span> = <span class="string">"1"</span></div><div class="line"></div><div class="line"><span class="keyword">.field</span><span class="keyword"> private</span><span class="keyword"> static</span><span class="keyword"> final</span> ENCRYPTING_STATE:<span class="class">Ljava/lang/String;</span> = <span class="string">"trigger_restart_min_framework"</span></div><div class="line"></div><div class="line"><span class="keyword">.field</span><span class="keyword"> private</span><span class="keyword"> static</span><span class="keyword"> final</span> TAG:<span class="class">Ljava/lang/String;</span> = <span class="string">"SystemServer"</span></div><div class="line"></div><div class="line"><span class="comment"># instance fields</span></div><div class="line"><span class="keyword">.field</span> mContentResolver:<span class="class">Landroid/content/ContentResolver;</span></div></pre></td></tr></table></figure></p>
+<hr>
+<p>Smali中的方法，方法有直接方法和虚方法，其中直接方法也就是java中的私有方法。这种方法在内部类的访问中会生成对应的access方法，在下面章节介绍。方法的基本结构如下。</p>
+<hr>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#direct methods</span></div><div class="line"><span class="keyword">.method</span> &lt;访问权限&gt; [修饰关键字] &lt;方法原型&gt;</div><div class="line">    &lt;.locals&gt;</div><div class="line">    [.parameter]</div><div class="line">    </div><div class="line">    [.prologue]</div><div class="line">    [.line]</div><div class="line">    &lt;代码体&gt;<span class="keyword"></span></div><div class="line">.end method</div></pre></td></tr></table></figure>
+<ul>
+<li>“direct methods”是 baksmali 添加的注释</li>
+<li>访问权限和修饰关键字与字段的描述相同,</li>
+<li>方法原型描述了方法的名称、参数与返回值。</li>
+<li>“.locals ”指定了使用的局部变量的个数。</li>
+<li>“.parameter”指定了方法的参数,与 Dalvik 语法中使用“.parameters”指定参数个数不同,<br>每个“.parameter”指令表明使用一个参数,比如方法中有使用到 3 个参数,那么就会出现<br>3 条“.parameter”指令。</li>
+<li>“.prologue”指定了代码的开始处,混淆过的代码可能去掉了该指令。</li>
+<li>“.line”指定了该处指令在源代码中的行号,同样的,混淆过的代码可能去除了行号信息。<br>虚方法的声明与直接方法相同,只是起始处的注释为“virtual methods”。</li>
+</ul>
+<hr>
+<p>如果一个类实现了某些接口就会在smali文件中使用”.implements”关键字声明，由于一个类可以实现多个接口所以可以出现多个”.implements”。<br><strong>在QROM逆向工程适配机型过程中由于厂商对某些接口类进行扩展，导致在适配机型过程中导致某些方法没有实现而导致无法开机。这时候就可以根据实现的接口去补一些没有实现的方法</strong> ，格式如下。<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#interfaces</span></div><div class="line"><span class="keyword">.implements</span> &lt;接口名&gt;</div></pre></td></tr></table></figure></p>
+<hr>
+<p>除此之外如果一个类使用了注解，会在samli文件中使用”.annotation”指令支出。注解的作用范围可以是类  、方法、或者字段。<strong>在适配中由于工具自动插桩的过程，可能产生对一个类的存在两个注解，虽然可以回编译回去，但是dexopt释放dex文件的过程中出错直接影响开机。在apktool1.5.2之前apktool回编译jar的过程中不做检查，但是apktool 2.0.0之后就会校验，这里只简单提一下</strong>。</p>
+<ul>
+<li><p>类的注解</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#annotations</span></div><div class="line"><span class="keyword">.annotation</span> [注解属性] &lt;注解类名&gt;</div><div class="line">    [注解字段=值]</div><div class="line"><span class="keyword">.endannotation</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>字段的注解</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#instance fields</span></div><div class="line"><span class="keyword">.field</span><span class="keyword"> public</span> sayWhat:<span class="class">Ljava/lang/String;</span></div><div class="line"><span class="keyword">    .annotation</span> runtime <span class="class">LMyAnnoField;</span></div><div class="line">    info=<span class="string">"Hellomyfriend"</span><span class="keyword"></span></div><div class="line">.end annotat</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h3 id="类的结构"><a href="#类的结构" class="headerlink" title="类的结构"></a>类的结构</h3><p>无论普通类、抽象类、接口类还是内部类,反编译的时候会为每个类单独生成一个 Smali<br>文件,但是内部类相存在相对比较特殊的地方。   </p>
+<ul>
+<li>内部类的文件是“[ 外部类 ]$[ 内部类 ].smali”的形式来命名的,匿名内部类文件以“[ 外部类 ]$[ 数字 ].smali”来命名。</li>
+<li>内部类访问外部类的私有方法和变量时,都要通过编译器生成的“合成方法”来间接访问。</li>
+<li>编译器会把外部类的引用作为第一个参数插入到会内部类的构造器参数列表。</li>
+<li>内部类的构造器中是先保存外部类的引用到一个“合成变量”,再初始化外部类,最后才初始化自身。</li>
+<li>对于匿名内部类文件名的命名规则是“[ 外部类 ]$[ 数字 ].smali”，当然内部类也可以有内部类的，规则以此类推。<strong>这里就暴漏出逆向工程适配过程中的access方法的处理，由于baksmali在反编译过程对匿名内部的编号，当在一个类中加入私有的字段或者私有的方法，就会产生对应的access方法，当然前提是这个类有内部类，就有造成access错误的情况，在使用工具插桩的过程中就无法准确合入，这里就需要人力去合并。当然我们可以通过工具对access进格式化，对于新加的匿名内部类里面访问的外部类的方法和字段，使用的access方法，格式化处理后，自动追加到外部类中，这样可以减轻插桩的重复体力劳动。</strong><br>以下面代码 java 代码为例:<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String mHello = <span class="string">"Hello World!"</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</div><div class="line">     System.out.println(<span class="string">"Hello!"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">      System.out.println(s);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">InterClass</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">InterClass</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123; &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span> </span>&#123;</div><div class="line">          sayHello();</div><div class="line">          say(mHello);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>反编译后生成 HelloWorld.smali 和 HelloWorld$InterClass.smali 两个文件,其中关键代码如下:<br>HelloWorld 文件:<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 合成方法访问 mHello</span></div><div class="line"><span class="keyword">.method</span><span class="keyword"> static</span><span class="keyword"> synthetic</span> access$0(<span class="class">Lcom/smali/helloworld/HelloWorld;</span>)<span class="class">Ljava/lang/String;</span></div><div class="line"><span class="keyword">    .locals</span> 1</div><div class="line"><span class="keyword">    .parameter</span></div><div class="line"></div><div class="line"><span class="keyword">    .prologue</span></div><div class="line"><span class="keyword">    .line</span> 7</div><div class="line">   <span class="built_in"> iget-object </span>v0, p0, <span class="class">Lcom/smali/helloworld/HelloWorld;</span>-&gt;mHello:<span class="class">Ljava/lang/String;</span></div><div class="line">   <span class="built_in"> return-object </span>v0<span class="keyword"></span></div><div class="line">.end method</div><div class="line"><span class="comment">#合成方法调用 say()</span></div><div class="line"><span class="keyword">.method</span><span class="keyword"> static</span><span class="keyword"> synthetic</span> access$1(<span class="class">Lcom/smali/helloworld/HelloWorld;</span><span class="class">Ljava/lang/String;</span>)V</div><div class="line"><span class="keyword">    .locals</span> 0</div><div class="line"><span class="keyword">    .parameter</span></div><div class="line"><span class="keyword">    .parameter</span></div><div class="line"></div><div class="line"><span class="keyword">    .prologue</span></div><div class="line"><span class="keyword">    .line</span> 22</div><div class="line">   <span class="built_in"> invoke-direct </span>&#123;p0, p1&#125;, <span class="class">Lcom/smali/helloworld/HelloWorld;</span>-&gt;say(<span class="class">Ljava/lang/String;</span>)V</div><div class="line">   <span class="built_in"> return-void</span></div><div class="line"><span class="keyword">.end method</span></div></pre></td></tr></table></figure></p>
+<p>HelloWorld$InterClass.smali 文件:<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">.method</span><span class="keyword"> public</span><span class="keyword"> constructor</span> &lt;init&gt;(<span class="class">Lcom/smali/helloworld/HelloWorld;</span>I)V <span class="comment"># 插入父类参数</span></div><div class="line"><span class="keyword">    .locals</span> 0</div><div class="line"><span class="keyword">    .parameter</span></div><div class="line"><span class="keyword">    .parameter</span> <span class="string">"i"</span></div><div class="line"></div><div class="line"><span class="keyword">    .prologue</span></div><div class="line"><span class="keyword">    .line</span> 27</div><div class="line">   <span class="built_in"> iput-object </span>p1, p0, <span class="class">Lcom/smali/helloworld/HelloWorld$InterClass;</span>-&gt;this$0:<span class="class">Lcom/smali/helloworld/HelloWorld;</span> <span class="comment"># 保存外部类的引用</span></div><div class="line">   <span class="built_in"> invoke-direct </span>&#123;p0&#125;, <span class="class">Ljava/lang/Object;</span>-&gt;&lt;init&gt;()V <span class="comment">#初始化父类</span></div><div class="line">   <span class="built_in"> return-void</span></div><div class="line"><span class="keyword">.end method</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">.method</span> func()V</div><div class="line"><span class="keyword">    .locals</span> 2</div><div class="line"></div><div class="line"><span class="keyword">    .prologue</span></div><div class="line"><span class="keyword">    .line</span> 29</div><div class="line">   <span class="built_in"> iget-object </span>v0, p0, <span class="class">Lcom/smali/helloworld/HelloWorld$InterClass;</span>-&gt;this$0:<span class="class">Lcom/smali/helloworld/HelloWorld;</span> <span class="comment"># 引用外部类</span></div><div class="line">   <span class="built_in"> invoke-virtual </span>&#123;v0&#125;, <span class="class">Lcom/smali/helloworld/HelloWorld;</span>-&gt;sayHello()V <span class="comment">#调用外部类公共方法</span></div><div class="line"><span class="keyword">    .line</span> 30</div><div class="line">   <span class="built_in"> iget-object </span>v0, p0, <span class="class">Lcom/smali/helloworld/HelloWorld$InterClass;</span>-&gt;this$0:<span class="class">Lcom/smali/helloworld/HelloWorld;</span></div><div class="line">   <span class="built_in"> iget-object </span>v1, p0, <span class="class">Lcom/smali/helloworld/HelloWorld$InterClass;</span> -&gt;this$0:<span class="class">Lcom/smali/helloworld/HelloWorld;</span></div><div class="line">    <span class="comment">#调用合成方法访问外部类私有变量mHello</span></div><div class="line">   <span class="built_in"> invoke-static </span>&#123;v1&#125;, <span class="class">Lcom/smali/helloworld/HelloWorld;</span> -&gt;access$0(<span class="class">Lcom/smali/helloworld/HelloWorld;</span>)<span class="class">Ljava/lang/String;</span></div><div class="line">   <span class="built_in"> move-result-object </span>v1</div><div class="line">    <span class="comment">#调用合成方法访问外部类私有方法 say()</span></div><div class="line">   <span class="built_in"> invoke-static </span>&#123;v0, v1&#125;, <span class="class">Lcom/smali/helloworld/HelloWorld;</span>-&gt;access$1(<span class="class">Lcom/smali/helloworld/HelloWorld;</span><span class="class">Ljava/lang/String;</span>)V</div><div class="line"><span class="keyword">    .line</span> 31</div><div class="line">   <span class="built_in"> return-void</span></div><div class="line"><span class="keyword">.end method</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/24/tps-fix-reject/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          TPS 解决冲突
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Smali" data-title="Smali" data-url="http://yoursite.com/2015/09/23/Smali/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 EverNever_NCWU
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: /
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

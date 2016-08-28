@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>flash_recovery | EverNever</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="首先写这篇文章的情景,今天武汉测试反馈说大神F2无法刷写recovery和无法无法进入recovery.让我帮忙解决下,doraning建议我写篇文章,我就只好献丑了.看武汉测试是用fastboot命令在fastboot模式刷写recovery,这个肯定是错误的,大神F2是非常特别的机型不仅在recovery刷写方面还有root权限方面.下面介绍这个两个特别之处,再写几种方法刷写recovery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flash_recovery">
+<meta property="og:url" content="http://yoursite.com/2015/11/28/flash-recovery/index.html">
+<meta property="og:site_name" content="EverNever">
+<meta property="og:description" content="首先写这篇文章的情景,今天武汉测试反馈说大神F2无法刷写recovery和无法无法进入recovery.让我帮忙解决下,doraning建议我写篇文章,我就只好献丑了.看武汉测试是用fastboot命令在fastboot模式刷写recovery,这个肯定是错误的,大神F2是非常特别的机型不仅在recovery刷写方面还有root权限方面.下面介绍这个两个特别之处,再写几种方法刷写recovery">
+<meta property="og:image" content="http://yoursite.com/assets/recovery/root.jpg">
+<meta property="og:updated_time" content="2015-11-28T12:14:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="flash_recovery">
+<meta name="twitter:description" content="首先写这篇文章的情景,今天武汉测试反馈说大神F2无法刷写recovery和无法无法进入recovery.让我帮忙解决下,doraning建议我写篇文章,我就只好献丑了.看武汉测试是用fastboot命令在fastboot模式刷写recovery,这个肯定是错误的,大神F2是非常特别的机型不仅在recovery刷写方面还有root权限方面.下面介绍这个两个特别之处,再写几种方法刷写recovery">
+<meta name="twitter:image" content="http://yoursite.com/assets/recovery/root.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="EverNever" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="//assets/blogImg/ever.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">EverNever_NCWU</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">菜鸟的成长之路</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Ever-Never" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="https://weibo.com/EverNeverNCWU" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/TPS/" style="font-size: 10px;">TPS</a> <a href="/tags/coron/" style="font-size: 10px;">coron</a> <a href="/tags/dd/" style="font-size: 10px;">dd</a> <a href="/tags/fastboot/" style="font-size: 10px;">fastboot</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/mi3/" style="font-size: 10px;">mi3</a> <a href="/tags/patchrom/" style="font-size: 10px;">patchrom</a> <a href="/tags/recovery/" style="font-size: 10px;">recovery</a> <a href="/tags/recovery-fstab/" style="font-size: 10px;">recovery.fstab</a> <a href="/tags/reject/" style="font-size: 10px;">reject</a> <a href="/tags/smali/" style="font-size: 10px;">smali</a> <a href="/tags/tps/" style="font-size: 10px;">tps</a> <a href="/tags/window/" style="font-size: 10px;">window</a> <a href="/tags/windowmanger/" style="font-size: 10px;">windowmanger</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yun-percy.github.io">振云的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://Yusan.github.com/">雨伞的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">一个菜鸟程序员,非计算机专业毕业,对程序有浓厚的兴趣.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">EverNever_NCWU</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img lazy-src="//assets/blogImg/ever.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">EverNever_NCWU</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">菜鸟的成长之路</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Ever-Never" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/EverNeverNCWU" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-flash-recovery" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/28/flash-recovery/" class="article-date">
+  	<time datetime="2015-11-28T12:07:38.000Z" itemprop="datePublished">2015年11月28日</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      flash_recovery
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dd/">dd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastboot/">fastboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recovery/">recovery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recovery-fstab/">recovery.fstab</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>首先写这篇文章的情景,今天武汉测试反馈说大神F2无法刷写recovery和无法无法进入recovery.让我帮忙解决下,<strong>doraning</strong>建议我写篇文章,我就只好献丑了.看武汉测试是用fastboot命令在fastboot模式刷写recovery,这个肯定是错误的,大神F2是非常特别的机型不仅在recovery刷写方面还有root权限方面.下面介绍这个两个特别之处,再写几种方法刷写recovery.</p>
+</blockquote>
+<h4 id="刷写recovery问题"><a href="#刷写recovery问题" class="headerlink" title="刷写recovery问题"></a><strong>刷写recovery问题</strong></h4><hr>
+<p> 在适配大神F2初期并没有适配我们自己的recovery,所以找一个第三方用着,有一次偷懒用刷机精灵刷,当时进入的是刷机精灵的recovery,但是刷机成功,我重启到recovery发现,还是我自己当时用的recovery,而且ROM并没有内置recovery,当时觉得很奇怪,后来问了刷机精灵官方人员才知道他们用了什么方法,在下面的刷写recovery教程中再介绍</p>
+ <a id="more"></a>
+<hr>
+<h3 id="root权限问题"><a href="#root权限问题" class="headerlink" title="root权限问题"></a><strong>root权限问题</strong></h3><hr>
+<p>酷派系类手机难root问题,早有耳闻,各种方法防止获取root权限,这也是这次准备公测的大神F2隐藏管理中心的root授权原因,酷派系列手机只有官方root方案才能root,而且root之后开始第一屏会显示root字眼,如下图.<br><img src="/assets/recovery/root.jpg" alt=""><br>只要第一屏显示有root之后我们就可以用其他root方案获取root权限并使用自己的授权管理.<br>我目前所知道酷派系列的手机防止root方案有三种</p>
+<ul>
+<li><strong>在boot.img中动手脚,内核中有一个专门的脚本来删除su和授权管理软件.</strong></li>
+<li><strong>在libandroidruntime.so动手脚.这个由于是二进制文件,所以不知道里面动了什么手脚.</strong></li>
+<li><strong>现在大神F2没有以上两种方案,而是在内核中sbin文件夹下有coolsec文件,怀疑这个有猫腻.</strong></li>
+</ul>
+<p>由于手机已经用官方root方案root过所以没法验证第三种方案的可行性.不过论坛有部分机友也指出这个文件就是大神F2防root的根源.</p>
+<hr>
+<p>下面介绍刷写recovery的各种方法总的来说刷写recovery有两种方案.</p>
+<ul>
+<li><strong>手机有root权限通过命令行刷写</strong></li>
+<li><strong>手机有线刷模式,通过线刷工具或者fastboot命令刷写.</strong></li>
+</ul>
+<h3 id="通用性的刷写方案"><a href="#通用性的刷写方案" class="headerlink" title="通用性的刷写方案"></a><strong>通用性的刷写方案</strong></h3><hr>
+<blockquote>
+<p>这种方案比较普遍,基本上适用全部手机,但是魅族mx3 mx2不适用.但是依赖的条件比较多.下面列举需要明确的各种前提.</p>
+</blockquote>
+<ul>
+<li><strong>手机必须先获取root权限.</strong></li>
+<li><strong> 知道recovery分区对应的节点文件.</strong></li>
+<li><strong> 需要打开adb 调试.</strong></li>
+</ul>
+<p>获取root权限的方法用很多,这个可以通过转各大论坛找专门的root方案,不多说.<br>recovery分区对应的分区节点<br>这个获取方法有两种,现在大-部分手机都有by-name方法标识那个是对应的recovery分区.下面给出大神F2获取对应分区的节点文件的方法.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">16:29 ~ $ adb shell</div><div class="line">shell@Coolpad8675-A:/ $ su</div><div class="line">root@Coolpad8675-A:/ # cd dev/block/bootdevice/by-name</div><div class="line">root@Coolpad8675-A:/dev/block/bootdevice/by-name # ls -l</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 DDR -&gt; /dev/block/mmcblk0p21</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 aboot -&gt; /dev/block/mmcblk0p2</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 abootbak -&gt; /dev/block/mmcblk0p3</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 autobak -&gt; /dev/block/mmcblk0p19</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 boot -&gt; /dev/block/mmcblk0p20yi</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 cache -&gt; /dev/block/mmcblk0p26</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 config -&gt; /dev/block/mmcblk0p28</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 fsc -&gt; /dev/block/mmcblk0p15</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 fsg -&gt; /dev/block/mmcblk0p22</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 hyp -&gt; /dev/block/mmcblk0p10</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 hypbak -&gt; /dev/block/mmcblk0p11</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 keystore -&gt; /dev/block/mmcblk0p27</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 misc -&gt; /dev/block/mmcblk0p14</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 modem -&gt; /dev/block/mmcblk0p1</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 modemst1 -&gt; /dev/block/mmcblk0p12</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 modemst2 -&gt; /dev/block/mmcblk0p13</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 oem -&gt; /dev/block/mmcblk0p29</div><div class="line">lrwxrwxrwx root     root              19$70-01-26 00:30 panic -&gt; /dev/block/mmcblk0p18</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 params -&gt; /dev/block/mmcblk0p17</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 persist -&gt; /dev/block/mmcblk0p25</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 recovery -&gt; /dev/block/mmcblk0p24</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 rpm -&gt; /dev/block/mmcblk0p6</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 rpmbak -&gt; /dev/block/mmcblk0p7</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 sbl1 -&gt; /dev/block/mmcblk0p4</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 sbl1bak -&gt; /dev/block/mmcblk0p5</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 sec -&gt; /dev/block/mmcblk0p23</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 ssd -&gt; /dev/block/mmcblk0p16</div><div class="line">lrwxrwxrwx $root     root              1970-01-26 00:30 system -&gt; /dev/block/mmcblk0p30</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 tz -&gt; /dev/block/mmcblk0p8</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 tzbak -&gt; /dev/block/mmcblk0p9</div><div class="line">lrwxrwxrwx root     root              1970-01-26 00:30 userdata -&gt; /dev/block/mmcblk0p31</div></pre></td></tr></table></figure></p>
+<p>从上面可以知道recovery分区对应的节点文件是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/dev/block/mmcblk0p24</div></pre></td></tr></table></figure></p>
+<p>可以看出/dev/block/bootdevice/by-name/recovery是链接到/dev/block/mmcblk0p24,所以访问/dev/block/bootdevice/by-name/recovery等同与访问/dev/block/mmcblk0p24节点文件.by-name这种写法是最近这两年才有的,比较老的机型可能没有.所以还有另一种方法获取节点路径方法.<br>解开官方的recovery.img至于这个文件怎么得到,不多做介绍,如果只为了获取节点文件是什么,当然也可以解开相应机型第三方的recovery.img通过recovery.fstab文件得到相应的参数.<br>下面给出大神F2对应的recovery.fstab,至于怎么解开recovery.img这里不做介绍.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"># Copyright (c) 2013, The Linux Foundation. All rights reserved.</div><div class="line">#</div><div class="line"># Redistribution and use in source and binary forms, with or without</div><div class="line"># modification, are permitted provided that the following conditions are</div><div class="line"># met:</div><div class="line">#     * Redistributions of source code must retain the above copyright</div><div class="line">#       notice, this list of conditions and the following disclaimer.</div><div class="line">#     * Redistributions in binary form must reproduce the above</div><div class="line">#       copyright notice, this list of conditions and the following</div><div class="line">#       disclaimer in the documentation and/or other materials provided</div><div class="line">#       with the distribution.</div><div class="line">#     * Neither the name of The Linux Foundation nor the names of its</div><div class="line">#       contributors may be used to endorse or promote products derived</div><div class="line">#       from this software without specific prior written permission.</div><div class="line">#</div><div class="line"># THIS SOFTWARE IS PROVIDED &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED</div><div class="line"># WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF</div><div class="line"># MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT</div><div class="line"># ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORSnian</div><div class="line"># BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</div><div class="line"># CONSEQUENTIAL DnianAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</div><div class="line"># SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR</div><div class="line"># BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,</div><div class="line"># WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE</div><div class="line"># OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN</div><div class="line"># IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</div><div class="line"></div><div class="line">#device         mount point      fstype        [device2] [length=]</div><div class="line">/dev/block/mmcblk0p30         /system      ext4    rw,barrier=1,discard                                wait</div><div class="line">/dev/block/mmcblk0p31         /data        ext4    noatime,nosuid,nodev,barrier=1,data=ordered,noauto_da_alloc     wait,check</div><div class="line">/dev/block/mmcblk0p26         /cache       ext4    noatime,nosuid,nodev,barrier=1,data=ordered                     wait,check</div><div class="line">/dev/block/mmcblk0p14         /misc        emmc    defaults    defaults</div><div class="line">/dev/block/mmcblk0p20         /boot        emmc    defaults    defaults</div><div class="line">/dev/block/mmcblk0p24         /recovery    emmc    defaults    defaults</div><div class="line"></div><div class="line">#extSDcard</div><div class="line">/devices/soc.0/7864900.sdhci/mmc_host/mmc1      /storage/sdcard1        auto    defaults        voldmanaged=sdcard1:auto</div></pre></td></tr></table></figure>
+<p>可以看出recovery对应的是/dev/block/mmcblk0p24<br>下面给出刷写步骤<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">16:43 ~/SVN/Coolpad8675-A-4.4.4/target_files/BOOTABLE_IMAGES $  adb push recovery.img /data/local/tmp</div><div class="line">renyuan3702 KB/s (10878976 bytes in 2.869s)</div><div class="line">16:43 ~/SVN/Coolpad8675-A-4.4.4/target_files/BOOTABLE_IMAGES $ adb shell</div><div class="line">shell@Coolpad8675-A:/ $ su </div><div class="line">root@Coolpad8675-A:/ # cd data/local/tmp</div><div class="line">root@Coolpad8675-A:/ # dd if=recovery.img of=/dev/block/mmcblk0p24 </div><div class="line">21248+0 records in</div><div class="line">21248+0 records out</div><div class="line">10878976 bytes transferred in 2.798 secs (3888125 bytes/sec)</div><div class="line">root@Coolpad8675-A:/data/local/tmp # reboot recovery</div></pre></td></tr></table></figure></p>
+<p>到此通用性刷写recovery方案已经讲完.</p>
+<hr>
+<h3 id="fastboot命令或者线刷工具刷写"><a href="#fastboot命令或者线刷工具刷写" class="headerlink" title=" fastboot命令或者线刷工具刷写"></a><strong> fastboot命令或者线刷工具刷写</strong></h3><p>其中线刷工具三星的基本都一样有专门的教程这里不多做解释.至于fastboot,需要分场合才能使用.<br>首先拿N5的线刷为例,因为N5解锁bootloader很简单只需几个命令就可以刷写.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">adb reboot bootloader</div><div class="line">fastboot oem unlock</div><div class="line">fastboot flash recovery recovery.img</div></pre></td></tr></table></figure></p>
+<p>这只持针对N5 这类机型,可以很容易的解锁bootloader ，对于HTC机型需要申请解锁码方能刷写recovery.img .可以使用刷机精灵解锁,比较方便.<br>其实还有一种临时刷写recovery的方法,也就是我上面我所提的大神F2用刷机精灵刷机,刷机过程使用的是刷机精灵的recovery,但是开机重启进入recovery确是我原先的,之后问了刷机精灵的官方人员才知道端倪,其实大神F2也有fastboot模式,但是不能用fastboot命令进行通讯,需要用官方的线刷工具才行,至于刷机精灵怎么刷写临时recovery却不知道.</p>
+<h3 id="临时刷写方案"><a href="#临时刷写方案" class="headerlink" title="临时刷写方案"></a><strong>临时刷写方案</strong></h3><p>首先看些fastboot命令支持的各种参数.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">17:17 ~ $ fastboot </div><div class="line">usage: fastboot [ &lt;option&gt; ] &lt;command&gt;</div><div class="line"></div><div class="line">commands:</div><div class="line">  update &lt;filename&gt;                        reflash device from update.zip</div><div class="line">  flashall                                 flash boot + recovery + system</div><div class="line">  flash &lt;partition&gt; [ &lt;filename&gt; ]         write a file to a flash partition</div><div class="line">  erase &lt;partition&gt;                        erase a flash partition</div><div class="line">  format &lt;partition&gt;                       format a flash partition </div><div class="line">  getvar &lt;variable&gt;                        display a bootloader variable</div><div class="line">  boot &lt;kernel&gt; [ &lt;ramdisk&gt; ]              download and boot kernel</div><div class="line">  flash:raw boot &lt;kernel&gt; [ &lt;ramdisk&gt; ]    create bootimage and flash it</div><div class="line">  devices                                  list all connected devices</div><div class="line">  continue                                 continue with autoboot</div><div class="line">  reboot                                   reboot device normally</div><div class="line">  reboot-bootloader                        reboot device into bootloader</div><div class="line">  help                                     show this help message</div><div class="line"></div><div class="line">options:</div><div class="line">  -w                                       erase userdata and cache (and format</div><div class="line">                                           if supported by partition type)</div><div class="line">xie  -u                                       do not first erase partition before</div><div class="line">                                           formatting</div><div class="line">  -s &lt;specific device&gt;                     specify device serial number</div><div class="line">                                           or path to device port</div><div class="line">  -l                                       with &quot;devices&quot;, lists device paths</div><div class="line">  -p &lt;product&gt;                             specify product name</div><div class="line">  -c &lt;cmdline&gt;                             override kernel commandline</div><div class="line">  -i &lt;vendor id&gt;                           specify a custom USB vendor id</div><div class="line">  -b &lt;base_addr&gt;                           specify a custom kernel base address. default: 0x10000000</div><div class="line">  -n &lt;page size&gt;                           specify the nand page size. default: 2048</div><div class="line">  -S &lt;size&gt;[K|M|G]                         automatically sparse files greater than</div><div class="line">                                           size.  0 to disable</div><div class="line">``` </div><div class="line">其中 boot &lt;kernel&gt; [ &lt;ramdisk&gt; ]              download and boot kernel 这个很显眼,从解释上可以看出是传输个本地内核上去然后执行开机的流程.抱着好奇的心态我试了试我的中兴天机确实可以通过这个方法进入recovery.而且可以刷机.通过以下的命令.</div><div class="line">```  shell</div><div class="line">adb reboot bootloader</div><div class="line">fastboot boot recovery.img</div></pre></td></tr></table></figure></p>
+<h3 id="其他刷写方式"><a href="#其他刷写方式" class="headerlink" title="其他刷写方式"></a><strong>其他刷写方式</strong></h3><p>还有一种是flash_image命令在手机在有root权限的刷下,这种仅仅适用高通平台,具体源码实现并不知,该文件可以从CM ROM中提取,刷写过程的命令如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">adb push flash_image /data/local/tmp</div><div class="line">adb push recovery.img /data/local/tmp</div><div class="line">adb shell</div><div class="line">cd /data/local/tmp</div><div class="line">su</div><div class="line">chmod 755 flash_image</div><div class="line">./flash_image recovery recovery.img</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/02/hezuokaifa/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          合作开发
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/25/MI3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">用新架构适配MI3中遇到的各种坑</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="flash-recovery" data-title="flash_recovery" data-url="http://yoursite.com/2015/11/28/flash-recovery/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 EverNever_NCWU
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: /
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>用新架构适配MI3中遇到的各种坑 | EverNever</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="用新架构适配MI3中遇到的各种坑
+首先不得不说hendy架构的强大之处, mi3也直接开机但是遇到各种坑,不能怪架构不够强大,只有说miui定制化太高.下面详细说一下mi3适配中的各种坑.有些坑会附带点log信息.
+
+PhonewindowManger 通过intent启动 qshutdown.apk首先贴出异常log">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用新架构适配MI3中遇到的各种坑">
+<meta property="og:url" content="http://yoursite.com/2015/09/25/MI3/index.html">
+<meta property="og:site_name" content="EverNever">
+<meta property="og:description" content="用新架构适配MI3中遇到的各种坑
+首先不得不说hendy架构的强大之处, mi3也直接开机但是遇到各种坑,不能怪架构不够强大,只有说miui定制化太高.下面详细说一下mi3适配中的各种坑.有些坑会附带点log信息.
+
+PhonewindowManger 通过intent启动 qshutdown.apk首先贴出异常log">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/phonewindowmanager.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/Policy.png">
+<meta property="og:image" content="http://yoursite.com/assets/blogImg/VolumePanel.png">
+<meta property="og:updated_time" content="2015-10-09T11:26:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用新架构适配MI3中遇到的各种坑">
+<meta name="twitter:description" content="用新架构适配MI3中遇到的各种坑
+首先不得不说hendy架构的强大之处, mi3也直接开机但是遇到各种坑,不能怪架构不够强大,只有说miui定制化太高.下面详细说一下mi3适配中的各种坑.有些坑会附带点log信息.
+
+PhonewindowManger 通过intent启动 qshutdown.apk首先贴出异常log">
+<meta name="twitter:image" content="http://yoursite.com/assets/blogImg/phonewindowmanager.png">
+  
+    <link rel="alternative" href="/atom.xml" title="EverNever" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="//assets/blogImg/ever.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">EverNever_NCWU</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">菜鸟的成长之路</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Ever-Never" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="https://weibo.com/EverNeverNCWU" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/TPS/" style="font-size: 10px;">TPS</a> <a href="/tags/coron/" style="font-size: 10px;">coron</a> <a href="/tags/dd/" style="font-size: 10px;">dd</a> <a href="/tags/fastboot/" style="font-size: 10px;">fastboot</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/mi3/" style="font-size: 10px;">mi3</a> <a href="/tags/patchrom/" style="font-size: 10px;">patchrom</a> <a href="/tags/recovery/" style="font-size: 10px;">recovery</a> <a href="/tags/recovery-fstab/" style="font-size: 10px;">recovery.fstab</a> <a href="/tags/reject/" style="font-size: 10px;">reject</a> <a href="/tags/smali/" style="font-size: 10px;">smali</a> <a href="/tags/tps/" style="font-size: 10px;">tps</a> <a href="/tags/window/" style="font-size: 10px;">window</a> <a href="/tags/windowmanger/" style="font-size: 10px;">windowmanger</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yun-percy.github.io">振云的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://Yusan.github.com/">雨伞的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">一个菜鸟程序员,非计算机专业毕业,对程序有浓厚的兴趣.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">EverNever_NCWU</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img lazy-src="//assets/blogImg/ever.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">EverNever_NCWU</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">菜鸟的成长之路</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Ever-Never" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/EverNeverNCWU" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-MI3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/25/MI3/" class="article-date">
+  	<time datetime="2015-09-25T13:50:56.000Z" itemprop="datePublished">2015年9月25日</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      用新架构适配MI3中遇到的各种坑
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TPS/">TPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mi3/">mi3</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="用新架构适配MI3中遇到的各种坑"><a href="#用新架构适配MI3中遇到的各种坑" class="headerlink" title="用新架构适配MI3中遇到的各种坑"></a>用新架构适配MI3中遇到的各种坑</h2><blockquote>
+<p>首先不得不说hendy架构的强大之处, mi3也直接开机但是遇到各种坑,不能怪架构不够强大,只有说miui定制化太高.<br>下面详细说一下mi3适配中的各种坑.有些坑会附带点log信息.</p>
+</blockquote>
+<h2 id="PhonewindowManger-通过intent启动-qshutdown-apk"><a href="#PhonewindowManger-通过intent启动-qshutdown-apk" class="headerlink" title="PhonewindowManger 通过intent启动 qshutdown.apk"></a>PhonewindowManger 通过intent启动 qshutdown.apk</h2><p>首先贴出异常log<br><img src="/assets/blogImg/phonewindowmanager.png" alt="PhonewindowManager"><br><a id="more"></a><br>从log中可以看出来是缺少mContext字段造成无法通过反射调用.但是在本类中确实有mContext字段声明,但是为何反射调用不到呢,由于对java的反射机制并不是太熟悉,只会简单的使用.所以刚开始也是丈二和尚摸不到头脑.但是细心点发现PhoneWindowManager该类有个子类, 难道是子类存在的原因,抱着试一试的态度,去干掉子类的对象的实例化,换成PhoneWindowManager的实例化,结果误打误撞解决这个问题, 至于为何,这个有待研究反射的用法,才能给出答案,下面给出修改之后于修改之前的对比.<br><img src="/assets/blogImg/Policy.png" alt="Policy"><br>但是这样改也是有后果的, 造成无法换出RecentApp界面…不过后来通过修改配置文件解决改问题,暂时没发现什么不良后果.</p>
+<hr>
+<h2 id="音量面板VolumePanel类"><a href="#音量面板VolumePanel类" class="headerlink" title="音量面板VolumePanel类"></a>音量面板VolumePanel类</h2><hr>
+<p>用TPS做好tos后,音量面板直接还是miui的, 其实这个一点都不出呼我的意料,因为miui的音量面板是VolumePanel,但是包名不一样.所以及时和对地方.也是一样不起效,因为就没有调用.对于这个问题解决思路其实和上面的类似,但是这两个问题从本质上是不一样,下面给出差异.<br>miui的VolumePanel<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">.class</span><span class="keyword"> public</span> <span class="class">Lmiui/view/VolumePanel;</span></div><div class="line"><span class="keyword">.super</span> <span class="class">Landroid/os/Handler;</span></div><div class="line"><span class="keyword">.source</span> <span class="string">"VolumePanel.java"</span></div></pre></td></tr></table></figure></p>
+<p>从以上信息可以看出miui的VolumePanel和安卓原生的VolumePanel毫无瓜葛.<br>安卓的VolumePanel<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">.class</span><span class="keyword"> public</span> <span class="class">Landroid/view/VolumePanel;</span></div><div class="line"><span class="keyword">.super</span> <span class="class">Landroid/os/Handler;</span></div><div class="line"><span class="keyword">.source</span> <span class="string">"VolumePanel.java"</span></div></pre></td></tr></table></figure></p>
+<p>抱着试一试的态度,依照上面的解决思路,去找miui的VolumePanel实例化的地方,这个由于经常做,所以给出类名AudioService.里面有该类的实例化,和调用该类的各种方法,解决本问题的思路也是调回原生,但是事实上并不是这么简单,因为里面还有调用,自己的方法,所以为了能够运行,还需要补接口到安卓原生.最后解决改问题.下面给出部分改动对比.<br><img src="/assets/blogImg/VolumePanel.png" alt="Policy"></p>
+<hr>
+<h2 id="第三个就是令人抓狂的Editor"><a href="#第三个就是令人抓狂的Editor" class="headerlink" title="第三个就是令人抓狂的Editor."></a>第三个就是令人抓狂的Editor.</h2><hr>
+<p>这个类被改的面目全非,问题其实是上面两个问题的综合,调用走了自己的另一路,而且在继承方面也是一样的问题,这个该起来确实需要耐心,这里就不详细讲了,因为太过于繁琐了.不是简单几句话都能就能说清楚的,我现在也是似懂非懂的.不过还好问题解决.</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/28/flash-recovery/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          flash_recovery
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/24/tps-fix-reject/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">TPS 解决冲突</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="MI3" data-title="用新架构适配MI3中遇到的各种坑" data-url="http://yoursite.com/2015/09/25/MI3/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 EverNever_NCWU
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: /
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
