@@ -16,7 +16,7 @@ MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不�
 <meta property="og:image" content="http://yoursite.com/assets/Decoupling/struct.png">
 <meta property="og:image" content="http://yoursite.com/assets/Decoupling/ProxyServer.png">
 <meta property="og:image" content="http://yoursite.com/assets/Decoupling/req_data.png">
-<meta property="og:updated_time" content="2017-03-18T10:52:27.000Z">
+<meta property="og:updated_time" content="2017-03-18T10:53:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Decoupling Framework">
 <meta name="twitter:description" content="基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇
@@ -236,8 +236,8 @@ MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不�
 - 安全: 由于是基于binder 可以根据uid pid 校验访问者权限或者签名而达到安全的作用.
 - 解耦: 业务不需要在耦合在DMA或者DM,也就是以后不用改DM或者DMA来增加业务,DM和DMA的只是起到搬运的作用
 </code></pre><p>[TOC]</p>
- <a id="more"></a>
 <h3 id="1-总体框架"><a href="#1-总体框架" class="headerlink" title="1 总体框架"></a>1 总体框架</h3><p><img src="/assets/Decoupling/struct.png" alt=""></p>
+ <a id="more"></a>
 <h3 id="2-代理服务框架"><a href="#2-代理服务框架" class="headerlink" title="2 代理服务框架"></a>2 代理服务框架</h3><p><img src="/assets/Decoupling/ProxyServer.png" alt=""></p>
 <h3 id="3-相关数据结构"><a href="#3-相关数据结构" class="headerlink" title="3 相关数据结构"></a>3 相关数据结构</h3><p><img src="/assets/Decoupling/req_data.png" alt=""></p>
 <h2 id="基于-MsgSender和-Binder-同步并发可信解耦透传框架实现篇"><a href="#基于-MsgSender和-Binder-同步并发可信解耦透传框架实现篇" class="headerlink" title="基于 MsgSender和 Binder 同步并发可信解耦透传框架实现篇"></a>基于 MsgSender和 Binder 同步并发可信解耦透传框架实现篇</h2><p>消息解耦,利用现有的AIDL工具自动生成自动打包数据解包数据的帮助类.像使用本手机别进程的Service一样.同步RPC调用.基本上和使用安卓Service用法一样.通讯服务独自一个进程,这样DM挂掉也能保证透传等通讯能力!</p>

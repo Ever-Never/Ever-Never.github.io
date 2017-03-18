@@ -36,7 +36,7 @@ Binder 是安卓进程间通讯(IPC)方式之一,同时也是一种RPC调用方�
 <meta property="og:image" content="http://yoursite.com/assets/binder/Binder内核各数据结构之关系间.png">
 <meta property="og:image" content="http://yoursite.com/assets/binder/binder_protecl.png">
 <meta property="og:image" content="http://yoursite.com/assets/binder/Binder内存地址映射.png">
-<meta property="og:updated_time" content="2017-03-18T10:52:16.000Z">
+<meta property="og:updated_time" content="2017-03-18T10:54:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Binder">
 <meta name="twitter:description" content="Android Binder
@@ -271,7 +271,6 @@ Binder 是安卓进程间通讯(IPC)方式之一,同时也是一种RPC调用方�
 <p>其中最常用的就是Binder同步调用,跟人感觉就是像 在一个进程里面调用感觉一样,其实最主要的实现思想就是利用Binder驱动实现两个线程的同步协作(只不过这两个线程在不同的进程),调用方请求服务端时候通过系统调用进入内核态,然后挂起当前线程,然后唤醒目标进程,目标进程读取通讯数据,然后调用相关接口,之后再通过系统调用进入内核态,然后挂起当前线程,唤醒调用进程,这是最常用功能,当然也有异步调用,也就是onway的调用,客户端不care 服务端返回的结果.</p>
 </blockquote>
 <p>[TOC]</p>
- <a id="more"></a>
 <h1 id="Android-Binder设计篇"><a href="#Android-Binder设计篇" class="headerlink" title="Android Binder设计篇"></a>Android Binder设计篇</h1><p>Binder是典型的C/S架构 ,服务端等待客服端调用,如果服务端没有客服端调用,服务端进程通过系统调用进入内核态,之后让出CPU使用权,进入休眠状态,此时调度器不会调度当前线程.客户端调用的时候就会挂起客户端线程,唤醒目标线程,这里就涉及一个问题就是,如何找到目标线程,以及目标线程处理之后怎么找到调用者线程的问题,这方面就要借助Binder 驱动了,和ServiceManger,其中对于系统级别的服务,都注册到ServiceManger中,其中注册到ServiceManger又是一个IPC过成,Linux内核空间是共享的,用户进程空间是独立的,对于4GB的虚拟地址空间,其中3GB是用户空间,1GB是内核空间,IPC实现主要借助内核空间,只不过这个内核空间和用户空间被映射到同一个物理页上,驱动找到目标进程的时候,会在目标进程分配传输数据的空间,直接把客户端数据copy到内核地址空间,只不过这个内核地址空间,在目标进程中也可以访问,目标进程用户空间分配接收数据的空间,和内核空间的起始地址错一个固定的偏移量,通过偏移量就可以算出数据在用户空间的地址.这些数据就是就是序列化的的数据(Parcel),这样就实现客户端的数据通过一次Copy就到了目标进程,不用通过先copy的内核空间,之后再从内核空间copy到目标进程空间,这也是一次copy的根源,当然在IPC过程中也有少量通讯协议数据由客户端copy到内核态,再通过内核态copy到用户空间,但是这些数据相对于通讯的数据是小之又少的.</p>
 <h2 id="1-总架构"><a href="#1-总架构" class="headerlink" title="1  总架构"></a>1  总架构</h2><p>这里需要介绍binder架构的中几个相关名词.(这里直接拿着相关数据结构来说明更加直接)</p>
 <ul>
@@ -285,6 +284,7 @@ Binder 是安卓进程间通讯(IPC)方式之一,同时也是一种RPC调用方�
 <li>IPCThreadState</li>
 </ul>
 <p><img src="/assets/binder/Binder总体架构.png" alt=""></p>
+ <a id="more"></a>
 <p>这里还涉及几个名词SeviceManger 系统服务(有名binder),匿名binder(Service其实里面可以有匿名binder). 其中ServiceManger 是系统服务的大管家,有名binder的通过名字存放在这里面这里,ServiceManger进程保存binder引用值,启动进程可以通过0号binder引用访问ServiceManger,然后获得对应的有名Binder的引用,只不过Binder驱动在传输有名Binder引用的同时会对有名Binder的引用的值进行更改,在不同进程相同的binde引用,可能对应的不同的binder实体,不同Binder引用可能对应者相同的binder实体,这个有点像文件描述符,在不同的进程控件文件文件描述符不同,但是在内核空间对应同一个文件结构体,只不过在这里的引用对应这相同的binder_node.</p>
 <p>相关数据模型</p>
 <p><img src="/assets/binder/all_struct.png" alt=""></p>
