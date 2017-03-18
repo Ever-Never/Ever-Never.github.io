@@ -205,7 +205,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/18/wechat-offline-pay/">wechat_offline_pay</a>
+      <a class="article-title" href="/2017/03/18/wechat-offline-pay/">WeChat Offline Pay</a>
     </h1>
   
 
@@ -215,18 +215,6 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="微信支付-智能设备离线支付"><a href="#微信支付-智能设备离线支付" class="headerlink" title="微信支付(智能设备离线支付)"></a>微信支付(智能设备离线支付)</h1><p>离线支付能力对智能穿戴设备很重要,如果支付要依靠与手机连接,支付能力过于依赖手机,则在使用太多限制,是用户感觉使用穿戴设备支付不够便捷,如果只用绑定一次就可以离线支付这样便捷性自然凸显出来,增加便携性.现在微信客服端已经可以在没有网络下支付,所以要是智能手表具有微信支付能力,不需要太多的改动.下面可以简单陈述下实现</p>
-<h2 id="绑定"><a href="#绑定" class="headerlink" title="绑定"></a>绑定</h2><p>首先绑定环节依赖与蓝牙通讯,通过蓝牙把用户信息传到手表,如果想要做通用方案,手机端微信App和手表端微信支付App需要通过蓝牙通讯.不要过多依赖与手表提供的透传接口,这样在不同厂商的手表都要做适配.</p>
-<h3 id="手表微信支付app"><a href="#手表微信支付app" class="headerlink" title="手表微信支付app"></a>手表微信支付app</h3><p>手表微信支付App在绑定阶段需要提供蓝牙的MAC地址蓝牙的通讯协议,以及手表的型号,MAC和蓝牙设疑是用来手机和手表通讯,手表型号是校验,比如后台可以配置不同的型号使手表具有支付能力等,否则告知用户当前设备部支持,上述信息一般通过一个二维码呈现,手机微信APP通过扫码获取手表MAC蓝牙通讯协议型号信息,然后与微信支付后台检验时候支持改设备,如果支持改设备就通过MAC和通讯协议信息绑定手表蓝牙,为下一步传送个人信息到手表.这里只所以要传通讯协议为了考虑iOS绑定手表的情况,iOS一般都是用的是BLE协议.</p>
-<h3 id="手机微信App"><a href="#手机微信App" class="headerlink" title="手机微信App"></a>手机微信App</h3><p>微信App需要有绑定手表能力,又有远程解除手表支付能力的能力.微信App需要有如下几个能力.</p>
-<ul>
-<li>给据手表提供的二维码信息建立蓝牙连接.</li>
-<li>传送个人信息到手表(生成条形码相关的证书等),这些信息主要用来生成支付码</li>
-<li>远程解绑的能力,考虑到离线支付,所以这里主要为了告诉后台该微信账号的手表支付能力失效,即使手表能产生支付码也不能支付.</li>
-</ul>
-<h2 id="支付"><a href="#支付" class="headerlink" title="支付"></a>支付</h2><p>支付就是手表端生成二维码或者条形码,让扫码枪扫完成支付,这里考虑到离线支付,支付成功或者失败都必须依赖商户的反馈,当然这里可以在支付成功的时候微信后台发送一个短信给用户,告知用户消费了多少,或者微信推送支付信息,这可能有一定延迟,最好是通过短信和微信双重通知告诉用户消费金额.考虑到手表支付无法输入支付密码,所以这里要考虑微信支付限额情况.</p>
-<h3 id="支付安全性问题"><a href="#支付安全性问题" class="headerlink" title="支付安全性问题"></a>支付安全性问题</h3><p>安全涉及加密算法,证书随机数等,加密算法通常用C或C++ 实现增加破解难度</p>
-<h3 id="风险控制"><a href="#风险控制" class="headerlink" title="风险控制"></a>风险控制</h3><p>因为是离线支付,所以要支付要限额,并且在手表丢失之后可以远程解绑,这样及时手表丢失能拉出来二维码,也不能支付.这些都需要后台实现.</p>
-
       
     </div>
     
@@ -235,6 +223,10 @@
       
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2017/03/18/wechat-offline-pay/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -267,7 +259,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/18/GP/">GP</a>
+      <a class="article-title" href="/2017/03/18/GP/">Global Platform</a>
     </h1>
   
 
@@ -423,337 +415,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="打开安全通道"><a href="#打开安全通道" class="headerlink" title="打开安全通道"></a>打开安全通道</h2><p>打开安全通道主要包括三步</p>
-<ul>
-<li>选中 ISD</li>
-<li>INITIALIZE UPDATE 完成对卡的认证</li>
-<li>EXTERNAL AUTHENTICATION 完成卡内 对卡外实体的认证</li>
-</ul>
-<h3 id="Select-ISD"><a href="#Select-ISD" class="headerlink" title="Select ISD"></a>Select ISD</h3><p>不同规范的卡ISD 不同, 我们使用的是GP211 ISD的AID 是a000000151000000 Select类型的APDU的数据段中需要指定ISD AID,这里有一个小技巧 如果不知道ISD AID情况可以发送APDU指令中不带数据段,就会默认选中发卡发安全域.</p>
-<h3 id="INITIALIZE-UPDATE"><a href="#INITIALIZE-UPDATE" class="headerlink" title="INITIALIZE UPDATE"></a>INITIALIZE UPDATE</h3><p>在安全通道的显式发起期间, INITIALIZE UPDATE 命令用于在卡和主机之间传送卡和会话数据。这个命令开始一个安全通道会话的发起。<br>在当前安全通道的任何时候,都可以将 INITIALIZE UPDATE 命令发送给卡以发起一个新的安全通道会话。</p>
-<h4 id="发送APDU消息格式"><a href="#发送APDU消息格式" class="headerlink" title="发送APDU消息格式"></a>发送APDU消息格式</h4><p>INITIALZE UPDATE 编码表</p>
-<table>
-<thead>
-<tr>
-<th>编码</th>
-<th>值</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CLA</td>
-<td>0x80</td>
-<td></td>
-</tr>
-<tr>
-<td>INS</td>
-<td>0x50</td>
-<td>INITIALIZE UPDATE</td>
-</tr>
-<tr>
-<td>P1</td>
-<td>xx</td>
-<td></td>
-</tr>
-<tr>
-<td>P2</td>
-<td>0x00</td>
-<td></td>
-</tr>
-<tr>
-<td>Lc</td>
-<td>0x08</td>
-<td>host challenge  长度</td>
-</tr>
-<tr>
-<td>Data</td>
-<td>xxxxx</td>
-<td>host challenge</td>
-</tr>
-<tr>
-<td>Le</td>
-<td>0x00</td>
-<td>返回长度任意或者说是最大255</td>
-</tr>
-</tbody>
-</table>
-<p>这里主要要介绍 host challenge  这是一个8 bytes的 随机数,在每次会话中是唯一, 卡收到 host challenge 后用 静态秘钥 和自己的 card challenge  sequence counter 加密生成 card cryptogram (卡的鉴别码) 然后返回给卡外实体(28 byte ).</p>
-<h3 id="相应消息"><a href="#相应消息" class="headerlink" title="相应消息"></a>相应消息</h3><p>响应消息中包含下列数据的串联(没有分隔符):</p>
-<table>
-<thead>
-<tr>
-<th>名字</th>
-<th>长度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>秘钥推导数据</td>
-<td>10 bytes</td>
-</tr>
-<tr>
-<td>秘钥信息</td>
-<td>2 bytes</td>
-</tr>
-<tr>
-<td>sequence counter</td>
-<td>2 bytes</td>
-</tr>
-<tr>
-<td>card challenge</td>
-<td>6 bytes</td>
-</tr>
-<tr>
-<td>card cryptogram</td>
-<td>8 bytes</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>密钥派生数据一般由后端系统用来派生卡静态密钥.(这个暂时还没用到)</li>
-<li>秘钥信息里面包含了秘钥的版本号和scpVersion 标识符.</li>
-<li>sequence counter 是卡内一个递增的计数器,他用于创建会话秘钥.</li>
-<li>card challenge 是卡内部生成的随机数.</li>
-<li>卡认证码 这个用于卡外实体认证卡的合法性.</li>
-</ul>
-<p>首先介绍下sequence counter</p>
-<hr>
-<p>安全域将为每一个安全通道基本密钥或共享相同密钥版本号的(一组)安<br>全通道密钥管理一个序列计数器。<br>当且仅当安全通道(隐式或显式发起)的第一个 C-MAC 被验证为有效时,序列计数器才加 1。<br>它在命令具体处理前增加(即校验 C-MAC 之后,执行具体命令之前)。在安全通道密钥<br>的创建或更新时,序列计数器重置为 0。当安全通道密钥集包含多于一个密钥时,密钥集中任意一<br>个密钥创建或更新,序列计算器重置为 0。<br>注意:如果 C-MAC 不是安全通道中第一个 C-MAC,或者当一个安全通道会话已经开始并且<br>C-MAC 无效,序列计数器不会更新。从这个方面来说,序列计数器保持了到目前为止有效的安全通<br>道会话的个数,经历过的相应的安全消息密钥集。当达到最大值时,序列计数器将不会重置为 0。<br>不要求卡支持超过 32767 的计数器值。</p>
-<hr>
-<p>再介绍下card cryptomgram, host cryptomgram , 生成规则. 这两个鉴别码完成了双向认证. 由于sequence<br>counter 是由安全域维护的一个计数序列, 且在每次会话中唯一,所以可以用这两bytes 为基础,然后填充协议要求的数据,然后推导出本地会话过程中的过程秘钥信息, 推导依赖与 <strong> 静态秘钥,协议填充数据 , 加密算法 </strong></p>
-<ul>
-<li>首先卡外实体和卡有相同的对称秘钥信息(S-MAC , S-ENC , DNC)</li>
-<li>协议填充数据<ul>
-<li>生成安全通道 C-MAC 会话密钥:需要用到以下数据,安全通道基本密钥或者 MAC 密钥(S-MAC),一个值为‘0101’的会话密钥派生数据.    <strong> | 0101 | sequence counter | 00(12 bytes) | </strong></li>
-<li>生成安全通道 R-MAC 会话密钥:需要用到以下数据,安全通道基本密钥或者 MAC 密钥(S-MAC),一个值为‘0102’的会话密钥派生数据 .   <strong> | 0102 | sequence counter | 00(12 bytes) | </strong></li>
-<li>生成安全通道加密会话密钥:需要用到以下数据,安全通道基本密钥或者加密密钥(S-ENC),一个值为‘0182’的会话密钥派生数据.         <strong> | 0182 | sequence counter | 00(12 bytes) | </strong></li>
-<li>生成安全通道数据加密会话密钥:需要用到以下数据,安全通道基本密钥或者数据加密密钥(DEK),一个值为‘0181’的会话密钥派生数据 .   <strong> | 0181 | sequence counter | 00(12 bytes) | </strong></li>
-</ul>
-</li>
-<li><p>加密算法 推导过程秘钥 Session-ENC Session-MAC Session-DEK, 这里用的是3DES算法 初始ICV 为8 bytes 0x00数据, 模式是CBC模式,由于这里加密的数据是8的倍数 所以指定nopadding. 加密秘钥为相应的静态秘钥( 由于3DES 算法的加密秘钥是24 bytes 而相应的静态秘钥为16 bytes 这里做法是<strong>把 24 bytes 最后8 bytes 用静态秘钥的前8 bytes 填充</strong>),具体的实现细节如下.</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">KeySet sessionKeys = <span class="keyword">new</span> KeySet();</div><div class="line"></div><div class="line"> <span class="keyword">try</span> &#123;</div><div class="line">     <span class="keyword">byte</span>[] derivationData = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">16</span>];</div><div class="line">     derivationData[<span class="number">2</span>] = seq1;</div><div class="line">     derivationData[<span class="number">3</span>] = seq2;</div><div class="line"></div><div class="line">     <span class="keyword">byte</span>[] constantMAC = <span class="keyword">new</span> <span class="keyword">byte</span>[] &#123;</div><div class="line">             (<span class="keyword">byte</span>) <span class="number">0x01</span>, (<span class="keyword">byte</span>) <span class="number">0x01</span></div><div class="line">     &#125;;</div><div class="line">     System.arraycopy(constantMAC, <span class="number">0</span>, derivationData, <span class="number">0</span>, <span class="number">2</span>);</div><div class="line"></div><div class="line">     ICipher cipher = ICipher.Factory.getImplementation(</div><div class="line">             ICipher.DESEDE_CBC_NOPADDING, GPUtil.getKey(</div><div class="line">                     staticKeys.keys[<span class="number">1</span>], <span class="number">24</span>), <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8</span>]);</div><div class="line">     <span class="comment">// Session-MAC</span></div><div class="line">     sessionKeys.keys[<span class="number">1</span>] = cipher.encrypt(derivationData);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>推导过程秘钥的示例图如下:</p>
-<p>  <img src="/assets/GP_files/sessionkeys.png" alt=""></p>
-<ul>
-<li>card cryptomgram 生成校验, 需要用到卡外产生host challenge, 卡返回的sequence counter , card challenge和规范要求的填充数据, 这里用的的是mac_3des 算法(组合算法),用到的加密秘钥是 Session-ENC 具体实现看算法具体的注释.</li>
-</ul>
-<p>card cryptomgram 生成校验过程(可以推算卡内也是这样算出来的, 只有具有相同的静态秘钥,按照相应的协议,才能生成通样的鉴别数据)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">ByteArrayOutputStream bo = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line"></div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">      <span class="comment">// 卡外实体的host challenge</span></div><div class="line">      bo.write(rand);</div><div class="line">      <span class="comment">// 这里获取 key information 和 card challege</span></div><div class="line">      bo.write(result, <span class="number">12</span>, <span class="number">8</span>);</div><div class="line">  &#125; <span class="keyword">catch</span> (IOException ioe) &#123;</div><div class="line"></div><div class="line">  &#125;</div><div class="line">  <span class="comment">// 也就是说卡通过mac_3des算法 根据host challenge 和card callenge sequence counter</span></div><div class="line">  <span class="comment">// 来生成 card cryptogram 此时加密算法icv 为8 byte 全00 数据</span></div><div class="line">  <span class="comment">// 加密数据是 |host challenge(8 bytes)| + | sequence counter (2 bytes)|+| card challenge (6 bytes)| +|8000000000000000( 8 bytes)|</span></div><div class="line"></div><div class="line">  <span class="comment">// 签名方法采用 S-ENC 会话密钥和全部为二进制 0 的 ICV 作用于这 24 字节数据块,</span></div><div class="line">  <span class="comment">// 8 字节的签名结果就是卡的鉴别密码</span></div><div class="line">  <span class="keyword">byte</span>[] myCryptogram = GPUtil.mac_3des(sessionKeys.keys[<span class="number">0</span>], GPUtil</div><div class="line">          .pad80(bo.toByteArray()), <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8</span>]);</div><div class="line"></div><div class="line">  <span class="keyword">byte</span>[] cardCryptogram = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8</span>];</div><div class="line">  <span class="comment">// 卡的鉴别密码(Card cryptogram)</span></div><div class="line">  System.arraycopy(result, <span class="number">20</span>, cardCryptogram, <span class="number">0</span>, <span class="number">8</span>);</div><div class="line">  <span class="comment">// 这里认证卡是合法的, 不合法则抛出异常</span></div><div class="line">  <span class="keyword">if</span> (!Arrays.equals(cardCryptogram, myCryptogram)) &#123;</div><div class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> CardException(<span class="string">"Card cryptogram invalid."</span>);</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
-<p>mac_3des 算法<br>这里初始向量cv 8 bytes 全 0x00 数据, key 是过程秘钥然后按照之上的规则扩展24 bytes , 加密数据是|host challenge(8 bytes)| + | sequenguochengce counter (2 bytes)|+| card challenge (6 bytes)| +|8000000000000000( 8 bytes)|<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] mac_3des(<span class="keyword">byte</span>[] key, <span class="keyword">byte</span>[] text, <span class="keyword">int</span> offset, <span class="keyword">int</span> length,</div><div class="line">        <span class="keyword">byte</span>[] cv) <span class="keyword">throws</span> CardException &#123;</div><div class="line">    <span class="keyword">if</span> (length == -<span class="number">1</span>)</div><div class="line">        length = text.length - offset;</div><div class="line"></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        ICipher cipher = ICipher.Factory.getImplementation(</div><div class="line">                ICipher.DESEDE_CBC_NOPADDING, getKey(key, <span class="number">24</span>), cv);</div><div class="line">        <span class="keyword">byte</span>[] result = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8</span>];</div><div class="line">        <span class="keyword">byte</span>[] res = cipher.encrypt(text, offset, length);</div><div class="line">        <span class="comment">// 把生成的密文的后 8 bytes copy 到前 8 bytes  其实 card cryptogram 是生成密文24 bytes 的后 8 bytes</span></div><div class="line">        System.arraycopy(res, res.length - <span class="number">8</span>, result, <span class="number">0</span>, <span class="number">8</span>);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> CardException(<span class="string">"MAC computation failed."</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<ul>
-<li>host cryptogram 生成用来认证卡外实体的合法性, 具体细节基本上和 card cryptogram 生成类似, 只不过加密数据有所变化,这里只是颠倒了随机数 | sequence counter (2 bytes)|+| card challenge (6 bytes)|+|host challenge(8 bytes) | +|8000000000000000( 8 bytes)|<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">            bo.reset();</div><div class="line">            <span class="comment">// sequence counter + card challenge</span></div><div class="line">            bo.write(result, <span class="number">12</span>, <span class="number">8</span>);</div><div class="line">            <span class="comment">// host challenge</span></div><div class="line">            bo.write(rand);</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException ioe) &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 加密数据是| sequence counter (2 bytes)|+| card challenge (6 bytes)|+|host challenge(8 bytes) | +|8000000000000000( 8 bytes)|</span></div><div class="line">        <span class="keyword">byte</span>[] authData = GPUtil.mac_3des(sessionKeys.keys[<span class="number">0</span>], GPUtil.pad80(bo</div><div class="line">                .toByteArray()), <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8</span>]);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>接下来就进入了卡认证卡外实体的过程.</p>
-<h3 id="EXTERNAL-AUTHENTICATE"><a href="#EXTERNAL-AUTHENTICATE" class="headerlink" title="EXTERNAL AUTHENTICATE"></a>EXTERNAL AUTHENTICATE</h3><p>本认证过程主要对指令做了C-MAC 签名 保证数据的不被篡改, 这里涉及加密算法的 和 ICV 以及明文组装.这个 C-MAC 是卡外实体对要发送到卡内的 APDU 指令(包括 APDU 指令的头,以及命令消息中的数据段,但不包括 Le)进行 MAC 运算后生成的。</p>
-<p>ICV 用于链接 APDU 命令以保证这些命令顺序的完整性;。对于第一个成功执行 C-MAC 校验之后的命令来说,它们在进行 C-MAC 运算时所采用的 ICV 是前一个命令的 C-MAC 值.<br>为了反映在命令消息中存在 C-MAC 值,APDU 命令的头应该按照以下方式进行修改:</p>
-<ul>
-<li>在命令消息的长度字段(Lc)中应该加 8 以表明命令消息字段中存在 C-MAC</li>
-<li>命令类型(Cla)应该被修改以表明该 APDU 命令中包含了安全消息。这是通过设置命令类型字节的第 3 位来完成的。对于本规范中定义个所有 APDU 命令来说,包含后安全消息的 APDU 命令的命令类型都应该是‘0x84’。C-MAC 的生成和校验不影响命令类型中包含的逻辑通道的相关信息:在生成和校验 C-MAC 时,这里一直假定逻辑通道号为 0。C-MAC 被附加在 APDU 命令消息的最末端,这个 APDU 命令消息不包含填充数据,但是包含修改后的 APDU 命令头。</li>
-<li>在未修改过的 APDU 命令上进行 C-MAC 生成:在执行 C-MAC 计算之前,应该先对 APDU命令进行填充,在 C-MAC 生成之后修改 APDU 命令头。<br>  <img src="/assets/GP_files/c-mac-ex.png" alt=""></li>
-<li>在修改后的 APDU 命令上进行 C-MAC 生成:在执行 C-MAC 运算之前,先进行 APDU命令的填充和 APDU 命令头的修改。<br><img src="/assets/GP_files/c-mac-after.png" alt=""></li>
-</ul>
-<p><strong><em>卡里为了校验卡外实体发来C-MAC,必须使用和卡外实体相同的数据填充机制,使用相同的ICV,使用相同的C-MAC会话密钥来对这个C-MAC进行校验。这个被成功校验的C-MAC值应该被保留,以作为下一个命令C-MAC校验时的ICV。无论这个APDU命令是否成功完成,卡内从来都不应该丢掉前一个命令中成功校验的C-MAC值 </em></strong></p>
-<p>数据组装<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> CommandAPDU <span class="title">wrap</span><span class="params">(CommandAPDU command)</span> <span class="keyword">throws</span> CardException </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="comment">//rmac = false</span></div><div class="line">        <span class="keyword">if</span> (rmac) &#123;</div><div class="line">            rMac.reset();</div><div class="line">            rMac.write(clearBits((<span class="keyword">byte</span>) command.getCLA(), (<span class="keyword">byte</span>) <span class="number">0x07</span>));</div><div class="line">            rMac.write(command.getINS());</div><div class="line">            rMac.write(command.getP1());</div><div class="line">            rMac.write(command.getP2());</div><div class="line">            <span class="keyword">if</span> (command.getNc() &gt;= <span class="number">0</span>) &#123;</div><div class="line">                rMac.write(command.getNc());</div><div class="line">                rMac.write(command.getData());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// mac = true enc = false</span></div><div class="line">        <span class="keyword">if</span> (!mac &amp;&amp; !enc) &#123;</div><div class="line">            <span class="keyword">return</span> command;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> origCLA = command.getCLA();</div><div class="line">        <span class="keyword">int</span> newCLA = origCLA;</div><div class="line">        <span class="keyword">int</span> origINS = command.getINS();</div><div class="line">        <span class="keyword">int</span> origP1 = command.getP1();</div><div class="line">        <span class="keyword">int</span> origP2 = command.getP2();</div><div class="line">        <span class="keyword">byte</span>[] origData = command.getData();java</div><div class="line">        <span class="keyword">int</span> origLc = command.getNc();</div><div class="line">        <span class="keyword">int</span> newLc = origLc;</div><div class="line">        <span class="keyword">byte</span>[] newData = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">int</span> le = command.getNe();</div><div class="line">        ByteArrayOutputStream t = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line"></div><div class="line">        <span class="keyword">int</span> maxLen = <span class="number">255</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (mac)</div><div class="line">            maxLen -= <span class="number">8</span>;</div><div class="line">        <span class="keyword">if</span> (enc)</div><div class="line">            maxLen -= <span class="number">8</span>;</div><div class="line">        <span class="comment">// mac 校验APDU 的data 长度应该小于等于247 为了追加MAC 到data 中 MAC 为8 bytes</span></div><div class="line">        <span class="keyword">if</span> (origLc &gt; maxLen) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> CardException(<span class="string">"APDU too long for wrapping. LC: "</span> + origLc + <span class="string">" Max"</span> + maxLen);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (mac) &#123;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (icv == <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="comment">// 第一次 icv 为8 bytes 全0x00 数据</span></div><div class="line">                icv = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8</span>];</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (icvEnc) &#123;</div><div class="line">                ICipher c = <span class="keyword">null</span>;</div><div class="line">                <span class="keyword">if</span> (scp == <span class="number">1</span>) &#123;</div><div class="line">                    c = ICipher.Factory.getImplementation(</div><div class="line">                            ICipher.DESEDE_ECB_NOPADDING, GPUtil</div><div class="line">                                    .getKey(sessionKeys.keys[<span class="number">1</span>], <span class="number">24</span>));</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    c = ICipher.Factory.getImplementation(</div><div class="line">                            ICipher.DES_ECB_NOPADDING, GPUtil.getKey(</div><div class="line">                                    sessionKeys.keys[<span class="number">1</span>], <span class="number">8</span>));</div><div class="line">                &#125;</div><div class="line">                <span class="comment">// 对icv 进行mac 运算</span></div><div class="line">                icv = c.encrypt(icv);</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// preAPDU = true</span></div><div class="line">            <span class="keyword">if</span> (preAPDU) &#123;</div><div class="line">                <span class="comment">// 修正CLA 和 Lc</span></div><div class="line">                newCLA = setBits((<span class="keyword">byte</span>) newCLA, (<span class="keyword">byte</span>) <span class="number">0x04</span>);</div><div class="line">                newLc = newLc + <span class="number">8</span>;</div><div class="line">            &#125;</div><div class="line">            t.write(newCLA);</div><div class="line">            t.write(origINS);</div><div class="line">            t.write(origP1);</div><div class="line">            t.write(origP2);</div><div class="line">            t.write(newLc);</div><div class="line">            t.write(origData);</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (scp == <span class="number">1</span>) &#123;</div><div class="line">                icv = GPUtil.mac_3des(sessionKeys.keys[<span class="number">1</span>], GPUtil</div><div class="line">                        .pad80(t.toByteArray()), icv);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="comment">// 生成新的icv</span></div><div class="line">                icv = GPUtil.mac_des_3des(sessionKeys.keys[<span class="number">1</span>], GPUtil</div><div class="line">                        .pad80(t.toByteArray()), icv);</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// postAPDU = false ;</span></div><div class="line">            <span class="keyword">if</span> (postAPDU) &#123;</div><div class="line">                newCLA = setBits((<span class="keyword">byte</span>) newCLA, (<span class="keyword">byte</span>) <span class="number">0x04</span>);</div><div class="line">                newLc = newLc + <span class="number">8</span>;</div><div class="line">            &#125;</div><div class="line">            t.reset();</div><div class="line">            newData = origData;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// enc  = false  origLc = 8</span></div><div class="line">        <span class="keyword">if</span> (enc &amp;&amp; origLc &gt; <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (scp == <span class="number">1</span>) &#123;</div><div class="line">                t.write(origLc);</div><div class="line">                t.write(origData);</div><div class="line">                <span class="keyword">if</span> (t.size() % <span class="number">8</span> != <span class="number">0</span>) &#123;</div><div class="line">                    <span class="keyword">byte</span>[] x = GPUtil.pad80(t.toByteArray());</div><div class="line">                    t.reset();</div><div class="line">                    t.write(x);</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                t.write(GPUtil.pad80(origData));</div><div class="line">            &#125;</div><div class="line">            newLc += t.size() - origData.length;</div><div class="line"></div><div class="line">            ICipher c = ICipher.Factory.getImplementation(</div><div class="line">                    ICipher.DESEDE_CBC_NOPADDING, GPUtil.getKey(</div><div class="line">                            sessionKeys.keys[<span class="number">0</span>], <span class="number">24</span>), <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8</span>]);</div><div class="line">            newData = c.encrypt(t.toByteArray());</div><div class="line">            t.reset();</div><div class="line">        &#125;</div><div class="line">        t.write(newCLA);</div><div class="line">        t.write(origINS);</div><div class="line">        t.write(origP1);</div><div class="line">        t.write(origP2);</div><div class="line">        <span class="keyword">if</span> (newLc &gt; <span class="number">0</span>) &#123;</div><div class="line">            t.write(newLc);</div><div class="line">            t.write(newData);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (mac) &#123;</div><div class="line">            t.write(icv);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (le &gt; <span class="number">0</span>) &#123;</div><div class="line">            t.write(le);</div><div class="line">        &#125;</div><div class="line">        CommandAPDU wrapped = <span class="keyword">new</span> CommandAPDU(t.toByteArray());</div><div class="line">        <span class="keyword">return</span> wrapped;</div><div class="line">    &#125; <span class="keyword">catch</span> (CardException ce) &#123;</div><div class="line">        <span class="keyword">throw</span> ce;</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> CardException(<span class="string">"APDU wrapping failed."</span>, e);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="装载安装Applet"><a href="#装载安装Applet" class="headerlink" title="装载安装Applet"></a>装载安装Applet</h2><p>装载Applet 涉及的APDU 指令比较多,而且需要很多装载参数, 用到INSTLL( for load  or install ) LOAD, 装载的前提是先打开安全通道,也是之上的过程,之后要获取Applet相关信息,这个信心可以从Apllet的cap文件获取,然后就是分段上传数据到卡,最后更改cap文件带的Applet的状态为selectable, 所以这里一切前提就是先是从cap 文件里面获取相关信息.</p>
-<p>流程如下:</p>
-<p><img src="/assets/GP_files/load_and_install.png" alt=""></p>
-<h3 id="cap-分析"><a href="#cap-分析" class="headerlink" title="cap 分析"></a>cap 分析</h3><p>cap  文件其实是一个jar包,可以这么理解相当与java的jar包,里面还包括部分标记信息,这个信息有的是用来调试,,有的是为了作为安装使用,这里只是简单分析cap格式和获取想关信息,后期有所需求在继续深入分析.</p>
-<p>JAVA 智能的可执行文件（CAP 文件）是编译多个应用程序（Applet）的生成结果，包含了一个包中定义的所有类和接口，与包之间是一一对应的关系。实际发卡操作时，首先需要将该可执行文件下载至卡片中，并安装需要的应用实例；用户使用该安装的应用实例执行操作功能。</p>
-<p>CAP文件包含12个组件：</p>
-<table>
-<thead>
-<tr>
-<th>Component Type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>COMPONENT_Header</td>
-<td>1</td>
-</tr>
-<tr>
-<td>COMPONENT_Directory</td>
-<td>2</td>
-</tr>
-<tr>
-<td>COMPONENT_Applet</td>
-<td>3</td>
-</tr>
-<tr>
-<td>COMPONENT_Import</td>
-<td>4</td>
-</tr>
-<tr>
-<td>COMPONENT_ConstantPool</td>
-<td>5</td>
-</tr>
-<tr>
-<td>COMPONENT_Class</td>
-<td>6</td>
-</tr>
-<tr>
-<td>COMPONENT_Method</td>
-<td>7</td>
-</tr>
-<tr>
-<td>COMPONENT_StaticField</td>
-<td>8</td>
-</tr>
-<tr>
-<td>COMPONENT_ReferenceLocation</td>
-<td>9</td>
-</tr>
-<tr>
-<td>COMPONENT_Export</td>
-<td>10</td>
-</tr>
-<tr>
-<td>COMPONENT_Descriptor</td>
-<td>11</td>
-</tr>
-<tr>
-<td>COMPONENT_Debug</td>
-<td>12</td>
-</tr>
-</tbody>
-</table>
-<p>一个完整的CAP文件，除Applet、Export 和Debug组件是可选外，其他均为必选。每个组件封装成一个CAP包，包含在Jar包中。最后在卡上只保留了5个组件：COMPONET_Method，COMPONET_Class，COMPONET_ConstantPool，COMPONET_StaticField和 COMPONET_Export。其余的组件只是安装时提取有用信息而不在卡中保存。</p>
-<p>12个组件中，类class组件保存本应用声明的所有类和接口的信息； 方法method组件保存本应用声明的所有方法和接口，method中利用2字节索引index引用类、方法和域；常数池constant pool组件保存method组件引用的所有类、方法和域信息，分为类、实例域、虚方法、父方法、静态域和静态方法6类，每组信息为4个字节；相关地址reference location组件保存method组件中索引的偏移。</p>
-<p>对于JavaCard而言，应用程序的下载过程是即CAP文件写入到EEPROM的过程，即是对CAP文件的下载过程。在CAP文件的下载过程中，需要将一部分组件进行解析，同时对reference location中指定的位置进行链接，能够链接到method组件中的一个索引号，并根据索引号查找constant pool中保存的、与该索引号对应的类、方法或域在 EEPROM中的实际地址，调用实际地址中存储的数据。也就是说，方法的调用其实是需要两个步骤来实现的：</p>
-<ul>
-<li>根据reference location中指定的位置进行链接，获取method组件中的索引号；</li>
-<li><p>根据索引号查找constant pool中保存的、与该索引号对应的类、方法或域在EEPROM中的实际地址，调用实际地址中存储的数据。</p>
-<p><strong><em> 注：多字节数据总是按照大端（big-endian）顺序存放。 </em></strong></p>
-</li>
-</ul>
-<h4 id="INSTALL-for-load-所需要的数据信息"><a href="#INSTALL-for-load-所需要的数据信息" class="headerlink" title="INSTALL[for load] 所需要的数据信息"></a>INSTALL[for load] 所需要的数据信息</h4><p>下表描述了 INSTALL[for load]命令的数据字段:</p>
-<p><img src="/assets/GP_files/install_for_load_data.png" alt=""></p>
-<p>装载文件数据块 Hash 和装载 Token 对于委托管理是必须的。如果装载文件包含一个或多个 DAP<br>块,那么装载文件数据块 Hash 是强制的。在其它情况下,装载文件数据块 Hash 是可选的并且是可<br>以被卡验证的。<br>装载文件 AID 和装载参数将与装载文件数据块(如果有的话)中包含的信息是一致的。</p>
-<p>我们可以cap中获取 装载文件 AID。可以从cap里面的header.cap 文件里面分析获取, 其实这里还需要计算cap文件 里面相关文件的hash,其实是计算cap里面一组文件拼接后的HASH</p>
-<h4 id="Header-cap-格式"><a href="#Header-cap-格式" class="headerlink" title="Header.cap 格式"></a>Header.cap 格式</h4><p>Header组件中包含了该CAP文件的基本信息，其中包括最重要的文件版本信息和包AID值。版本信息用以判断JAVA卡是否支持对该文件的解析。AID是CAP文件的唯一识别，单张JAVA智能卡上不支持装载相同AID的CAP文件。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">header_component &#123;</div><div class="line">    u1 tag</div><div class="line">    u2 size</div><div class="line">    u4 magic    <span class="comment">// 必须为0xDECAFFE</span></div><div class="line">    u1 minor_version</div><div class="line">    u1 major_version</div><div class="line">    u1 flags    <span class="comment">// ACC_INT - 0x01; ACC_EXPORT - 0x02; ACC_APPLET - 0x04</span></div><div class="line">    package_info package</div><div class="line">    package_name_info package_name</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>其中CAP File Package Flags：</p>
-<table>
-<thead>
-<tr>
-<th>Flags</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ACC_INT</td>
-<td>0x01</td>
-</tr>
-<tr>
-<td>ACC_EXPORTACC_EXPORT</td>
-<td>0x02</td>
-</tr>
-<tr>
-<td>ACC_EXPORT</td>
-<td>0x04</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">package_info &#123;</div><div class="line">  u1 minor_version</div><div class="line">  u1 major_version</div><div class="line">  u1 AID_length</div><div class="line">  u1 AID[AID_length]</div><div class="line">&#125;</div><div class="line"></div><div class="line">package_name_info &#123;</div><div class="line">  u1 name_length  <span class="comment">// 当包内没有定义任何remote interfaces或者remote classes的时候值可以为0</span></div><div class="line">  u1 name[name_length]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>以　HelloWorld.cap 文件中的Header.cap中的信息为例：</p>
-<p>  0×01 | 0×00 0×13 | 0xDE 0xCA 0xFF 0xED | 0×01 | 0×02 | 0×04 |0×00 0×01 | 0×09 | 0xA0 0×00 0×00 0×00 0×62 0×03 0×01 0x0C 0×01</p>
-<ul>
-<li>tag: 0×01 COMPONENT_Header</li>
-<li>size: 0×13 = 19 除去tag和size后的大小</li>
-<li>magic: 0xDECAFFED 用以标识Java卡CAP文件格式，若一个文件不是以0xDECAFFED开头则肯定不是JavaCard CAP文件，因为它不符合规范</li>
-<li>minor_version: 0×01 次版本号</li>
-<li>major_version: 0×02 主版本号， 该CAP文件格式的版本号是02.01；如果CAP文件的版本号超出了Java卡虚拟机所能够处理的有效范围，Java卡虚拟机将不会处理该CAP文件</li>
-<li>flag: 0×04 包中没有用到int类型、CAP文件中没有Export组件、CAP文件中有Applet组件。</li>
-<li>package_info:<ul>
-<li>minor_version: 0×00</li>
-<li>major_version: 0×01</li>
-<li>AID_length: 0×09</li>
-<li>AID: 0xA0 0×00 0×00 0×00 0×62 0×03 0×01 0x0C 0×01</li>
-</ul>
-</li>
-</ul>
-<p>获取包AID java 代码实现<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">byte</span>[] header = capComponents.get(<span class="string">"Header"</span>);</div><div class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line"><span class="comment">// header[0] should be 1;</span></div><div class="line">i++;</div><div class="line"><span class="comment">// header[1] should be 0;</span></div><div class="line">i++;</div><div class="line"><span class="comment">// header[2] should be remaining length</span></div><div class="line">i++;</div><div class="line"><span class="comment">// header[3, 4, 5, 6] should be magic</span></div><div class="line">i += <span class="number">4</span>;</div><div class="line"><span class="comment">// header[7, 8] should be cap file version</span></div><div class="line">i += <span class="number">2</span>;</div><div class="line"><span class="comment">// header[9] should be flags</span></div><div class="line">i++;</div><div class="line"><span class="comment">// header[10,11] should be package version</span></div><div class="line">i += <span class="number">2</span>;</div><div class="line"><span class="comment">// header[12] should be the length of AID</span></div><div class="line"><span class="keyword">int</span> len = header[i++];</div><div class="line">packageAID = <span class="keyword">new</span> AID(header, i, len);</div></pre></td></tr></table></figure></p>
-<h4 id="Applet-cap-分析"><a href="#Applet-cap-分析" class="headerlink" title="Applet.cap 分析"></a>Applet.cap 分析</h4><p>Applet组件用以记录CAP文件中Applet的基本信息。CAP文件中的Applet可以有多个，且相互独立。 这里主要为了<strong>获取应用的AID,为INSTALL [ for make selectable ] 做准备,更改应用状态. </strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">applet_component &#123;</div><div class="line">    u1 tag</div><div class="line">    u2 size</div><div class="line">    u1 count    <span class="comment">// 包中applet的个数</span></div><div class="line">    &#123;   u1 AID_length</div><div class="line">        u1 AID[AID_length]</div><div class="line">        u2 install_method_offset</div><div class="line">    &#125;  applets[count]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>以 HelloWorld.cap 中的 Applet.cap为例：</p>
-<p>  0×03 | 0×00 0x0E | 0×01 | 0x0A 0xA0 0×00 0×00 0×00 0×62 0×03 0×01 0x0C 0×01 0×01 0×00 0×14</p>
-<ul>
-<li>tag: 03 COMPONENT_Applet</li>
-<li>size: 0x0E = 14</li>
-<li>count: 01 包中有一个applet</li>
-<li>applets[]:<ul>
-<li>AID_length: 0x0A = 10</li>
-<li>AID[]: 0xA0 0×00 0×00 0×00 0×62 0×03 0×01 0x0C 0×01 0×01 该applet的AID</li>
-<li>install_method_offset: 0×14 即当前Applet中的install()在Method组件info[]中的偏移。其中，Install()方法是一个静态方法，用以创建当前Applet的类实例，赋予应用软件生命周期开始执行。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">java 实现</div><div class="line"></div><div class="line">``` java</div><div class="line">byte[] applet = capComponents.get(&quot;Applet&quot;);</div><div class="line">   if(applet != null) &#123;</div><div class="line">     i = 0;</div><div class="line">     // applet[0] should be 3;</div><div class="line">     i++;</div><div class="line">     // applet[1] should be 0;</div><div class="line">     i++;</div><div class="line">     // applet[2] should be remaining length</div><div class="line">     i++;</div><div class="line">     // header[3] should be number of applets</div><div class="line">     int num = applet[i++];</div><div class="line">     for (int j = 0; j &lt; num; j++) &#123;</div><div class="line">         len = applet[i++];</div><div class="line">         appletAIDs.add(new AID(applet, i, len));</div><div class="line">         i += len + 2;</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
-<h3 id="拼INSTALL-for-load-指令"><a href="#拼INSTALL-for-load-指令" class="headerlink" title="拼INSTALL [for load ]指令"></a>拼INSTALL [for load ]指令</h3><p>install for load 发起装载请求 上面基本介绍过APDU 带的数据段,这里只用确定P1 P2  就可以拼接APDU 发起load 请求.<br>P1 = 0x02<br>P2 = 0x00</p>
-<p>相关过程代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//        装载文件数据块 Hash 和装载 Token 对于委托管理是必须的。如果装载文件包含一个或多个 DAP</span></div><div class="line"><span class="comment">//        块,那么装载文件数据块 Hash 是强制的。在其它情况下,装载文件数据块 Hash 是可选的并且是可</span></div><div class="line"><span class="comment">//        以被卡验证的。</span></div><div class="line">        <span class="comment">// useHash = false ;// 委托安装的时候为true</span></div><div class="line">        <span class="keyword">byte</span>[] hash = useHash ? cap.getLoadFileDataHash(includeDebug)</div><div class="line">                : <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>];</div><div class="line">        <span class="comment">// includeDebug = false</span></div><div class="line">        <span class="keyword">int</span> len = cap.getCodeLength(includeDebug);</div><div class="line">        <span class="comment">// loadParam = true ; // 装载参数 暂时还没弄懂</span></div><div class="line">        <span class="keyword">byte</span>[] loadParams = loadParam ? <span class="keyword">new</span> <span class="keyword">byte</span>[] &#123;</div><div class="line">                (<span class="keyword">byte</span>) <span class="number">0xEF</span>, <span class="number">0x04</span>,</div><div class="line">                (<span class="keyword">byte</span>) <span class="number">0xC6</span>, <span class="number">0x02</span>, (<span class="keyword">byte</span>) ((len &amp; <span class="number">0xFF00</span>) &gt;&gt; <span class="number">8</span>),</div><div class="line">                (<span class="keyword">byte</span>) (len &amp; <span class="number">0xFF</span>)</div><div class="line">        &#125; : <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>];</div><div class="line"></div><div class="line">        ByteArrayOutputStream bo = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            bo.write(cap.getPackageAID().getLength());</div><div class="line">            bo.write(cap.getPackageAID().getBytes());</div><div class="line">            android.util.Log.d(<span class="string">"Load"</span>, <span class="string">"Load --&gt; PackageAID"</span> + ByteHelper.toHexString(cap.getPackageAID().getBytes())</div><div class="line">                    + <span class="string">" length"</span> + cap.getPackageAID().getLength());</div><div class="line">            bo.write(sdAID.getLength());</div><div class="line">            bo.write(sdAID.getBytes());</div><div class="line">            android.util.Log.d(<span class="string">"Load"</span>, <span class="string">"Load --&gt; CM_AID"</span> + ByteHelper.toHexString(sdAID.getBytes()) + <span class="string">"  Length: "</span></div><div class="line">                    + sdAID.getLength());</div><div class="line"></div><div class="line">            bo.write(hash.length);</div><div class="line">            bo.write(hash);</div><div class="line">            android.util.Log.d(<span class="string">"Load"</span>, <span class="string">"Load --&gt; hash"</span> + ByteHelper.toHexString(hash) + <span class="string">"  Length: "</span> + hash.length);</div><div class="line"></div><div class="line">            bo.write(loadParams.length);</div><div class="line">            bo.write(loadParams);</div><div class="line">            bo.write(<span class="number">0</span>); <span class="comment">//  装在token 长度</span></div><div class="line">            android.util.Log.d(<span class="string">"Load"</span>, <span class="string">"Load --&gt; Load Paras --&gt;"</span> + ByteHelper.toHexString(loadParams) + <span class="string">"  length"</span></div><div class="line">                    + loadParams.length);</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException ioe) &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        CommandAPDU installForLoad = <span class="keyword">new</span> CommandAPDU(CLA_GP, INSTALL, <span class="number">0x02</span>,</div><div class="line">                <span class="number">0x00</span>, bo.toByteArray());</div><div class="line">        ResponseAPDU response = transmit(installForLoad);</div><div class="line">        notifyExchangedAPDU(installForLoad, response);</div></pre></td></tr></table></figure>
-<h3 id="一系列的LOAD-APDU-指令"><a href="#一系列的LOAD-APDU-指令" class="headerlink" title="一系列的LOAD APDU 指令"></a>一系列的LOAD APDU 指令</h3><p>为装载一个装载文件的 LOAD 命令的数据字段中传输的装载文件的结构<br>多个 LOAD 命令可以用来传输一个装载文件到卡中。这个装载文件被分成多个便于传输的小块。<br>每一个 LOAD 命令将从 ̳00 开始进行编号。LOAD 命令的编号是连续的,每次增加 1。装载文件的最后一块时将通知卡。<br>当接收到装载文件的最后一块后,卡将执行先于 LOAD 命令的对装载文件必要的内部处理和在INSTALL[for load]命令中标识的任何附加的处理。</p>
-<h5 id="LOAD-APDU"><a href="#LOAD-APDU" class="headerlink" title="LOAD APDU"></a>LOAD APDU</h5><table>
-<thead>
-<tr>
-<th>代码</th>
-<th>值</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CLA</td>
-<td>0x80或 ̳0x84</td>
-<td></td>
-</tr>
-<tr>
-<td>INS</td>
-<td>̳0xE8</td>
-<td>LOAD</td>
-</tr>
-<tr>
-<td>P1</td>
-<td>xx</td>
-<td>引用控制参数 P1</td>
-</tr>
-<tr>
-<td>P2</td>
-<td>xx</td>
-<td>块号</td>
-</tr>
-<tr>
-<td>Lc</td>
-<td>xx</td>
-<td>数据字段的长度</td>
-</tr>
-<tr>
-<td>Data</td>
-<td>xxxxx</td>
-<td>装载数据(和 MAC 如果存在)</td>
-</tr>
-<tr>
-<td>Le</td>
-<td>0x00</td>
-<td>qi</td>
-</tr>
-</tbody>
-</table>
-<h4 id="引用控制参数P1"><a href="#引用控制参数P1" class="headerlink" title="引用控制参数P1"></a>引用控制参数P1</h4><p>下表描述了引用控制参数 P1 的编码,该参数用于指示命令消息中包含的块是否是最后一块。</p>
-<p><img src="/assets/GP_files/load_p1.png" alt=""></p>
-<p>load 过程实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">List&lt;<span class="keyword">byte</span>[]&gt; blocks = cap.getLoadBlocks(includeDebug,</div><div class="line">               separateComponents, blockSize);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; blocks.size(); i++) &#123;</div><div class="line">    CommandAPDU load = <span class="keyword">new</span> CommandAPDU(CLA_GP, LOAD, (i == blocks.size() - <span class="number">1</span>) ? <span class="number">0x80</span> : <span class="number">0x00</span>, (<span class="keyword">byte</span>) i, blocks.get(i));</div><div class="line">    response = transmit(load);</div><div class="line">    notifyExchangedAPDU(load, response);</div><div class="line">    sw = (<span class="keyword">short</span>) response.getSW();</div><div class="line">    <span class="keyword">if</span> (sw != SW_NO_ERROR) &#123;</div><div class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> GPLoadException(sw, <span class="string">"Load failed, SW: "</span></div><div class="line">                       + GPUtil.swToString(sw));</div><div class="line">           &#125;</div></pre></td></tr></table></figure>
-<p>其中涉及到如何把cap文件里面的数据组装和分组,这个到看实现 这里就先不写了</p>
-<h3 id="拼INSTALL-for-install-APDU指令"><a href="#拼INSTALL-for-install-APDU指令" class="headerlink" title="拼INSTALL [for install] APDU指令"></a>拼INSTALL [for install] APDU指令</h3><p>下表描述了 INSTALL[for install]命令的数据字段</p>
-<p><img src="/assets/GP_files/install_for_install.png" alt=""></p>
-<p>装载文件数据块 Hash 和装载 Token 对于委托管理是必须的。如果装载文件包含一个或多个 DAP<br>块,那么装载文件数据块 Hash 是强制的。在其它情况下,装载文件数据块 Hash 是可选的并且是可<br>以被卡验证的。<br>装载文件 AID 和装载参数将与装载文件数据块(如果有的话)中包含的信息是一致的。</p>
-<p>相关java 代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">installAndMakeSelecatable</span><span class="params">(AID packageAID, AID appletAID,</span></span></div><div class="line">           AID instanceAID, <span class="keyword">byte</span> privileges, <span class="keyword">byte</span>[] installParams,</div><div class="line">           <span class="keyword">byte</span>[] installToken) <span class="keyword">throws</span> GPMakeSelectableException,</div><div class="line">           CardException &#123;</div><div class="line">       <span class="keyword">if</span> (installParams == <span class="keyword">null</span>) &#123;</div><div class="line">           installParams = <span class="keyword">new</span> <span class="keyword">byte</span>[] &#123;</div><div class="line">                   (<span class="keyword">byte</span>) <span class="number">0xC9</span>, <span class="number">0x00</span></div><div class="line">           &#125;;</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">if</span> (instanceAID == <span class="keyword">null</span>) &#123;</div><div class="line">           instanceAID = appletAID;</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">if</span> (installToken == <span class="keyword">null</span>) &#123;</div><div class="line">           installToken = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>];</div><div class="line">       &#125;</div><div class="line">       ByteArrayOutputStream bo = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">           bo.write(packageAID.getLength());</div><div class="line">           bo.write(packageAID.getBytes());</div><div class="line"></div><div class="line">           bo.write(appletAID.getLength());</div><div class="line">           bo.write(appletAID.getBytes());</div><div class="line"></div><div class="line">           bo.write(instanceAID.getLength());</div><div class="line">           bo.write(instanceAID.getBytes());</div><div class="line"></div><div class="line">           bo.write(<span class="number">1</span>);</div><div class="line">           bo.write(privileges);</div><div class="line">           bo.write(installParams.length);</div><div class="line">           bo.write(installParams);</div><div class="line"></div><div class="line">           bo.write(installToken.length);</div><div class="line">           bo.write(installToken);</div><div class="line">       &#125; <span class="keyword">catch</span> (IOException ioe) &#123;</div><div class="line"></div><div class="line">       &#125;</div><div class="line">       CommandAPDU install = <span class="keyword">new</span> CommandAPDU(CLA_GP, INSTALL, <span class="number">0x0C</span>, <span class="number">0x00</span>, bo</div><div class="line">               .toByteArray());</div><div class="line">       ResponseAPDU response = transmit(install);</div><div class="line">       notifyExchangedAPDU(install, response);</div><div class="line">       <span class="keyword">short</span> sw = (<span class="keyword">short</span>) response.getSW();</div><div class="line">       <span class="keyword">if</span> (sw != SW_NO_ERROR) &#123;</div><div class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> GPMakeSelectableException(sw,</div><div class="line">                   <span class="string">"Install for Install and make selectable failed, SW: "</span></div><div class="line">                           + GPUtil.swToString(sw));</div><div class="line">       &#125;</div><div class="line"></div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
-
       
     </div>
     
@@ -762,6 +423,10 @@
       
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2017/03/18/GP/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
