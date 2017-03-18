@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>flash_recovery | Fine</title>
+  <title>各种刷写Recovery的方法 | Fine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="首先写这篇文章的情景,今天武汉测试反馈说大神F2无法刷写recovery和无法无法进入recovery.让我帮忙解决下,doraning建议我写篇文章,我就只好献丑了.看武汉测试是用fastboot命令在fastboot模式刷写recovery,这个肯定是错误的,大神F2是非常特别的机型不仅在recovery刷写方面还有root权限方面.下面介绍这个两个特别之处,再写几种方法刷写recovery">
 <meta property="og:type" content="article">
-<meta property="og:title" content="flash_recovery">
+<meta property="og:title" content="各种刷写Recovery的方法">
 <meta property="og:url" content="http://yoursite.com/2015/11/28/flash-recovery/index.html">
 <meta property="og:site_name" content="Fine">
 <meta property="og:description" content="首先写这篇文章的情景,今天武汉测试反馈说大神F2无法刷写recovery和无法无法进入recovery.让我帮忙解决下,doraning建议我写篇文章,我就只好献丑了.看武汉测试是用fastboot命令在fastboot模式刷写recovery,这个肯定是错误的,大神F2是非常特别的机型不仅在recovery刷写方面还有root权限方面.下面介绍这个两个特别之处,再写几种方法刷写recovery">
 <meta property="og:image" content="http://yoursite.com/assets/recovery/root.jpg">
-<meta property="og:updated_time" content="2015-11-28T12:14:34.000Z">
+<meta property="og:updated_time" content="2017-03-18T13:50:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="flash_recovery">
+<meta name="twitter:title" content="各种刷写Recovery的方法">
 <meta name="twitter:description" content="首先写这篇文章的情景,今天武汉测试反馈说大神F2无法刷写recovery和无法无法进入recovery.让我帮忙解决下,doraning建议我写篇文章,我就只好献丑了.看武汉测试是用fastboot命令在fastboot模式刷写recovery,这个肯定是错误的,大神F2是非常特别的机型不仅在recovery刷写方面还有root权限方面.下面介绍这个两个特别之处,再写几种方法刷写recovery">
 <meta name="twitter:image" content="http://yoursite.com/assets/recovery/root.jpg">
   
@@ -117,7 +117,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/BLE/" style="font-size: 10px;">BLE</a> <a href="/tags/TPS/" style="font-size: 10px;">TPS</a> <a href="/tags/binder-node/" style="font-size: 10px;">binder node</a> <a href="/tags/binder-proxy/" style="font-size: 10px;">binder proxy</a> <a href="/tags/binder-thread-pool/" style="font-size: 10px;">binder thread pool</a> <a href="/tags/coron/" style="font-size: 10px;">coron</a> <a href="/tags/dd/" style="font-size: 10px;">dd</a> <a href="/tags/fastboot/" style="font-size: 10px;">fastboot</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/mi3/" style="font-size: 10px;">mi3</a> <a href="/tags/patchrom/" style="font-size: 10px;">patchrom</a> <a href="/tags/recovery/" style="font-size: 10px;">recovery</a> <a href="/tags/recovery-fstab/" style="font-size: 10px;">recovery.fstab</a> <a href="/tags/reject/" style="font-size: 10px;">reject</a> <a href="/tags/smali/" style="font-size: 10px;">smali</a> <a href="/tags/tps/" style="font-size: 10px;">tps</a> <a href="/tags/window/" style="font-size: 10px;">window</a> <a href="/tags/windowmanger/" style="font-size: 10px;">windowmanger</a> <a href="/tags/加密算法/" style="font-size: 10px;">加密算法</a>
+						<a href="/tags/AMSD/" style="font-size: 10px;">AMSD</a> <a href="/tags/APDU/" style="font-size: 10px;">APDU</a> <a href="/tags/BLE/" style="font-size: 10px;">BLE</a> <a href="/tags/ISD/" style="font-size: 10px;">ISD</a> <a href="/tags/TPS/" style="font-size: 10px;">TPS</a> <a href="/tags/binder/" style="font-size: 10px;">binder</a> <a href="/tags/binder-node/" style="font-size: 10px;">binder node</a> <a href="/tags/binder-proxy/" style="font-size: 10px;">binder proxy</a> <a href="/tags/binder-thread-pool/" style="font-size: 10px;">binder thread pool</a> <a href="/tags/coron/" style="font-size: 10px;">coron</a> <a href="/tags/dd/" style="font-size: 10px;">dd</a> <a href="/tags/fastboot/" style="font-size: 10px;">fastboot</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/mi3/" style="font-size: 10px;">mi3</a> <a href="/tags/patchrom/" style="font-size: 10px;">patchrom</a> <a href="/tags/recovery/" style="font-size: 10px;">recovery</a> <a href="/tags/recovery-fstab/" style="font-size: 10px;">recovery.fstab</a> <a href="/tags/reject/" style="font-size: 10px;">reject</a> <a href="/tags/smali/" style="font-size: 10px;">smali</a> <a href="/tags/tps/" style="font-size: 10px;">tps</a> <a href="/tags/window/" style="font-size: 10px;">window</a> <a href="/tags/windowmanger/" style="font-size: 10px;">windowmanger</a> <a href="/tags/加密算法/" style="font-size: 10px;">加密算法</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/线程调度/" style="font-size: 10px;">线程调度</a> <a href="/tags/解耦/" style="font-size: 10px;">解耦</a>
 					</div>
 				</section>
 				
@@ -206,7 +206,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      flash_recovery
+      各种刷写Recovery的方法
     </h1>
   
 
