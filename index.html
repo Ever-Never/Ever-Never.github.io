@@ -205,7 +205,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/18/decoupling-framework/">decoupling_framework</a>
+      <a class="article-title" href="/2017/03/18/decoupling-framework/">Decoupling Framework</a>
     </h1>
   
 
@@ -286,56 +286,6 @@ remotepackage com.tenect.testbinderserver ;
 <h4 id="4-5-client端异常处理"><a href="#4-5-client端异常处理" class="headerlink" title="4.5  client端异常处理"></a>4.5  client端异常处理</h4><p>其实就是处理超时异常,蓝牙异常,以及对端抛出的运行时异常等等!运行一样就是对端服务出问题,自己处理,这里直接抛出RuntimeExcption!</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> R.id.id_send_data:</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">int</span> ret = mRemote.onSendData(<span class="number">1</span>, <span class="string">"test !!!!"</span>, <span class="number">1000</span>*<span class="number">10</span>);</div><div class="line">        Log.d(<span class="string">"fine"</span>, <span class="string">"client receive return "</span> + ret);</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">        ParcelUtil.getExceptionType(e) ;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="decoupling-framework" class="article article-type-decoupling" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/03/18/framework/" class="article-date">
-  	<time datetime="2017-03-18T10:43:50.000Z" itemprop="datePublished">2017年3月18日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/18/framework/">framework</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
       
     </div>
     
