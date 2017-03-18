@@ -3,17 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Fine</title>
+  <title>decoupling_framework | Fine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fine">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇
+MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不稳定会造成丢包,需要上层业务自己去保证,这样上层业务需要做很多不必要操作,而且MsgSender 是异步回调接口,对于习惯Android Binder 同步RPC 颇为不习惯,而且MsgSender 有强烈的耦合关系,这里曾经在做公交卡中深有体会,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="decoupling_framework">
+<meta property="og:url" content="http://yoursite.com/2017/03/18/decoupling-framework/index.html">
 <meta property="og:site_name" content="Fine">
-<meta property="og:description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
+<meta property="og:description" content="基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇
+MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不稳定会造成丢包,需要上层业务自己去保证,这样上层业务需要做很多不必要操作,而且MsgSender 是异步回调接口,对于习惯Android Binder 同步RPC 颇为不习惯,而且MsgSender 有强烈的耦合关系,这里曾经在做公交卡中深有体会,">
+<meta property="og:image" content="http://yoursite.com/assets/Decoupling/struct.png">
+<meta property="og:image" content="http://yoursite.com/assets/Decoupling/ProxyServer.png">
+<meta property="og:image" content="http://yoursite.com/assets/Decoupling/req_data.png">
+<meta property="og:updated_time" content="2017-03-18T10:45:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fine">
-<meta name="twitter:description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
+<meta name="twitter:title" content="decoupling_framework">
+<meta name="twitter:description" content="基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇
+MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不稳定会造成丢包,需要上层业务自己去保证,这样上层业务需要做很多不必要操作,而且MsgSender 是异步回调接口,对于习惯Android Binder 同步RPC 颇为不习惯,而且MsgSender 有强烈的耦合关系,这里曾经在做公交卡中深有体会,">
+<meta name="twitter:image" content="http://yoursite.com/assets/Decoupling/struct.png">
   
     <link rel="alternative" href="/atom.xml" title="Fine" type="application/atom+xml">
   
@@ -186,9 +194,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-decoupling-framework" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-decoupling-framework" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2017/03/18/decoupling-framework/" class="article-date">
@@ -204,12 +210,19 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/18/decoupling-framework/">decoupling_framework</a>
+    <h1 class="article-title" itemprop="name">
+      decoupling_framework
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -289,557 +302,47 @@ remotepackage com.tenect.testbinderserver ;
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/18/framework/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">framework</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="decoupling-framework" data-title="decoupling_framework" data-url="http://yoursite.com/2017/03/18/decoupling-framework/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
-  
-    <article id="decoupling-framework" class="article article-type-decoupling" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/03/18/framework/" class="article-date">
-  	<time datetime="2017-03-18T10:43:50.000Z" itemprop="datePublished">2017年3月18日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/18/framework/">framework</a>
-    </h1>
-  
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-binder" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/03/18/binder/" class="article-date">
-  	<time datetime="2017-03-18T10:33:43.000Z" itemprop="datePublished">2017年3月18日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/18/binder/">Binder</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Android-Binder"><a href="#Android-Binder" class="headerlink" title="Android Binder"></a>Android Binder</h1><blockquote>
-<p>Binder 是安卓进程间通讯(IPC)方式之一,同时也是一种RPC调用方式之一, 其实Linxu 实现有socket,信号量等进程间通讯方式<br>Binder和传统的进程间通讯,有无可以比拟的优势.Binder提供以下几个功能</p>
-<ul>
-<li>进程间通讯</li>
-<li>共享内存(主要靠传递文件描述符实现)</li>
-<li>多线程支持(线程池)</li>
-<li>进程间同步异步调用</li>
-<li>对象引用计数,死亡通知</li>
-<li>用户校验(pid uid)</li>
-</ul>
-<p>其中最常用的就是Binder同步调用,跟人感觉就是像 在一个进程里面调用感觉一样,其实最主要的实现思想就是利用Binder驱动实现两个线程的同步协作(只不过这两个线程在不同的进程),调用方请求服务端时候通过系统调用进入内核态,然后挂起当前线程,然后唤醒目标进程,目标进程读取通讯数据,然后调用相关接口,之后再通过系统调用进入内核态,然后挂起当前线程,唤醒调用进程,这是最常用功能,当然也有异步调用,也就是onway的调用,客户端不care 服务端返回的结果.</p>
-</blockquote>
-<p>[TOC]</p>
-<h1 id="Android-Binder设计篇"><a href="#Android-Binder设计篇" class="headerlink" title="Android Binder设计篇"></a>Android Binder设计篇</h1><p>Binder是典型的C/S架构 ,服务端等待客服端调用,如果服务端没有客服端调用,服务端进程通过系统调用进入内核态,之后让出CPU使用权,进入休眠状态,此时调度器不会调度当前线程.客户端调用的时候就会挂起客户端线程,唤醒目标线程,这里就涉及一个问题就是,如何找到目标线程,以及目标线程处理之后怎么找到调用者线程的问题,这方面就要借助Binder 驱动了,和ServiceManger,其中对于系统级别的服务,都注册到ServiceManger中,其中注册到ServiceManger又是一个IPC过成,Linux内核空间是共享的,用户进程空间是独立的,对于4GB的虚拟地址空间,其中3GB是用户空间,1GB是内核空间,IPC实现主要借助内核空间,只不过这个内核空间和用户空间被映射到同一个物理页上,驱动找到目标进程的时候,会在目标进程分配传输数据的空间,直接把客户端数据copy到内核地址空间,只不过这个内核地址空间,在目标进程中也可以访问,目标进程用户空间分配接收数据的空间,和内核空间的起始地址错一个固定的偏移量,通过偏移量就可以算出数据在用户空间的地址.这些数据就是就是序列化的的数据(Parcel),这样就实现客户端的数据通过一次Copy就到了目标进程,不用通过先copy的内核空间,之后再从内核空间copy到目标进程空间,这也是一次copy的根源,当然在IPC过程中也有少量通讯协议数据由客户端copy到内核态,再通过内核态copy到用户空间,但是这些数据相对于通讯的数据是小之又少的.</p>
-<h2 id="1-总架构"><a href="#1-总架构" class="headerlink" title="1  总架构"></a>1  总架构</h2><p>这里需要介绍binder架构的中几个相关名词.(这里直接拿着相关数据结构来说明更加直接)</p>
-<ul>
-<li>binder_node和BBbinder</li>
-<li>binder_ref BPBinder</li>
-<li>ServiceManger</li>
-<li>BinderProc</li>
-<li>Binder线程池</li>
-<li>binder_buffer( 接受数据内存映射)</li>
-<li>ProcessState(进程相关数据结构)</li>
-<li>IPCThreadState</li>
-</ul>
-<p><img src="/assets/binder/Binder总体架构.png" alt=""></p>
-<p>这里还涉及几个名词SeviceManger 系统服务(有名binder),匿名binder(Service其实里面可以有匿名binder). 其中ServiceManger 是系统服务的大管家,有名binder的通过名字存放在这里面这里,ServiceManger进程保存binder引用值,启动进程可以通过0号binder引用访问ServiceManger,然后获得对应的有名Binder的引用,只不过Binder驱动在传输有名Binder引用的同时会对有名Binder的引用的值进行更改,在不同进程相同的binde引用,可能对应的不同的binder实体,不同Binder引用可能对应者相同的binder实体,这个有点像文件描述符,在不同的进程控件文件文件描述符不同,但是在内核空间对应同一个文件结构体,只不过在这里的引用对应这相同的binder_node.</p>
-<p>相关数据模型</p>
-<p><img src="/assets/binder/all_struct.png" alt=""></p>
-<h2 id="2-ServiceManger"><a href="#2-ServiceManger" class="headerlink" title="2 ServiceManger"></a>2 ServiceManger</h2><p>ServiceMnanger作为系统服务的大管家,当然比系统服务先起来,这里可以从init.rc里面看出来.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">on boot</div><div class="line">      ..............</div><div class="line"></div><div class="line">    class_start core</div><div class="line">    class_start main</div><div class="line"></div><div class="line"></div><div class="line">service servicemanager /system/bin/servicemanager</div><div class="line">    class core</div><div class="line">    user system</div><div class="line">    group system</div><div class="line">    critical</div><div class="line">    onrestart restart healthd</div><div class="line">    onrestart restart zygote</div><div class="line">    onrestart restart media</div><div class="line">    onrestart restart surfaceflinger</div><div class="line">    onrestart restart drm</div><div class="line">    onrestart restart qcamerasvr</div><div class="line">    </div><div class="line"></div><div class="line">service zygote /system/bin/app_process -Xzygote /system/bin --zygote --start-system-server</div><div class="line">    class main</div><div class="line">    socket zygote stream 660 root system</div><div class="line">    onrestart write /sys/android_power/request_state wake</div><div class="line">    onrestart write /sys/power/state on</div><div class="line">    onrestart restart media</div><div class="line">    onrestart restart netd</div><div class="line">    onrestart setprop ro.yulong.ylcrash syscrash</div><div class="line">    onrestart restart qcamerasvr</div><div class="line">    onrestart start crash_and_reset</div></pre></td></tr></table></figure></p>
-<p>可以看出on boot阶段  先class_start core  之后在class_start main  ,servicemanger 属于class core 类型的service  而zygote 属于class main 类型的service.</p>
-<p>servicemanager 进程起来主要做三件事</p>
-<ul>
-<li>映射一个内核和进程公用的空间(128K)  接收远程调用传来的数据</li>
-<li>通知内核当前进程为servicemanger 为 Service大管家,其实就是在内核初始化一个全局变量binder_context_mgr_node ,该binder node 对应的引用为0,这也就是系统能通过固定的手法,RPC调用的原因.</li>
-<li>当前进程监听远程调用,如果没有调用则进入休眠状态.</li>
-</ul>
-<p><img src="/assets/binder/sevicemange_list.png" alt=""></p>
-<p>其中svcinfo结构体对应一个系统服务,name 是系统服务的名字, ptr 是相应binder实体的引用在servicemanger进程的句柄, svclist 是链表头,获取系统服务一般只需提供name 然后通过svclist 编译链表找到对用的binder实体的引用.</p>
-<h2 id="3-注册获取系统服务"><a href="#3-注册获取系统服务" class="headerlink" title="3 注册获取系统服务"></a>3 注册获取系统服务</h2><p>系统服务就是有名Binder实体,这些服务注册到ServiceManager ,  客户端可以通过ServiceManager获取相关服务端的合法代理!,其中system_server 里面注册很多系统级别的Services  比如 AMS PMS  WMS 等,当然应用也可以注册系统服务,比如Phone , NFC 蓝牙, 因为NFC 蓝牙一般和硬件相关具体的实现不同,所以放在一个APK里面更好维护和验证问题, 至于AMS PMS WMS 为啥在一个进程,一个主要原因可能是这些服务之间相互依赖,而减少RPC调用! 这里大致给一个图.具体细节可以看代码跟踪<br><img src="/assets/binder/get_system_service.png" alt=""><br>至于匿名Binder 一般都是通过有名Binder 获取的 其中比较典型的就是Service ,这个是靠AMS和PMS 协同合作获取匿名的Binde实体的合法代理,这样客户端就可以调用服务端,这里AMS扮演一个匿名Service大管家!其实AMS功能不止这些,还有Activity 广播  其中动态广播的注册也涉及匿名Binder .这里就不细说了!</p>
-<h2 id="4-binder-RPC-细节"><a href="#4-binder-RPC-细节" class="headerlink" title="4 binder RPC 细节"></a>4 binder RPC 细节</h2><p>这里假定已经通过ServiceManager或者有名Binder实体获取合法代理端,之后就是拿着代理端访问服务端实现同步调用,其中调用可以分one_way 和非one_way,其中one_way 客户端不care服务端的结果或者不care是否调用到服务端!, no_way  可以带回结果或者异常!</p>
-<p><strong>其中最核心的就是在内核态实现相关的线程的唤醒和休眠而实现同步RPC调用! </strong></p>
-<p><img src="/assets/binder/detail.png" alt=""></p>
-<h4 id="4-1-client-server端-one-way-调用流程"><a href="#4-1-client-server端-one-way-调用流程" class="headerlink" title="4.1  client-server端 one_way 调用流程."></a>4.1  client-server端 one_way 调用流程.</h4><p>service端一般都是一个循环,监听客户端的请求,当客户端有请求的时候一般都会开启一个线程来处理客户端的请求,这样有多个client 请求的时候就能及时响应.client 调用server端一般分为两种,一种是需要返回结果的,一种是不care结果的.</p>
-<h4 id="4-2-client-server端-none-one-way-调用流程"><a href="#4-2-client-server端-none-one-way-调用流程" class="headerlink" title="4.2  client-server端 none_one_way 调用流程."></a>4.2  client-server端 none_one_way 调用流程.</h4><p><img src="/assets/binder/binder_none_flag_one_way.png" alt=""></p>
-<h2 id="5-binder-内核数据结构以及相关结构"><a href="#5-binder-内核数据结构以及相关结构" class="headerlink" title="5 binder 内核数据结构以及相关结构"></a>5 binder 内核数据结构以及相关结构</h2><p>内核的数据接口主要设计数据的传输相关摘要,比如客户端数据传来的大小和相关binder实体在数据中的位置, 线程的to-do 队列  binder实体引用的相关数据结构  内存管理和释放相关的红黑树! 全局的进程对象相关的数据结构</p>
-<p><img src="/assets/binder/Binder内核各数据结构之关系间.png" alt=""></p>
-<p>其中和和通讯协议相关的数据结构</p>
-<p><img src="/assets/binder/binder_protecl.png" alt=""></p>
-<h2 id="6-binder-一次copy数据-和内存管理"><a href="#6-binder-一次copy数据-和内存管理" class="headerlink" title="6 binder 一次copy数据 和内存管理"></a>6 binder 一次copy数据 和内存管理</h2><p>Binder对于协议数据其实也是copy两次,只不过是用户数据是copy一次,相对于用户数据,协议数据基本可以忽略不计,这里只说下一次copy的原理,一次copy就是把用户进程的数据同时映射到内核空间和用户空间,驱动管理释放的分配!<br><img src="/assets/binder/Binder内存地址映射.png" alt=""></p>
-<h2 id="7-binder-多线程支持"><a href="#7-binder-多线程支持" class="headerlink" title="7 binder 多线程支持"></a>7 binder 多线程支持</h2><p>其实binder驱动已经帮我们实现多线程支持,就如服务器支持多线程一样!而且有相关协议设置支持线程的个数! 一般是16  但是对已ServiceManager这种服务是4个! 一般Service都会起来两个线程,一个是主线程非Binder 线程,和Binder线程,其中这两个线程都Wait到进程的Thread todo 队列 刚开没数据 所以都休眠,只有有请求起来就会唤醒这两个线程的其中之一,此时就会检查可用线程的个数如果可用的为0 就会通请求一起发送到服务端,服务端会起来一个线程继续wait,启动实现一个比较简单方法管理这些binder线程,就是不够就建立直到上限!,之后就不回收了! 除非系统回收相关进程!</p>
-<h2 id="8-总结"><a href="#8-总结" class="headerlink" title="8 总结"></a>8 总结</h2><p>其实binder里面细节远非这些,都经过很多优化,对于业务端只有care 数据封包和解包,以及通过binder驱动来注册相关死亡监听来完成一些清理工作,其实网上早有大牛总结过binder的设计篇,读过代码过后,再去看总结,豁然开朗,其实binder早就想啃下,只不过当时水平不够,看了一点就看不动了,尝试过很多次,在工作中业余实现也一直在看,其实具体的细节还是没能看完,只不过了解了具体的实现思想和使用方法!  其实这些思想都是在做交通卡业务中看BaodingZhou的对于公交卡的RPC调用的写法再回顾下Binder  慢慢才能消化掉binder基本原理.其中部分图取决网上,时间有限,没能够坚持都自己绘制一遍.实在惭愧!</p>
-<p>最后奉上这份神总结! 真是句句都是真经!</p>
-<p><a href="http://blog.csdn.net/universus/article/details/6211589" target="_blank" rel="external">Android Binder设计与实现 - 设计篇</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/binder-node/">binder node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/binder-proxy/">binder proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/binder-thread-pool/">binder thread pool</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Libaroma-GUI" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/28/Libaroma-GUI/" class="article-date">
-  	<time datetime="2016-08-27T17:33:41.000Z" itemprop="datePublished">2016年8月28日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/28/Libaroma-GUI/">Libaroma_GUI</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>摘要：<br>  Libaroma是一个用纯C写的控件库，支持Linux、X86、QNX等不同平台。针对不同平台API做了一层封装，可以很快的移植到不同平台，参照Android的材料设计风格实现控件库，已经写好了Fragment、ViewPager、Button、ProgressBar、ListView、Dialog等控件，开发者可以实现自己的控件。目前Libaroma框架只绝对布局，控件的开发基本和Android类似，也有Window，WindowManagr、EventHub等概念，支持Window转场动画。</p>
-</blockquote>
-<iframe height=498 width=510 src='http://player.youku.com/embed/XMTcwNDk3NDQwNA==' frameborder=0 'allowfullscreen'></iframe>
-
-<iframe height=498 width=510 src='http://player.youku.com/embed/XMTcwNDk3MzQ5Mg==' frameborder=0 'allowfullscreen'></iframe>
-
-
-<p>[TOC]</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gui/">gui</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/window/">window</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windowmanger/">windowmanger</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/28/Libaroma-GUI/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-hezuokaifa" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/12/02/hezuokaifa/" class="article-date">
-  	<time datetime="2015-12-02T09:17:55.000Z" itemprop="datePublished">2015年12月2日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/02/hezuokaifa/">合作开发</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="深蓝合作开发规划"><a href="#深蓝合作开发规划" class="headerlink" title="深蓝合作开发规划"></a><strong>深蓝合作开发规划</strong></h4><hr>
-<h5 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h5><h6 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a><strong>技术背景</strong></h6><ol>
-<li>反射架构的完成。一键适配成功率达到百分之九十五以上，颠覆传统的patchrom方案，适配效率提高.由于反射架构的是以后的更新和维护可以达到批量更新的水平,而无法投入太多的人力更新维护.</li>
-<li>无线刷机方案的日益完善，用户刷机难度降低，利于推广，而且无线刷机后台编译服务器可以提供给民间开发者使用，可以帮助开发者后台更新与升级.</li>
-<li>双卡sdk的完善，给开发者提供了更广的选择.兼容高通4.4方案,和高通5.1方案.</li>
-</ol>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/12/02/hezuokaifa/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-flash-recovery" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/28/flash-recovery/" class="article-date">
-  	<time datetime="2015-11-28T12:07:38.000Z" itemprop="datePublished">2015年11月28日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/28/flash-recovery/">flash_recovery</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>首先写这篇文章的情景,今天武汉测试反馈说大神F2无法刷写recovery和无法无法进入recovery.让我帮忙解决下,<strong>doraning</strong>建议我写篇文章,我就只好献丑了.看武汉测试是用fastboot命令在fastboot模式刷写recovery,这个肯定是错误的,大神F2是非常特别的机型不仅在recovery刷写方面还有root权限方面.下面介绍这个两个特别之处,再写几种方法刷写recovery.</p>
-</blockquote>
-<h4 id="刷写recovery问题"><a href="#刷写recovery问题" class="headerlink" title="刷写recovery问题"></a><strong>刷写recovery问题</strong></h4><hr>
-<p> 在适配大神F2初期并没有适配我们自己的recovery,所以找一个第三方用着,有一次偷懒用刷机精灵刷,当时进入的是刷机精灵的recovery,但是刷机成功,我重启到recovery发现,还是我自己当时用的recovery,而且ROM并没有内置recovery,当时觉得很奇怪,后来问了刷机精灵官方人员才知道他们用了什么方法,在下面的刷写recovery教程中再介绍</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dd/">dd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastboot/">fastboot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recovery/">recovery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recovery-fstab/">recovery.fstab</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/11/28/flash-recovery/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-MI3" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/09/25/MI3/" class="article-date">
-  	<time datetime="2015-09-25T13:50:56.000Z" itemprop="datePublished">2015年9月25日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/25/MI3/">用新架构适配MI3中遇到的各种坑</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="用新架构适配MI3中遇到的各种坑"><a href="#用新架构适配MI3中遇到的各种坑" class="headerlink" title="用新架构适配MI3中遇到的各种坑"></a>用新架构适配MI3中遇到的各种坑</h2><blockquote>
-<p>首先不得不说hendy架构的强大之处, mi3也直接开机但是遇到各种坑,不能怪架构不够强大,只有说miui定制化太高.<br>下面详细说一下mi3适配中的各种坑.有些坑会附带点log信息.</p>
-</blockquote>
-<h2 id="PhonewindowManger-通过intent启动-qshutdown-apk"><a href="#PhonewindowManger-通过intent启动-qshutdown-apk" class="headerlink" title="PhonewindowManger 通过intent启动 qshutdown.apk"></a>PhonewindowManger 通过intent启动 qshutdown.apk</h2><p>首先贴出异常log<br><img src="/assets/blogImg/phonewindowmanager.png" alt="PhonewindowManager"><br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TPS/">TPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mi3/">mi3</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/25/MI3/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-tps-fix-reject" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/09/24/tps-fix-reject/" class="article-date">
-  	<time datetime="2015-09-24T11:00:13.000Z" itemprop="datePublished">2015年9月24日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/24/tps-fix-reject/">TPS 解决冲突</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="TPS-解决冲突"><a href="#TPS-解决冲突" class="headerlink" title="TPS 解决冲突"></a>TPS 解决冲突</h1><blockquote>
-<p>首先感谢<strong>hendy</strong>为我们带来这么强悍的框架,减少机型适配中百分之八十的重复劳动,之前开机都是一个大关,但是用TPS和新的架构开机不再是一件难事,减少我们之前的解决reject阶段,直接进入fix bug 阶段. 也许大家习惯之前的patchrom方案. 之所以叫patchrom 在我个人理解来看来是因为patchrom工具核心使用diff 和patch 命令来进行代码的插入.当然patch不可能百分百正确,才需要人力去解决冲突修复bug.小米patch我也做过,真是深恶痛绝好多重复劳动,做起来让人抓狂,让我最新欢的coron项目的patchrom ,它核心是围绕diff3命令进行的,用makefile进行流程控制,用起来真是爱不释手,工具好用只是前提,更重要的是百度云rom开发人员对代码进行重构,使reject减少,即便是冲突不用对比也能直接插入的.</p>
-</blockquote>
-<hr>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coron/">coron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/patchrom/">patchrom</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reject/">reject</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tps/">tps</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/24/tps-fix-reject/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Smali" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/09/23/Smali/" class="article-date">
-  	<time datetime="2015-09-23T08:27:49.000Z" itemprop="datePublished">2015年9月23日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/23/Smali/">Smali</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="QROM逆向工程之-Smali文档结构介绍"><a href="#QROM逆向工程之-Smali文档结构介绍" class="headerlink" title="QROM逆向工程之 - Smali文档结构介绍"></a>QROM逆向工程之 - Smali文档结构介绍</h1><blockquote>
-<p>在逆向工程适配过程中，直接打交道的就是smali文件，所以明确smali文档结构，对以后的适配过程有很大的帮助。在适配的过程可以根据smali文件的格式反应对应的java源文件，其实samli文件在读起来和java其实差不多，只是java源文件很容易看清代码执行的逻辑，而smali只能进行局部的判断。在机型适配的过程中根据可以相关指令判获取类的继承信息，实现的接口信息，字段的权限和类型，方法的权限参数类型和返回值。</p>
-</blockquote>
-<h2 id="Smali格式结构"><a href="#Smali格式结构" class="headerlink" title="Smali格式结构"></a>Smali格式结构</h2><h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><p>无论是普通类、抽象类、接口类或者内部类，反编译出来的代码中，都是以单独的Smali文件存放的，每个文件的的前三行描述改类的信息，包括权限信息、继承信息和源文件信息。<strong><em>#号之后为注释内容</em></strong>格式，格式如下。</p>
-<hr>
-<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">.class</span><span class="keyword"> public</span> <span class="class">Lcom/android/server/SystemServer;</span> <span class="comment">#.class &lt;访问权限&gt; [修饰关键字] &lt;类名&gt;</span></div><div class="line"><span class="keyword">.super</span> <span class="class">Ljava/lang/Object;</span>                       <span class="comment">#&lt;父类名&gt;</span></div><div class="line"><span class="keyword">.source</span> <span class="string">"SystemServer.java"</span>                     <span class="comment">#&lt;源文件名&gt;</span></div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smali/">smali</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/23/Smali/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -863,8 +366,8 @@ remotepackage com.tenect.testbinderserver ;
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
