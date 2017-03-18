@@ -533,7 +533,7 @@ a {
   cursor: pointer;
   text-transform: uppercase;
   float: none;
-  min-height: 150px;
+  height: 150px;
   margin-left: -12px;
   text-align: center;
   display: -webkit-box;
@@ -1461,6 +1461,7 @@ a {
   overflow: auto;
   color: #4c4c4c;
   line-height: 22.400000000000002px;
+  border-radius: 4px;
 }
 .article-entry .highlight .gutter pre,
 .article-entry .gist .gist-file .gist-data .line-numbers {
@@ -1483,9 +1484,6 @@ a {
   text-shadow: none;
   padding: 0;
   color: #fff;
-}
-.article-entry .highlight {
-  border-radius: 4px;
 }
 .article-entry .highlight pre {
   border: none;
@@ -1585,8 +1583,7 @@ pre .class .params {
 pre .tag,
 pre .doctype,
 pre .params,
-pre .function,
-pre .css .value {
+pre .function {
   color: #fff;
 }
 pre .css ~ * .tag,
