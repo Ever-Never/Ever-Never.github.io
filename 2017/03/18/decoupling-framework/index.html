@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Decoupling Framework | Fine</title>
+  <title>基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇 | Fine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇
 MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不稳定会造成丢包,需要上层业务自己去保证,这样上层业务需要做很多不必要操作,而且MsgSender 是异步回调接口,对于习惯Android Binder 同步RPC 颇为不习惯,而且MsgSender 有强烈的耦合关系,这里曾经在做公交卡中深有体会,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Decoupling Framework">
+<meta property="og:title" content="基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇">
 <meta property="og:url" content="http://yoursite.com/2017/03/18/decoupling-framework/index.html">
 <meta property="og:site_name" content="Fine">
 <meta property="og:description" content="基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇
@@ -17,9 +17,9 @@ MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不�
 <meta property="og:image" content="http://yoursite.com/assets/Decoupling/struct.png">
 <meta property="og:image" content="http://yoursite.com/assets/Decoupling/ProxyServer.png">
 <meta property="og:image" content="http://yoursite.com/assets/Decoupling/req_data.png">
-<meta property="og:updated_time" content="2017-03-18T10:53:41.000Z">
+<meta property="og:updated_time" content="2017-03-18T12:30:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Decoupling Framework">
+<meta name="twitter:title" content="基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇">
 <meta name="twitter:description" content="基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇
 MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不稳定会造成丢包,需要上层业务自己去保证,这样上层业务需要做很多不必要操作,而且MsgSender 是异步回调接口,对于习惯Android Binder 同步RPC 颇为不习惯,而且MsgSender 有强烈的耦合关系,这里曾经在做公交卡中深有体会,">
 <meta name="twitter:image" content="http://yoursite.com/assets/Decoupling/struct.png">
@@ -169,7 +169,7 @@ MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不�
         
   
     <h1 class="article-title" itemprop="name">
-      Decoupling Framework
+      基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇
     </h1>
   
 
