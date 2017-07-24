@@ -16,7 +16,7 @@ MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不�
 <meta property="og:image" content="http://yoursite.com/assets/Decoupling/struct.png">
 <meta property="og:image" content="http://yoursite.com/assets/Decoupling/ProxyServer.png">
 <meta property="og:image" content="http://yoursite.com/assets/Decoupling/req_data.png">
-<meta property="og:updated_time" content="2017-07-24T02:48:03.000Z">
+<meta property="og:updated_time" content="2017-07-24T02:51:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于 MsgSender和 Binder 并发可信解耦透传框架设计篇">
 <meta name="twitter:description" content="基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇
@@ -246,7 +246,7 @@ MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不�
 <li>基于JCE进行数据的序列化和反序列化,基于命令字分发业务,基于Biner实现的跨进程分发RPC框架(基于JCE所以iOS也能使用,但是和上一种方案,可能存在部分缺陷,)</li>
 <li>基于JCE进行数据的序列化和反序列化,基于命令字分发业务,基于Biner实现的跨进程分发RPC框架(这种主要依靠CallBack进行分发,只会占用一个binder线程,而且还能很快的返回回收)</li>
 </ul>
-<p><strong><em>一二两种方案和第三种最大的区别是,一二种方案挂起代理服务端的binder线程池,造成代理端binder线程全部忙碌,第三种设计请求和回调的时候只会占用一个binder线程,而且很快的返回,而且是基于异步回调机制,对接iOS现有命令字分发框架更好对接</em></strong></p>
+<p><strong><em>一二两种方案和第三种最大的区别是,一二种方案挂起代理服务端的binder线程池,造成代理端binder线程全部忙碌,第三种设计请求和回调的时候只会占用一个binder线程,而且很快的返回,而且是基于异步回调机制,对接iOS现有命令字分发框架更好对接,第三种方案是借鉴映理和jiulingli思路进行实现扩展.</em></strong></p>
  <a id="more"></a>
 <h2 id="基于JCE-binder跨进程的异步回调RPC框架"><a href="#基于JCE-binder跨进程的异步回调RPC框架" class="headerlink" title="基于JCE binder跨进程的异步回调RPC框架."></a>基于JCE binder跨进程的异步回调RPC框架.</h2><p>这里只讲使用具体的通过代码机型分析</p>
 <ul>
@@ -274,11 +274,11 @@ MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不�
 <p>客户端异常处理</p>
 <p><strong>同步调用是通过throw异常给客户端调用,异步调用是使用onFailure 回调给客户端异常</strong></p>
 <ul>
-<li>超时一场</li>
+<li>超时异常</li>
 <li>服务端挂掉异常</li>
 <li>蓝牙断开异常</li>
-<li>服务端和客户端接口没对齐一场</li>
-<li>服务端没找到一场</li>
+<li>服务端和客户端接口没对齐异常</li>
+<li>服务端没找到异常</li>
 </ul>
 <h2 id="独立通讯"><a href="#独立通讯" class="headerlink" title="独立通讯"></a>独立通讯</h2><p>独立通讯只需要把业务代码搬到手表端.客户端只需调用一个setIndepent(true)就可以无缝对接</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">messgeApi = <span class="keyword">new</span> PaceMessageAPI.Builder(<span class="keyword">this</span>.getApplicationContext())</div><div class="line">             .setAction(<span class="string">"com.pacewear.jceserver.action"</span>)</div><div class="line">             .setInterface(RPCCall.class)</div><div class="line">             .setPackage(<span class="string">"com.pacewear.jceserver"</span>)</div><div class="line">             .setIndepent(<span class="keyword">true</span>) ;</div><div class="line">             .build();</div></pre></td></tr></table></figure>
