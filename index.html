@@ -467,7 +467,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/18/decoupling-framework/">基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇</a>
+      <a class="article-title" href="/2017/03/18/decoupling-framework/">基于 MsgSender和 Binder 并发可信解耦透传框架设计篇</a>
     </h1>
   
 
@@ -476,7 +476,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="基于-MsgSender和-Binder-同步并发可信解耦透传框架设计篇"><a href="#基于-MsgSender和-Binder-同步并发可信解耦透传框架设计篇" class="headerlink" title="基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇"></a>基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇</h2><blockquote>
+        <h1 id="基于-MsgSender和-Binder-同步并发可信解耦透传框架设计篇"><a href="#基于-MsgSender和-Binder-同步并发可信解耦透传框架设计篇" class="headerlink" title="基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇"></a>基于 MsgSender和 Binder 同步并发可信解耦透传框架设计篇</h1><blockquote>
 <p>MsgSender是基于蓝牙Socket封装的一套API,但是手表链路有时候不稳定会造成丢包,需要上层业务自己去保证,这样上层业务需要做很多不必要操作,而且MsgSender 是异步回调接口,对于习惯Android Binder 同步RPC 颇为不习惯,而且MsgSender 有强烈的耦合关系,这里曾经在做公交卡中深有体会,为了扩展一个接口就要改四个APK,对于DMA 这种还需要系统签名,DM的微信和QQ支付需要使用正式签名!由于第三方提供的APK有严格的签名验证,所以在手表端就不能使用DMA 直接bind 第三方apk获取服务! share uid 问题  确定不了包名,所以就存在代理端,调试颇为不方便,耦合性太高.简直是痛不欲生!为了达到iOS和安卓的通用性,用JCE来打包数据,对于习惯了AIDL的我颇为不习惯.针对MsgSender问题,本文基于MsgSender封装一套API 供业务使用.像安卓使用别的进程的Service一样,也是基于AIDL的,针对iOS和安卓都需要的业务,可以在参数中直接传byte数组这样也可以达到公用的效果,不过这样牺牲了AIDL的部分数据打包和解包功能.尤其是注册远程CallBack的功能.</p>
 </blockquote>
 <pre><code>- 同步: 是这套API是同步接口,想android中使用Service一样,如果Service里面有耗时操作,客户端线程休眠等待.所以要关注ANR情况.
@@ -485,7 +485,13 @@
 - 安全: 由于是基于binder 可以根据uid pid 校验访问者权限或者签名而达到安全的作用.
 - 解耦: 业务不需要在耦合在DMA或者DM,也就是以后不用改DM或者DMA来增加业务,DM和DMA的只是起到搬运的作用
 </code></pre><p>[TOC]</p>
-<h3 id="1-总体框架"><a href="#1-总体框架" class="headerlink" title="1 总体框架"></a>1 总体框架</h3><p><img src="/assets/Decoupling/struct.png" alt=""></p>
+<p><strong>这里我总共实现了三套通用RPC框架，前两套原理基本类似，但是觉得可能引起DM和DMA的 binder线程池过度忙碌,造成DM的所有binder调用的阻塞等待,所以实现第三套方案,占用客户端工作线程的异步回调机制.</strong></p>
+<ul>
+<li>基于AIDL进行数据的序列化和反序列化,基于命令字分发业务,基于Biner实现的跨进程分发RPC框架(由于基于AIDL进行打包解包,对iOS可能不太友好)</li>
+<li>基于JCE进行数据的序列化和反序列化,基于命令字分发业务,基于Biner实现的跨进程分发RPC框架(基于JCE所以iOS也能使用,但是和上一种方案,可能存在部分缺陷,)</li>
+<li>基于JCE进行数据的序列化和反序列化,基于命令字分发业务,基于Biner实现的跨进程分发RPC框架(这种主要依靠CallBack进行分发,只会占用一个binder线程,而且还能很快的返回回收)</li>
+</ul>
+<p><strong><em>一二两种方案和第三种最大的区别是,一二种方案挂起代理服务端的binder线程池,造成代理端binder线程全部忙碌,第三种设计请求和回调的时候只会占用一个binder线程,而且很快的返回,而且是基于异步回调机制,对接iOS现有命令字分发框架更好对接</em></strong></p>
       
     </div>
     
