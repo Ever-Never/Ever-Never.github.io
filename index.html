@@ -188,6 +188,67 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Compile-Win-aapt" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/10/Compile-Win-aapt/" class="article-date">
+  	<time datetime="2017-08-10T02:43:23.000Z" itemprop="datePublished">2017年8月10日</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/10/Compile-Win-aapt/">Compile_Win_aapt</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>理论上，只要下一个windows版本的SDK，里面就自带了fastboot和adb工具。<br>但我最近确实遇到了一个需要在linux下编译出windows版本的adb的问题，废话不多说，步骤如下：</p>
+<ol>
+<li>执行：apt-get install mingw32<pre><code>安装了linux-windows交叉编译环境mingwin
+</code></pre></li>
+<li>执行：. build/envsetup.sh</li>
+<li>执行choosecombo，选择各个参数<pre><code>这两步设置了一些编译参数和环境变量，按照你正常编译android的设置即可。
+</code></pre></li>
+<li>执行：make USE_MINGW=y adb</li>
+<li>执行：make USE_MINGW=y fastboot</li>
+<li>执行：make USE_MINGW=y aapt</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-wechat-offline-pay" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -919,73 +980,10 @@
 
 
   
-    <article id="post-Smali" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2015/09/23/Smali/" class="article-date">
-  	<time datetime="2015-09-23T08:27:49.000Z" itemprop="datePublished">2015年9月23日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/23/Smali/">Smali 语法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="QROM逆向工程之-Smali文档结构介绍"><a href="#QROM逆向工程之-Smali文档结构介绍" class="headerlink" title="QROM逆向工程之 - Smali文档结构介绍"></a>QROM逆向工程之 - Smali文档结构介绍</h1><blockquote>
-<p>在逆向工程适配过程中，直接打交道的就是smali文件，所以明确smali文档结构，对以后的适配过程有很大的帮助。在适配的过程可以根据smali文件的格式反应对应的java源文件，其实samli文件在读起来和java其实差不多，只是java源文件很容易看清代码执行的逻辑，而smali只能进行局部的判断。在机型适配的过程中根据可以相关指令判获取类的继承信息，实现的接口信息，字段的权限和类型，方法的权限参数类型和返回值。</p>
-</blockquote>
-<h2 id="Smali格式结构"><a href="#Smali格式结构" class="headerlink" title="Smali格式结构"></a>Smali格式结构</h2><h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><p>无论是普通类、抽象类、接口类或者内部类，反编译出来的代码中，都是以单独的Smali文件存放的，每个文件的的前三行描述改类的信息，包括权限信息、继承信息和源文件信息。<strong><em>#号之后为注释内容</em></strong>格式，格式如下。</p>
-<hr>
-<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">.class</span><span class="keyword"> public</span> <span class="class">Lcom/android/server/SystemServer;</span> <span class="comment">#.class &lt;访问权限&gt; [修饰关键字] &lt;类名&gt;</span></div><div class="line"><span class="keyword">.super</span> <span class="class">Ljava/lang/Object;</span>                       <span class="comment">#&lt;父类名&gt;</span></div><div class="line"><span class="keyword">.source</span> <span class="string">"SystemServer.java"</span>                     <span class="comment">#&lt;源文件名&gt;</span></div></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smali/">smali</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/随笔/">随笔</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/23/Smali/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">

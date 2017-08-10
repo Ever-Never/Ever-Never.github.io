@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017 | Fine</title>
+  <title>Fine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Fine">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Fine">
 <meta property="og:description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
 <meta name="twitter:card" content="summary">
@@ -188,172 +188,78 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Smali" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2015/09/23/Smali/" class="article-date">
+  	<time datetime="2015-09-23T08:27:49.000Z" itemprop="datePublished">2015年9月23日</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/23/Smali/">Smali 语法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="QROM逆向工程之-Smali文档结构介绍"><a href="#QROM逆向工程之-Smali文档结构介绍" class="headerlink" title="QROM逆向工程之 - Smali文档结构介绍"></a>QROM逆向工程之 - Smali文档结构介绍</h1><blockquote>
+<p>在逆向工程适配过程中，直接打交道的就是smali文件，所以明确smali文档结构，对以后的适配过程有很大的帮助。在适配的过程可以根据smali文件的格式反应对应的java源文件，其实samli文件在读起来和java其实差不多，只是java源文件很容易看清代码执行的逻辑，而smali只能进行局部的判断。在机型适配的过程中根据可以相关指令判获取类的继承信息，实现的接口信息，字段的权限和类型，方法的权限参数类型和返回值。</p>
+</blockquote>
+<h2 id="Smali格式结构"><a href="#Smali格式结构" class="headerlink" title="Smali格式结构"></a>Smali格式结构</h2><h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><p>无论是普通类、抽象类、接口类或者内部类，反编译出来的代码中，都是以单独的Smali文件存放的，每个文件的的前三行描述改类的信息，包括权限信息、继承信息和源文件信息。<strong><em>#号之后为注释内容</em></strong>格式，格式如下。</p>
+<hr>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">.class</span><span class="keyword"> public</span> <span class="class">Lcom/android/server/SystemServer;</span> <span class="comment">#.class &lt;访问权限&gt; [修饰关键字] &lt;类名&gt;</span></div><div class="line"><span class="keyword">.super</span> <span class="class">Ljava/lang/Object;</span>                       <span class="comment">#&lt;父类名&gt;</span></div><div class="line"><span class="keyword">.source</span> <span class="string">"SystemServer.java"</span>                     <span class="comment">#&lt;源文件名&gt;</span></div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/10/Compile-Win-aapt/" class="archive-article-date">
-  	<time datetime="2017-08-10T02:43:23.000Z" itemprop="datePublished">Aug 10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/10/Compile-Win-aapt/">Compile_Win_aapt</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/18/wechat-offline-pay/" class="archive-article-date">
-  	<time datetime="2017-03-18T11:08:34.000Z" itemprop="datePublished">Mar 18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/18/wechat-offline-pay/">微信离线支付</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BLE/">BLE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加密算法/">加密算法</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smali/">smali</a></li></ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/18/GP/" class="archive-article-date">
-  	<time datetime="2017-03-18T10:55:28.000Z" itemprop="datePublished">Mar 18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/18/GP/">Global Platform</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AMSD/">AMSD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APDU/">APDU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ISD/">ISD</a></li></ul>
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/随笔/">随笔</a>
 	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a  href="/2015/09/23/Smali/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/18/decoupling-framework/" class="archive-article-date">
-  	<time datetime="2017-03-18T10:44:01.000Z" itemprop="datePublished">Mar 18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/18/decoupling-framework/">基于 MsgSender和 Binder 并发可信解耦透传框架设计篇</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/binder/">binder</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程池/">线程池</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程调度/">线程调度</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/解耦/">解耦</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/18/binder/" class="archive-article-date">
-  	<time datetime="2017-03-18T10:33:43.000Z" itemprop="datePublished">Mar 18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/18/binder/">Binder 设计篇分析</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/binder-node/">binder node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/binder-proxy/">binder proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/binder-thread-pool/">binder thread pool</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
   
-
-    
-
 </div>
       <footer id="footer">
   <div class="outer">
@@ -377,9 +283,9 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: false,
+		isHome: true,
 		isPost: false,
-		isArchive: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false

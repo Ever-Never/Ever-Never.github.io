@@ -3,17 +3,33 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017 | Fine</title>
+  <title>Compile_Win_aapt | Fine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fine">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+  <meta name="description" content="理论上，只要下一个windows版本的SDK，里面就自带了fastboot和adb工具。但我最近确实遇到了一个需要在linux下编译出windows版本的adb的问题，废话不多说，步骤如下：
+
+执行：apt-get install mingw32安装了linux-windows交叉编译环境mingwin
+
+执行：. build/envsetup.sh
+执行choosecombo，选择各个参数这两步">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compile_Win_aapt">
+<meta property="og:url" content="http://yoursite.com/2017/08/10/Compile-Win-aapt/index.html">
 <meta property="og:site_name" content="Fine">
-<meta property="og:description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
+<meta property="og:description" content="理论上，只要下一个windows版本的SDK，里面就自带了fastboot和adb工具。但我最近确实遇到了一个需要在linux下编译出windows版本的adb的问题，废话不多说，步骤如下：
+
+执行：apt-get install mingw32安装了linux-windows交叉编译环境mingwin
+
+执行：. build/envsetup.sh
+执行choosecombo，选择各个参数这两步">
+<meta property="og:updated_time" content="2017-08-10T02:44:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fine">
-<meta name="twitter:description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
+<meta name="twitter:title" content="Compile_Win_aapt">
+<meta name="twitter:description" content="理论上，只要下一个windows版本的SDK，里面就自带了fastboot和adb工具。但我最近确实遇到了一个需要在linux下编译出windows版本的adb的问题，废话不多说，步骤如下：
+
+执行：apt-get install mingw32安装了linux-windows交叉编译环境mingwin
+
+执行：. build/envsetup.sh
+执行choosecombo，选择各个参数这两步">
   
     <link rel="alternative" href="/atom.xml" title="Fine" type="application/atom+xml">
   
@@ -186,173 +202,74 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-Compile-Win-aapt" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2017/08/10/Compile-Win-aapt/" class="article-date">
+  	<time datetime="2017-08-10T02:43:23.000Z" itemprop="datePublished">2017年8月10日</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Compile_Win_aapt
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/10/Compile-Win-aapt/" class="archive-article-date">
-  	<time datetime="2017-08-10T02:43:23.000Z" itemprop="datePublished">Aug 10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/10/Compile-Win-aapt/">Compile_Win_aapt</a>
-    </h1>
-  
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>理论上，只要下一个windows版本的SDK，里面就自带了fastboot和adb工具。<br>但我最近确实遇到了一个需要在linux下编译出windows版本的adb的问题，废话不多说，步骤如下：</p>
+<ol>
+<li>执行：apt-get install mingw32<pre><code>安装了linux-windows交叉编译环境mingwin
+</code></pre></li>
+<li>执行：. build/envsetup.sh</li>
+<li>执行choosecombo，选择各个参数<pre><code>这两步设置了一些编译参数和环境变量，按照你正常编译android的设置即可。
+</code></pre></li>
+<li>执行：make USE_MINGW=y adb</li>
+<li>执行：make USE_MINGW=y fastboot</li>
+<li>执行：make USE_MINGW=y aapt</li>
+</ol>
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/18/wechat-offline-pay/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">微信离线支付</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/18/wechat-offline-pay/" class="archive-article-date">
-  	<time datetime="2017-03-18T11:08:34.000Z" itemprop="datePublished">Mar 18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/18/wechat-offline-pay/">微信离线支付</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BLE/">BLE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加密算法/">加密算法</a></li></ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/18/GP/" class="archive-article-date">
-  	<time datetime="2017-03-18T10:55:28.000Z" itemprop="datePublished">Mar 18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/18/GP/">Global Platform</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AMSD/">AMSD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APDU/">APDU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ISD/">ISD</a></li></ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/18/decoupling-framework/" class="archive-article-date">
-  	<time datetime="2017-03-18T10:44:01.000Z" itemprop="datePublished">Mar 18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/18/decoupling-framework/">基于 MsgSender和 Binder 并发可信解耦透传框架设计篇</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/binder/">binder</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程池/">线程池</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程调度/">线程调度</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/解耦/">解耦</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/18/binder/" class="archive-article-date">
-  	<time datetime="2017-03-18T10:33:43.000Z" itemprop="datePublished">Mar 18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/18/binder/">Binder 设计篇分析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/binder-node/">binder node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/binder-proxy/">binder proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/binder-thread-pool/">binder thread pool</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 </div>
       <footer id="footer">
@@ -378,8 +295,8 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false
