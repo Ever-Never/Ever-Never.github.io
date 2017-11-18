@@ -3,17 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: ISD | Fine</title>
+  <title>FreeRTOS_GUI | Fine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fine">
-<meta property="og:url" content="http://yoursite.com/tags/ISD/index.html">
+  <meta name="description" content="最近研究了下libaroma GUI在FreeRTOS上实现,再结合特定的外设调整,本以为自己有可能去做,项目原因,如果有机会有条件做就自己尝试移植下,现在只能先放一边了,突然觉得没啥玩了,总体框架如下,其实就是android 2D UI框架的缩小版本.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FreeRTOS_GUI">
+<meta property="og:url" content="http://yoursite.com/2017/11/18/FreeRTOS-GUI/index.html">
 <meta property="og:site_name" content="Fine">
-<meta property="og:description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
+<meta property="og:description" content="最近研究了下libaroma GUI在FreeRTOS上实现,再结合特定的外设调整,本以为自己有可能去做,项目原因,如果有机会有条件做就自己尝试移植下,现在只能先放一边了,突然觉得没啥玩了,总体框架如下,其实就是android 2D UI框架的缩小版本.">
+<meta property="og:image" content="http://yoursite.com/assets/Libaroma/libaroma_gt.png">
+<meta property="og:updated_time" content="2017-11-18T04:23:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fine">
-<meta name="twitter:description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
+<meta name="twitter:title" content="FreeRTOS_GUI">
+<meta name="twitter:description" content="最近研究了下libaroma GUI在FreeRTOS上实现,再结合特定的外设调整,本以为自己有可能去做,项目原因,如果有机会有条件做就自己尝试移植下,现在只能先放一边了,突然觉得没啥玩了,总体框架如下,其实就是android 2D UI框架的缩小版本.">
+<meta name="twitter:image" content="http://yoursite.com/assets/Libaroma/libaroma_gt.png">
   
     <link rel="alternative" href="/atom.xml" title="Fine" type="application/atom+xml">
   
@@ -186,53 +189,80 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-FreeRTOS-GUI" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/18/GP/" class="archive-article-date">
-  	<time datetime="2017-03-18T10:55:28.000Z" itemprop="datePublished">Mar 18</time>
+    <div class="article-meta">
+      <a href="/2017/11/18/FreeRTOS-GUI/" class="article-date">
+  	<time datetime="2017-11-18T04:16:33.000Z" itemprop="datePublished">2017年11月18日</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/18/GP/">Global Platform</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      FreeRTOS_GUI
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AMSD/">AMSD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APDU/">APDU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ISD/">ISD</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2D-engine/">2D engine</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gt-gui/">gt_gui</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/libaroma/">libaroma</a></li></ul>
 	</div>
 
-          
+        
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+      </div>
+      
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>最近研究了下libaroma GUI在FreeRTOS上实现,再结合特定的外设调整,本以为自己有可能去做,项目原因,如果有机会有条件做就自己尝试移植下,现在只能先放一边了,突然觉得没啥玩了,总体框架如下,其实就是android 2D UI框架的缩小版本.</p>
+</blockquote>
+<p><img src="/assets/Libaroma/libaroma_gt.png" alt="libaroma_gt.png"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/18/volte/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          S8 Volte
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/10/Compile-Win-aapt/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Compile_Win_aapt</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
 
 </div>
       <footer id="footer">
@@ -258,9 +288,9 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false
 	}
