@@ -3,33 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Compile_Win_aapt | Fine</title>
+  <title>traffic_card | Fine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="理论上，只要下一个windows版本的SDK，里面就自带了fastboot和adb工具。但我最近确实遇到了一个需要在linux下编译出windows版本的adb的问题，废话不多说，步骤如下：
-
-执行：apt-get install mingw32安装了linux-windows交叉编译环境mingwin
-
-执行：. build/envsetup.sh
-执行choosecombo，选择各个参数这两步">
+  <meta name="description" content="公交卡蓝牙稳定性完善
+背景
+公交卡开卡过程中药频繁和后台交互拉取数据，由于手表没有联网能力，所以我们自己封装一套HttpManager 供第三方合作的App使用，以便访问自己的服务器，但是在与雪球合作的时候，合作业务不稳定，反馈给我们说，是调用我们的接口返回蓝牙异常造成的， 所以我们这边也复现这个问题，在实际的调试过程中也有发现，蓝牙不稳定，尤其是泰山2代上非常不稳定，之前HttpManager都">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Compile_Win_aapt">
-<meta property="og:url" content="http://yoursite.com/2017/08/10/Compile-Win-aapt/index.html">
+<meta property="og:title" content="traffic_card">
+<meta property="og:url" content="http://yoursite.com/2018/01/01/traffic-card/index.html">
 <meta property="og:site_name" content="Fine">
-<meta property="og:description" content="理论上，只要下一个windows版本的SDK，里面就自带了fastboot和adb工具。但我最近确实遇到了一个需要在linux下编译出windows版本的adb的问题，废话不多说，步骤如下：
-
-执行：apt-get install mingw32安装了linux-windows交叉编译环境mingwin
-
-执行：. build/envsetup.sh
-执行choosecombo，选择各个参数这两步">
-<meta property="og:updated_time" content="2017-08-10T02:44:15.223Z">
+<meta property="og:description" content="公交卡蓝牙稳定性完善
+背景
+公交卡开卡过程中药频繁和后台交互拉取数据，由于手表没有联网能力，所以我们自己封装一套HttpManager 供第三方合作的App使用，以便访问自己的服务器，但是在与雪球合作的时候，合作业务不稳定，反馈给我们说，是调用我们的接口返回蓝牙异常造成的， 所以我们这边也复现这个问题，在实际的调试过程中也有发现，蓝牙不稳定，尤其是泰山2代上非常不稳定，之前HttpManager都">
+<meta property="og:updated_time" content="2018-01-01T05:00:34.873Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Compile_Win_aapt">
-<meta name="twitter:description" content="理论上，只要下一个windows版本的SDK，里面就自带了fastboot和adb工具。但我最近确实遇到了一个需要在linux下编译出windows版本的adb的问题，废话不多说，步骤如下：
-
-执行：apt-get install mingw32安装了linux-windows交叉编译环境mingwin
-
-执行：. build/envsetup.sh
-执行choosecombo，选择各个参数这两步">
+<meta name="twitter:title" content="traffic_card">
+<meta name="twitter:description" content="公交卡蓝牙稳定性完善
+背景
+公交卡开卡过程中药频繁和后台交互拉取数据，由于手表没有联网能力，所以我们自己封装一套HttpManager 供第三方合作的App使用，以便访问自己的服务器，但是在与雪球合作的时候，合作业务不稳定，反馈给我们说，是调用我们的接口返回蓝牙异常造成的， 所以我们这边也复现这个问题，在实际的调试过程中也有发现，蓝牙不稳定，尤其是泰山2代上非常不稳定，之前HttpManager都">
   
     <link rel="alternative" href="/atom.xml" title="Fine" type="application/atom+xml">
   
@@ -202,11 +193,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Compile-Win-aapt" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-traffic-card" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/08/10/Compile-Win-aapt/" class="article-date">
-  	<time datetime="2017-08-10T02:43:23.000Z" itemprop="datePublished">2017年8月10日</time>
+      <a href="/2018/01/01/traffic-card/" class="article-date">
+  	<time datetime="2018-01-01T04:58:53.000Z" itemprop="datePublished">2018年1月1日</time>
 </a>
     </div>
   
@@ -219,7 +210,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Compile_Win_aapt
+      traffic_card
     </h1>
   
 
@@ -227,6 +218,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NFC/">NFC</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -235,17 +230,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>理论上，只要下一个windows版本的SDK，里面就自带了fastboot和adb工具。<br>但我最近确实遇到了一个需要在linux下编译出windows版本的adb的问题，废话不多说，步骤如下：</p>
-<ol>
-<li>执行：apt-get install mingw32<pre><code>安装了linux-windows交叉编译环境mingwin
-</code></pre></li>
-<li>执行：. build/envsetup.sh</li>
-<li>执行choosecombo，选择各个参数<pre><code>这两步设置了一些编译参数和环境变量，按照你正常编译android的设置即可。
-</code></pre></li>
-<li>执行：make USE_MINGW=y adb</li>
-<li>执行：make USE_MINGW=y fastboot</li>
-<li>执行：make USE_MINGW=y aapt</li>
-</ol>
+        <p>公交卡蓝牙稳定性完善</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><blockquote>
+<p>公交卡开卡过程中药频繁和后台交互拉取数据，由于手表没有联网能力，所以我们自己封装一套HttpManager 供第三方合作的App使用，以便访问自己的服务器，但是在与雪球合作的时候，合作业务不稳定，反馈给我们说，是调用我们的接口返回蓝牙异常造成的， 所以我们这边也复现这个问题，在实际的调试过程中也有发现，蓝牙不稳定，尤其是泰山2代上非常不稳定，之前HttpManager都是假设蓝牙稳定情况下，但是在蓝牙不稳定的情况下就有可能造成<strong>消息请求发送出去回不来，或者请求根本就没从手表发送出去</strong>，缺少相应的回包机制。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="优化思路"><a href="#优化思路" class="headerlink" title="优化思路"></a>优化思路</h3><p>Http请求的时候都会指定超时，如果没指定就使用默认超时，根据该信息设计蓝牙端断开容忍超时，只要在这超时之间请求能回来，就认为请求成功，中间无论蓝牙断开几次，只要从新连接上，传回之前请求的接口，并且在超时时间之内，就把请求的结果返回给第三方应用。</p>
+<h3 id="情况分类"><a href="#情况分类" class="headerlink" title="情况分类"></a>情况分类</h3><p>根据蓝牙断开时请求是否发送DM端可以分为两类，一类是发送的时候刚好蓝牙断开，这是请求在DMA缓存，并且根据超时时间设定超时，以确保调用端有结果返回，不会一直卡在某个阶段一直等待，没有结果返回。</p>
+<h4 id="发送的时候蓝牙断开"><a href="#发送的时候蓝牙断开" class="headerlink" title="发送的时候蓝牙断开"></a>发送的时候蓝牙断开</h4><p>这种状态，涉及和第二种状态的转换，大致分为两种</p>
+<ul>
+<li>断开时超时之内消息发送到DM端。</li>
+<li>断开超时之内，蓝牙从新连接上，请求发送到DM端。这种状态就流转到下个状态。<h4 id="请求发送到DM端蓝牙断开"><a href="#请求发送到DM端蓝牙断开" class="headerlink" title="请求发送到DM端蓝牙断开"></a>请求发送到DM端蓝牙断开</h4>这种涉及两种，</li>
+<li>超时之内，蓝牙从新连接上， 消息回到dma</li>
+<li>超时后消息回到DMA，但是因为DMA把超时结果已经返回给客户端，所以本次结果会被过滤掉。这里有个细节优化，DMA会根据蓝牙状态，如果此时蓝牙连接，但是消息没回来，那就是返回给客户端超时，蓝牙没连接就返回蓝牙异常，降低返回蓝牙异常的可能性， 让客户端重试，提高成功率。</li>
+</ul>
+<h3 id="优化结果"><a href="#优化结果" class="headerlink" title="优化结果"></a>优化结果</h3><p>之前在开卡充值过程中，只要开关一次蓝牙，就会造成开卡充值失败，优化后开关蓝牙只要在超时之内连接成功基本都能开卡充值成功，中间可以随意任意断开蓝牙，只要在超时时间之内连接上请求成功即可。</p>
+<p>###待优化<br>发送过程中丢包，或者发送数据受损坏，这是一种极端情况，暂时没有优化，需要加入校验和回包机制验证。</p>
 
       
     </div>
@@ -255,18 +255,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/09/18/volte/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          S8 Volte
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/18/wechat-offline-pay/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">微信离线支付</div>
+    <a href="/2018/01/01/Android-eSE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android_eSE</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
