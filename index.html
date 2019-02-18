@@ -214,164 +214,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="蓝鲸手环软件系统"><a href="#蓝鲸手环软件系统" class="headerlink" title="蓝鲸手环软件系统"></a>蓝鲸手环软件系统</h1><html><br><a href="mailto:swordluo@163.com" target="_blank" rel="external">作者：Jack Luo</a><br></html>
+        <h1 id="蓝鲸手环软件系统"><a href="#蓝鲸手环软件系统" class="headerlink" title="蓝鲸手环软件系统"></a>蓝鲸手环软件系统</h1><html><br><a href="mailto:swordluo@163.com">作者：Jack Luo</a><br></html>
 
 <h2 id="1-硬件框架"><a href="#1-硬件框架" class="headerlink" title="1 硬件框架"></a>1 硬件框架</h2><p>先来看一下硬件框图：<br><img src="https://note.youdao.com/yws/api/personal/file/77990DC7BCCA428087B57242123372AF?method=download&amp;shareKey=606e8e9f87e1534d75871ef42d957159" alt="硬件框图"></p>
-<p>主要器件型号如下：</p>
-<table>
-<thead>
-<tr>
-<th>硬件模块</th>
-<th>型号</th>
-<th>参数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MCU</td>
-<td>Apollo2Blue</td>
-<td>48MHz/256KB RAM/1MB ROM</td>
-</tr>
-<tr>
-<td>Norflash</td>
-<td></td>
-<td>8MB</td>
-</tr>
-<tr>
-<td>GPS</td>
-<td>UBX-M8230</td>
-<td></td>
-</tr>
-<tr>
-<td>LCD</td>
-<td>Truly</td>
-<td>1.1寸/160*64</td>
-</tr>
-<tr>
-<td>TP</td>
-<td>联阳</td>
-<td></td>
-</tr>
-<tr>
-<td>PPG</td>
-<td>PPS964</td>
-<td></td>
-</tr>
-<tr>
-<td>G-Sensor</td>
-<td>MC3632</td>
-<td></td>
-</tr>
-<tr>
-<td>PMU</td>
-<td>MAX14745D</td>
-<td></td>
-</tr>
-<tr>
-<td>BT</td>
-<td>内置AM</td>
-<td></td>
-</tr>
-<tr>
-<td>Motor</td>
-<td>AWA</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="2-软件框架"><a href="#2-软件框架" class="headerlink" title="2 软件框架"></a>2 软件框架</h2><p><img src="https://note.youdao.com/yws/api/personal/file/8154D1F2B9574D62A772673EF71C5FAD?method=download&amp;shareKey=b79ac91749e5089521761dbd34ad35a7" alt="蓝鲸手环软件系统"></p>
-<p>&#8195;如上图所示，蓝鲸的软件结构可以分为APP应用、中间件（Middleware）、HAL&amp;BSP三个层次，另外还有一个BootLoader。</p>
-<ul>
-<li><p>APP应用主要是实现UI交互逻辑和UI界面显示，通过API和消息接口，可以与中间件进行数据交互。</p>
-</li>
-<li><p>中间件实现了系统的大部分的组件，包含了GUI库(GUI Lib)、运动算法库（Algo Lib）、心率算法库(HRM Lib)、电源管理（PM)、通信协议(Protocol)、算法模块（Algo Ctrl)、数据存储模块（His Data）、数据查询模块(Data Reader)、运动模块（Sports）、Preference、AGPS、GPS、工厂测试（Factory)、升级模块（OTA）、健康模块（Providers)、调试模块等。</p>
-</li>
-<li><p>HAL是中间件和BSP之间的一个抽象接口层。</p>
-</li>
-<li><p>BSP实现了各个硬件模块的驱动。</p>
-</li>
-<li><p>Bootloader主要用于OTA升级过程中执行文件的搬移，将最新的版本搬到执行区域。</p>
-</li>
-</ul>
-<h2 id="3-主要子系统框架介绍"><a href="#3-主要子系统框架介绍" class="headerlink" title="3 主要子系统框架介绍"></a>3 主要子系统框架介绍</h2><h3 id="3-1-APP应用"><a href="#3-1-APP应用" class="headerlink" title="3.1 APP应用"></a>3.1 APP应用</h3><p>&#8195;主要完成UI显示和交互逻辑，数据和系统控制是由中间件的各个模块提供，UI显示由GUI控件提供。模块之间通信主要是通过消息传递。</p>
-<h3 id="3-2-GUI模块"><a href="#3-2-GUI模块" class="headerlink" title="3.2 GUI模块"></a>3.2 GUI模块</h3><p>&#8195;Libaroma是一个用纯C写的控件库，支持Linux、X86、QNX等不同平台。针对不同平台API做了一层封装，可以很快的移植到不同平台，参照Android的材料设计风格实现控件库，已经写好了Fragment、ViewPager、Button、ProgressBar、ListView、Dialog等控件，开发者可以实现自己的控件。目前<br>Libaroma框架只绝对布局，控件的开发基本和Android类似，也有Window，WindowManagr、EventHub等概念，支持Window转场动画。</p>
-<h3 id="3-3-私有协议模块"><a href="#3-3-私有协议模块" class="headerlink" title="3.3 私有协议模块"></a>3.3 私有协议模块</h3><p>&#8195;数据接收流程如下图，当DM端通过BLE的写特征值写入数据时，手环端BLE协议写回调函数会将数据送出，在回调函数中调用Message pack的API对数据包解析，并根据cmd字段对解析后的内容通过消息分发出去。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">graph TD</div><div class="line">A[BLE Service WriteCback]--&gt;B[msg unpack解包]</div><div class="line">B--&gt;C[根据cmd字段发送对应的消息]</div></pre></td></tr></table></figure></p>
-<p>&#8195;数据发送流程如下图，当数据需要发送时，先调用Message pack的API对数据进行打包，再调用BLE的发送接口发送出去。这里用到了两种发送方式，一种是写特征值的方式，这个主要是返回DM需要读取的数据；另一种是发送notify的方式，这个主要是回应DM发送过来的命令成功与否。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">graph TD</div><div class="line">A[send data]--&gt;B[msg pack打包]</div><div class="line">B--&gt;C[fill characteristic]</div><div class="line">B--&gt;D[send Notification]</div></pre></td></tr></table></figure></p>
-<h3 id="3-4-ANCS通知模块"><a href="#3-4-ANCS通知模块" class="headerlink" title="3.4 ANCS通知模块"></a>3.4 ANCS通知模块</h3><p>&#8195;和私有协议的接收流程类似，不同之处是这里是通过ANCS Service接收到数据，数据格式是ANCS规范定义的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">graph TD</div><div class="line">A[ancsAnccAttrCback]--&gt;B[根据ancs协议解析和过滤]</div><div class="line">B--&gt;C[发送消息到APP模块]</div></pre></td></tr></table></figure></p>
-<h3 id="3-5-运动算法"><a href="#3-5-运动算法" class="headerlink" title="3.5 运动算法"></a>3.5 运动算法</h3><p>&#8195;运动算法包括计步、睡眠、骑行、久坐、翻腕、运动检测、敲击、游泳、健身等。除游泳和健身是采用SVM的深度学习算法外，其他都是采用传统算法，通过计算三轴数据的能量值和角度，并滤波，加上特征提取和判断逻辑。</p>
-<ul>
-<li>传统算法运算量少，占用资源少，可以做到低功耗，全天候运行。</li>
-<li>深度学习算法相对占用资源比较多，功耗会比较大，只能在进入特定场景下运行。</li>
-</ul>
-<h3 id="3-6-健康模块"><a href="#3-6-健康模块" class="headerlink" title="3.6 健康模块"></a>3.6 健康模块</h3><p>&#8195;健康模块中有心率、计步、睡眠、久坐四个业务，每个业务的软件架构基本是一样的，都是监听并处理其他模块发过来的消息。此模块与其他模块的关系如下：</p>
-<p><img src="https://note.youdao.com/yws/api/personal/file/8FE3AB30B5754337A8839883EE248ECF?method=download&amp;shareKey=7642e36f4f9e8a8b1bb96bcaf490992d" alt="健康模块与其他模块的关系"></p>
-<p>&#8195;健康模块是中间件中的一个重要模块，分别与穿戴协议、心率UI、计步UI、健康UI、运动UI、运动算法模块、心率算法模块、存储模块有交互。</p>
-<ul>
-<li>DM通过穿戴协议可以设置参数和读取健康数据，健康模块中要处理穿戴协议传过来的命令以及返回数据给穿戴协议。</li>
-<li>UI通过消息和API从健康模块获取相应的数据，健康模块也会根据设置的数值给UI主动发送消息，用于弹出提醒框。</li>
-<li>运动算法的开关是通过健康模块来控制的，算法的数据会主动上报给健康模块。</li>
-<li>健康模块会调用存储模块的接口保存健康数据，当DM要拉取健康数据的时候，健康模块也会调用存储模块查询历史数据，并返回给DM。</li>
-</ul>
-<h3 id="3-7-运动模块"><a href="#3-7-运动模块" class="headerlink" title="3.7 运动模块"></a>3.7 运动模块</h3><p>&#8195;运动模块中有室外跑步、室内跑步、游泳、骑行、健走、健身等业务，业务逻辑都是监听并处理其他模块发过来的消息，记录心率、步数、gps、距离、姿态等数据。此模块与其他模块的关系如下：</p>
-<p><img src="https://note.youdao.com/yws/api/personal/file/D09C612FA6434F11B333422D1403D69F?method=download&amp;shareKey=19a58175bbd46983576aa2cc2242b919" alt="运动模块与其他模块的关系"></p>
-<p>&#8195;运动模块是中间件中的一个重要模块，分别与穿戴协议、跑步UI、游泳UI、骑行UI、健走UI、健身UI、健康模块、运动算法模块、GPS模块、存储模块有交互。</p>
-<ul>
-<li>DM通过穿戴协议可以设置参数和读取健康数据，运动模块中要处理穿戴协议传过来的命令以及返回数据给穿戴协议。</li>
-<li>UI通过消息和API从运动模块获取相应的数据，运动模块也会根据设置的数值给UI主动发送消息，用于实时更新数据。</li>
-<li>运动模块会调用存储模块的接口保存运动记录、心率数据、GPS数据，当DM要拉取运动数据的时候，运动模块也会调用存储模块查询历史数据，并返回给DM。</li>
-</ul>
-<h3 id="3-8-GPS模块"><a href="#3-8-GPS模块" class="headerlink" title="3.8 GPS模块"></a>3.8 GPS模块</h3><p>&#8195;GPS模块主要的任务是开关GPS、星历数据的下发、命令的下发、报文接收并解析，定位信息保存和发送等。</p>
-<p>&#8195;业务主要流程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">graph TD</div><div class="line">A(开始)--&gt;B[打开串口]</div><div class="line">B--&gt;C[打开GPS]</div><div class="line">C--&gt;D&#123;是否有AGPS星历文件?&#125;</div><div class="line">D--&gt;|yes| E[下载AGPS星历数据]</div><div class="line">D--&gt;|no| F[接收GPS数据]</div><div class="line">E--&gt;F[接收GPS数据]</div><div class="line">F--&gt;G[解析GPS报文]</div><div class="line">G--&gt;H[保存GPS定位信息到flash]</div><div class="line">H--&gt;I[发送定位信息消息]</div></pre></td></tr></table></figure></p>
-<h3 id="3-9-AGPS下载模块"><a href="#3-9-AGPS下载模块" class="headerlink" title="3.9 AGPS下载模块"></a>3.9 AGPS下载模块</h3><p>&#8195;主要业务流程如下，异常处理流程没有画出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">graph TD</div><div class="line">A(Bigfile Service WriteCback)--&gt;B[检测包头的起始位置]</div><div class="line">B--&gt;C[接收包头并解析出文件的描述信息]</div><div class="line">C--&gt;D[接收后面的文件数据]</div><div class="line">D--&gt;E[CRC校验]</div><div class="line">E--&gt;F[保存数据到flash]</div><div class="line">F--&gt;G[发送notify回包给DM]</div></pre></td></tr></table></figure></p>
-<p>&#8195;等全部的数据接收完成后，DM端发送命令给手环，进行全部数据的校验，校验成功后返回校验成功的消息给DM。</p>
-<h3 id="3-10-存储查询模块"><a href="#3-10-存储查询模块" class="headerlink" title="3.10 存储查询模块"></a>3.10 存储查询模块</h3><p>&#8195;蓝鲸硬件上有两块flash，一个是mcu片内的1MB ROM，一个是外部4/8MB norflash。片内的ROM主要用于存放代码，外部放norflash主要用于存放数据。</p>
-<p>&#8195;两个flash我们规划了不同的分区，用于满足手环系统的需求。</p>
-<p>&#8195;片内的ROM分区表如下：<br>分区名 | 地址范围 | 大小 | 备注<br>—|—|—|—|—<br>Bootloader | 0x00000-0x03FFF | 16KB | Bootloader<br>flag | 0x04000-0x07FFF | 16KB | ota flag和image地址、crc等<br>image | 0x08FFF-0xF7FFF | 984KB | image执行文件<br>factory | 0xF8000-0xFFFFF | 8KB | 工厂信息</p>
-<p>&#8195;外部的norflash分区表如下：<br>分区名 | 地址范围 | 大小 | 备注<br>—|—|—|—|—<br>OTA | 0x000000-0x0FFFFF | 1MB | OTA升级包<br>front | 0x100000-0x1FFFFF | 1MB | 字库<br>log | 0x200000-0x2FFFFF | 1MB | 离线log<br>bt_pair1 | 0x300000-0x300FFF | 4KB | ios蓝牙配对信息<br>bt_pair2 | 0x301000-0x301FFF | 4KB |ios蓝牙配对信息<br>bt_pair3 | 0x302000-0x302FFF | 4KB |ios蓝牙配对信息<br>bt_pair4 | 0x303000-0x303FFF | 4KB |ios蓝牙配对信息<br>bt_pair5 | 0x304000-0x304FFF | 4KB |ios蓝牙配对信息<br>agps | 0x305000-0x313FFF | 60KB |agps星历文件<br>agps head| 0x314000-0x318FFF | 20KB | agps星历文件头<br>resume | 0x319000-0x33FFFF | 156KB |保留<br>user data | 0x340000-0x37FFFF | 256KB |用户健康历史数据<br>sport data | 0x380000-0x3FFFFF | 512KB |运动历史数据</p>
-<p>&#8195;除历史数据外，其他的分区的数据存储比较简单，都是整块区域数据的读写。</p>
-<p>&#8195;历史数据的存储设计成一个循环buffer的机制，始终保持最近的数据，当数据量超过分区容量时，覆盖最早的数据。</p>
-<h3 id="3-11-OTA模块"><a href="#3-11-OTA模块" class="headerlink" title="3.11 OTA模块"></a>3.11 OTA模块</h3><p>&#8195;主要业务流程如下，异常处理流程没有画出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">graph TD</div><div class="line">A(OTA Service WriteCback)--&gt;B[检测包头的起始位置]</div><div class="line">B--&gt;C[接收包头并解析出文件的描述信息]</div><div class="line">C--&gt;D[接收后面的文件数据]</div><div class="line">D--&gt;E[CRC校验]</div><div class="line">E--&gt;F[保存数据到flash]</div><div class="line">F--&gt;G[发送notify回包给DM]</div></pre></td></tr></table></figure></p>
-<p>&#8195;等全部的数据接收完成后，DM端发送命令给手环，进行全部数据的校验，校验成功后修改OTA的标志位，并返回校验成功的消息给DM，DM再发送重启的命令给手环，手环重启进入OTA流程，OTA完成后将标志位还原。</p>
-<h3 id="3-12-Preference模块"><a href="#3-12-Preference模块" class="headerlink" title="3.12 Preference模块"></a>3.12 Preference模块</h3><p>&#8195;此模块维护了一组持久化数据，这些数据更新的频率可能会比较高，并且系统关机重启后，数据不会丢失。<br>&#8195;业务逻辑如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">graph TD</div><div class="line">A(开始)--&gt;B[从flash中读取数据到全局变量中]</div><div class="line">B--&gt;C&#123;首次开机?&#125;</div><div class="line">C--&gt;|yes| D[初始化全局变量]</div><div class="line">C--&gt;|no| E[各业务更新变量]</div><div class="line">D--&gt;E</div><div class="line">E--&gt;F&#123;关机重启?&#125;</div><div class="line">F--&gt;|yes| G[将全局变量的内容保存到flash]</div><div class="line">F--&gt;|no|E</div></pre></td></tr></table></figure></p>
-<p>&#8195;分配了一块4KB大小的Flash区域用于保存数据，开机后，会将flash中的数据拷贝到内存中的一个全局变量，用于临时保存并更新数据。当系统关机重启前，全局变量中的数据会保存到flash中。</p>
-<h3 id="3-13-电源管理模块"><a href="#3-13-电源管理模块" class="headerlink" title="3.13 电源管理模块"></a>3.13 电源管理模块</h3><p>&#8195;电源管理模块负责充电管理、LCD背光管理、电量管理、温度报警、假关机管理等。</p>
-<h3 id="3-14-Common-Driver模块"><a href="#3-14-Common-Driver模块" class="headerlink" title="3.14 Common Driver模块"></a>3.14 Common Driver模块</h3><p>&#8195;Common driver模块是中断处理的下半部，将一些中断处理函数中耗时的操作放到中断上下文之外去处理，保证了中断时间尽量的少。处理的中断有串口中断、TP中断、PMU中断、电池电量检测ADC中断、NTC检测ADC中断等。</p>
-<h3 id="3-15-看门狗模块"><a href="#3-15-看门狗模块" class="headerlink" title="3.15 看门狗模块"></a>3.15 看门狗模块</h3><p>&#8195;Apollo2Blue芯片的看门狗设置成0.75秒会产生一次中断，1.5秒不喂狗会超时重启。根据这个硬件特性，系统设计了一套喂狗机制：</p>
-<ul>
-<li>使用事件标志组的方式，监控各个task，被监控的task每分钟设置一次事件标志组中对应的标志位。当全部的标志位都置位了，就清一次看门狗中断计数器g_ui8NumWatchdogInterrupts。</li>
-<li>在看门狗中断中，对进入中断的次数计数g_ui8NumWatchdogInterrupts，当g_ui8NumWatchdogInterrupts小于180的时候就喂狗，否则就停止喂狗，等待超时重启。</li>
-</ul>
-<!--
-系统重启的触发条件有：
-1. 看门狗超时
-2. am_hal_reset_por()
-3. am_hal_reset_poi()
-4. 掉电复位
-5. 外部复位
--->
-<h3 id="3-16-消息模块"><a href="#3-16-消息模块" class="headerlink" title="3.16 消息模块"></a>3.16 消息模块</h3><p>&#8195;任务之间的数据通信主要靠消息机制，由于FreeRTOS系统只提供了点对点的API，我们在此基础上实现了类似Android的注册和广播的消息API。<br>使用队列将注册的消息保存起来，在发送消息的时候查找遍历队列中的消息，逐个发送出去。</p>
-<h3 id="3-17-工厂测试模块"><a href="#3-17-工厂测试模块" class="headerlink" title="3.17 工厂测试模块"></a>3.17 工厂测试模块</h3><p>&#8195;产线生产的时候需要对硬件测试、写入信息、控制软件进入特定模式等，因此在手环代码要加入相关的代码。</p>
-<p>&#8195;需要通过发送特定的命令才能激活工厂测试代码，命令的发送方式主要有以下两种：</p>
-<ul>
-<li>在SMT阶段，产线的夹具接通手环的串口，通过PC上位机发送串口命令。</li>
-<li>在组装阶段，通过dongle连接手环的BLE Service，上位机发送蓝牙命令给手环。</li>
-</ul>
-<h3 id="3-18-BootLoader"><a href="#3-18-BootLoader" class="headerlink" title="3.18 BootLoader"></a>3.18 BootLoader</h3><p>&#8195;Bootloader的主要作用是用来完成OTA，每次启动首先进入bootloader，通过判断保存在flash中的标志位，来决定是否进行代码搬移，主要流程如下图：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">graph TD</div><div class="line">A(开始)--&gt;B[从flash中读取标志位]</div><div class="line">B--&gt;C&#123;是否OTA?&#125;</div><div class="line">C--&gt;|yes| D[从外部flash搬移新的执行代码到内部flash的运行地址]</div><div class="line">C--&gt;|no| E[跳转到系统代码运行]</div><div class="line">D--&gt;F[擦除标志位]</div><div class="line">F--&gt;G[重启]</div></pre></td></tr></table></figure></p>
-<h3 id="3-19-调试"><a href="#3-19-调试" class="headerlink" title="3.19 调试"></a>3.19 调试</h3><p>&#8195;调试方式目前有如下几种：</p>
-<ul>
-<li>串口log：每个task都有宏单独控制log的开关，方便调试使用。</li>
-<li>AT指令：手环上实现了AT指令的解析，可以自己添加指令用于调试。</li>
-<li>KEIL DEBUG：可以设置断点和单步跟踪。</li>
-<li>离线log：在flash中分出来一个单独的区域，用于存放离线log，在整机的情况下非常有用，但容量有限。</li>
-</ul>
-<!--
-## 系统指标
-
-## 产品优势
-
-## 总结
-GPS模块目前没有启用batch功能，启用后可以降低不少功耗，GPS模块最多可以缓存300个点的数据，也就是可以五分钟上报一次数据。
--->
       
     </div>
     
@@ -384,6 +229,10 @@ GPS模块目前没有启用batch功能，启用后可以降低不少功耗，GPS
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2019/02/18/langjing-band/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
