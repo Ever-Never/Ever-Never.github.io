@@ -3,17 +3,158 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Fine</title>
+  <title>蓝鲸手环软件系统 | Fine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fine">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="蓝鲸手环软件系统作者：Jack Luo
+
+1 硬件框架先来看一下硬件框图：
+主要器件型号如下：
+
+
+
+硬件模块
+型号
+参数
+
+
+
+
+MCU
+Apollo2Blue
+48MHz/256KB RAM/1MB ROM
+
+
+Norflash
+
+8MB
+
+
+GPS
+UBX-M8230
+
+
+
+LCD
+Truly
+1.1寸/160*64
+
+
+TP
+联阳
+
+
+
+PPG
+PPS964
+
+
+
+G-Sensor
+MC3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蓝鲸手环软件系统">
+<meta property="og:url" content="http://yoursite.com/2019/02/18/langjing-band/index.html">
 <meta property="og:site_name" content="Fine">
-<meta property="og:description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
+<meta property="og:description" content="蓝鲸手环软件系统作者：Jack Luo
+
+1 硬件框架先来看一下硬件框图：
+主要器件型号如下：
+
+
+
+硬件模块
+型号
+参数
+
+
+
+
+MCU
+Apollo2Blue
+48MHz/256KB RAM/1MB ROM
+
+
+Norflash
+
+8MB
+
+
+GPS
+UBX-M8230
+
+
+
+LCD
+Truly
+1.1寸/160*64
+
+
+TP
+联阳
+
+
+
+PPG
+PPS964
+
+
+
+G-Sensor
+MC3">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/77990DC7BCCA428087B57242123372AF?method=download&shareKey=606e8e9f87e1534d75871ef42d957159">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/8154D1F2B9574D62A772673EF71C5FAD?method=download&shareKey=b79ac91749e5089521761dbd34ad35a7">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/8FE3AB30B5754337A8839883EE248ECF?method=download&shareKey=7642e36f4f9e8a8b1bb96bcaf490992d">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/D09C612FA6434F11B333422D1403D69F?method=download&shareKey=19a58175bbd46983576aa2cc2242b919">
+<meta property="og:updated_time" content="2019-02-18T06:28:47.630Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fine">
-<meta name="twitter:description" content="个人的一些分享,主要分享传统patchrom适配中各个厂商在做机型适配的时候的各种坑.">
+<meta name="twitter:title" content="蓝鲸手环软件系统">
+<meta name="twitter:description" content="蓝鲸手环软件系统作者：Jack Luo
+
+1 硬件框架先来看一下硬件框图：
+主要器件型号如下：
+
+
+
+硬件模块
+型号
+参数
+
+
+
+
+MCU
+Apollo2Blue
+48MHz/256KB RAM/1MB ROM
+
+
+Norflash
+
+8MB
+
+
+GPS
+UBX-M8230
+
+
+
+LCD
+Truly
+1.1寸/160*64
+
+
+TP
+联阳
+
+
+
+PPG
+PPS964
+
+
+
+G-Sensor
+MC3">
+<meta name="twitter:image" content="https://note.youdao.com/yws/api/personal/file/77990DC7BCCA428087B57242123372AF?method=download&shareKey=606e8e9f87e1534d75871ef42d957159">
   
     <link rel="alternative" href="/atom.xml" title="Fine" type="application/atom+xml">
   
@@ -186,9 +327,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-langjing-band" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-langjing-band" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2019/02/18/langjing-band/" class="article-date">
@@ -204,12 +343,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/18/langjing-band/">蓝鲸手环软件系统</a>
+    <h1 class="article-title" itemprop="name">
+      蓝鲸手环软件系统
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FreeRTOS/">FreeRTOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GUI/">GUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MCU/">MCU</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -375,20 +525,19 @@ GPS模块目前没有启用batch功能，启用后可以降低不少功耗，GPS
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FreeRTOS/">FreeRTOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GUI/">GUI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MCU/">MCU</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/18/Low-malfunction_operation_system/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">超低功耗操作系统的设计经验</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
@@ -397,695 +546,6 @@ GPS模块目前没有启用batch功能，启用后可以降低不少功耗，GPS
 
 
 
-
-  
-    <article id="源语言：-Low-malfunction_operation_system" class="article article-type-源语言：" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/02/18/Low-malfunction_operation_system/" class="article-date">
-  	<time datetime="2019-02-18T03:13:00.000Z" itemprop="datePublished">2019年2月18日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/18/Low-malfunction_operation_system/">超低功耗操作系统的设计经验</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h3><blockquote>
-<p>续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。</p>
-</blockquote>
-<p>如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的效果，与几十年前的电子表有什么区别呢。3.用运算量更小的CPU？那些丰富的安卓手表应用就跑不起来了，还不如直接戴手环。行业里这几年无论是卡西欧、摩托罗拉、三星还是苹果，在智能手表的续航时长上一直没有实质性的突破。长期以来长续航与高颜值就是鱼和熊掌的关系。</p>
-<p>但软硬结合的架构设计以及操作系统层面的自研，其实可以很好的解决这个问题。</p>
-<p>本文从CPU的选取开始，然后介绍双核架构的必要性，再进一步阐述自研OS的软硬件架构、双核通信的设计与实现、UI框架、其他省电优化的关键点，逐步勾勒出既高颜值又省电易用的智能手表操作系统。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MCU/">MCU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SensorHub/">SensorHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI-Framework/">UI Framework</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2019/02/18/Low-malfunction_operation_system/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-volte" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/02/18/volte/" class="article-date">
-  	<time datetime="2019-02-18T03:01:19.010Z" itemprop="datePublished">2019年2月18日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/18/volte/">S8 Volte</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>经过一两天的研究,初步得出一些方法来开启联通volte,由于没有机器,或者其他原因就不打算继续研究了.既然研究了就分享下,具体是否有效还有待探究.</p>
-</blockquote>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Volte/">Volte</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2019/02/18/volte/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="libaroma-使用规范" class="article article-type-libaroma" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/05/26/使用规范/" class="article-date">
-  	<time datetime="2018-05-26T08:54:33.000Z" itemprop="datePublished">2018年5月26日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/26/使用规范/">使用规范</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="libaroma-GUI-使用规范"><a href="#libaroma-GUI-使用规范" class="headerlink" title="libaroma GUI 使用规范"></a>libaroma GUI 使用规范</h3><blockquote>
-<p>在使用 libaroma framework 遇到很多使用问题，造成后期改动，其实就是使用没遵循规范造成死机，显示异常。各种莫名奇妙的问题。这里就列举几个使用规范。</p>
-</blockquote>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/05/26/使用规范/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-traffic-card" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/01/01/traffic-card/" class="article-date">
-  	<time datetime="2018-01-01T04:58:53.000Z" itemprop="datePublished">2018年1月1日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/01/traffic-card/">Traffic Card</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>公交卡蓝牙稳定性完善</p>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><blockquote>
-<p>公交卡开卡过程中药频繁和后台交互拉取数据，由于手表没有联网能力，所以我们自己封装一套HttpManager 供第三方合作的App使用，以便访问自己的服务器，但是在与雪球合作的时候，合作业务不稳定，反馈给我们说，是调用我们的接口返回蓝牙异常造成的， 所以我们这边也复现这个问题，在实际的调试过程中也有发现，蓝牙不稳定，尤其是泰山2代上非常不稳定，之前HttpManager都是假设蓝牙稳定情况下，但是在蓝牙不稳定的情况下就有可能造成<strong>消息请求发送出去回不来，或者请求根本就没从手表发送出去</strong>，缺少相应的回包机制。</p>
-</blockquote>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NFC/">NFC</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/01/01/traffic-card/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Android-eSE" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/01/01/Android-eSE/" class="article-date">
-  	<time datetime="2018-01-01T04:55:10.000Z" itemprop="datePublished">2018年1月1日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/01/Android-eSE/">Android eSE</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Android-eSE-访问接口"><a href="#Android-eSE-访问接口" class="headerlink" title="Android eSE 访问接口"></a>Android eSE 访问接口</h1><blockquote>
-<p>NFC 基于eSE的卡模拟，需要访问eSE，来替换秘钥建立安全域下载Applet个人化应用读取个人信息等。这些过程都要通过OMA接口访问，OMA其实是一个装饰APK，来给上层提供统一的API。目前SE实现方式主要分三种 基于SIM卡的 基于SD卡的和基于内置eSE的。针对不同的实现有不同的终端，所以用OMA包装一层，现阶段基于eSE的方案，最终的实现在NFC系统APK中，这是一个系统级别的服务，开机自启动运行。NFC整体架构如下。</p>
-</blockquote>
-<p><img src="assets/eSE/NFC-Framework.png" alt=""></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eSE/">eSE</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/01/01/Android-eSE/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-FreeRTOS-GUI" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/11/18/FreeRTOS-GUI/" class="article-date">
-  	<time datetime="2017-11-18T04:16:33.000Z" itemprop="datePublished">2017年11月18日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/FreeRTOS-GUI/">FreeRTOS_GUI</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>最近研究了下libaroma GUI在FreeRTOS上实现,再结合特定的外设调整,本以为自己有可能去做,项目原因,如果有机会有条件做就自己尝试移植下,现在只能先放一边了,突然觉得没啥玩了,总体框架如下,其实就是android 2D UI框架的缩小版本.</p>
-</blockquote>
-<p><img src="/assets/Libaroma/libaroma_gt.png" alt="libaroma_gt.png"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2D-engine/">2D engine</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gt-gui/">gt_gui</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/libaroma/">libaroma</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Compile-Win-aapt" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/08/10/Compile-Win-aapt/" class="article-date">
-  	<time datetime="2017-08-10T02:43:23.000Z" itemprop="datePublished">2017年8月10日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/10/Compile-Win-aapt/">Compile_Win_aapt</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>理论上，只要下一个windows版本的SDK，里面就自带了fastboot和adb工具。<br>但我最近确实遇到了一个需要在linux下编译出windows版本的adb的问题，废话不多说，步骤如下：</p>
-<ol>
-<li>执行：apt-get install mingw32<pre><code>安装了linux-windows交叉编译环境mingwin
-</code></pre></li>
-<li>执行：. build/envsetup.sh</li>
-<li>执行choosecombo，选择各个参数<pre><code>这两步设置了一些编译参数和环境变量，按照你正常编译android的设置即可。
-</code></pre></li>
-<li>执行：make USE_MINGW=y adb</li>
-<li>执行：make USE_MINGW=y fastboot</li>
-<li>执行：make USE_MINGW=y aapt</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-wechat-offline-pay" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/03/18/wechat-offline-pay/" class="article-date">
-  	<time datetime="2017-03-18T11:08:34.000Z" itemprop="datePublished">2017年3月18日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/18/wechat-offline-pay/">微信离线支付</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="微信支付-智能设备离线支付"><a href="#微信支付-智能设备离线支付" class="headerlink" title="微信支付(智能设备离线支付)"></a>微信支付(智能设备离线支付)</h1><p>离线支付能力对智能穿戴设备很重要,如果支付要依靠与手机连接,支付能力过于依赖手机,则在使用太多限制,是用户感觉使用穿戴设备支付不够便捷,如果只用绑定一次就可以离线支付这样便捷性自然凸显出来,增加便携性.现在微信客服端已经可以在没有网络下支付,所以要是智能手表具有微信支付能力,不需要太多的改动.下面可以简单陈述下实现</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BLE/">BLE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加密算法/">加密算法</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/03/18/wechat-offline-pay/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-GP" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/03/18/GP/" class="article-date">
-  	<time datetime="2017-03-18T10:55:28.000Z" itemprop="datePublished">2017年3月18日</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/18/GP/">Global Platform</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h2 id="术语表"><a href="#术语表" class="headerlink" title="术语表"></a>术语表</h2><table>
-<thead>
-<tr>
-<th>术语</th>
-<th>英文</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>EMV</td>
-<td>Europay, MasterCard and Visa</td>
-<td></td>
-</tr>
-<tr>
-<td>ISD</td>
-<td>Issuer Secure Domains</td>
-<td>发卡方安全域</td>
-</tr>
-<tr>
-<td>SD</td>
-<td>Secure Domains</td>
-<td>安全域</td>
-</tr>
-<tr>
-<td>DM SD</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>DES</td>
-<td>Data Encryption Standard</td>
-<td>数据加密标准</td>
-</tr>
-<tr>
-<td>DEK</td>
-<td>Data Encryption Key</td>
-<td>数据加密密钥</td>
-</tr>
-<tr>
-<td>TDES</td>
-<td>Triple DES</td>
-<td>3DES 算法</td>
-</tr>
-<tr>
-<td>MAC</td>
-<td>Message Authentication Code</td>
-<td>消息认证码</td>
-</tr>
-<tr>
-<td>C-MAC</td>
-<td>Command Message Authentication Code</td>
-<td></td>
-</tr>
-<tr>
-<td>KMC DES</td>
-<td>Master Key for Personalization Session Keys</td>
-<td></td>
-</tr>
-<tr>
-<td>ICV</td>
-<td>Initial Chaining Vecto</td>
-<td>初始向量</td>
-</tr>
-<tr>
-<td>CM</td>
-<td>CardManger</td>
-<td></td>
-</tr>
-<tr>
-<td>SCP</td>
-<td>Secure Channel Protocol</td>
-<td>安全通道协议</td>
-</tr>
-<tr>
-<td>AID</td>
-<td>Application Identifier</td>
-<td>应用标识符</td>
-</tr>
-<tr>
-<td>APDU</td>
-<td>Application Protocol Data Unit</td>
-<td>应用协议数据单元</td>
-</tr>
-<tr>
-<td>CLA</td>
-<td>Class byte of the command message</td>
-<td>命令消息中的类字节</td>
-</tr>
-<tr>
-<td>INS</td>
-<td>Instruction byte of the command message</td>
-<td></td>
-</tr>
-<tr>
-<td>P1</td>
-<td>Reference control parameter 1</td>
-<td>引用控制参数1</td>
-</tr>
-<tr>
-<td>P2</td>
-<td>Reference control parameter 2</td>
-<td>引用控制参数2</td>
-</tr>
-<tr>
-<td>Lc</td>
-<td>Exact length of data in a case 3 or case 4 command</td>
-<td></td>
-</tr>
-<tr>
-<td>Le</td>
-<td>Maximum length of data expected in response to a case 2 or case 4 command</td>
-<td></td>
-</tr>
-<tr>
-<td>SW</td>
-<td>Status Word</td>
-<td>状态字</td>
-</tr>
-<tr>
-<td>SW1</td>
-<td>Status Word One</td>
-<td></td>
-</tr>
-<tr>
-<td>SW2</td>
-<td>Status Word Two</td>
-<td></td>
-</tr>
-<tr>
-<td>TLV</td>
-<td>Tag Length Value</td>
-<td></td>
-</tr>
-<tr>
-<td>OPEN</td>
-<td>GlobalPlatform envisequenguochengceronment</td>
-<td></td>
-</tr>
-<tr>
-<td>ENC</td>
-<td>Encryption</td>
-<td>加密</td>
-</tr>
-</tbody>
-</table>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AMSD/">AMSD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APDU/">APDU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ISD/">ISD</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/03/18/GP/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -1109,8 +569,8 @@ GPS模块目前没有启用batch功能，启用后可以降低不少功耗，GPS
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
