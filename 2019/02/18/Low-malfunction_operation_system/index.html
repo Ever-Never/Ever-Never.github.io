@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>超低功耗操作系统的设计经验 | Fine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="导语
+续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。
+
+如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超低功耗操作系统的设计经验">
+<meta property="og:url" content="http://yoursite.com/2019/02/18/Low-malfunction_operation_system/index.html">
+<meta property="og:site_name" content="Fine">
+<meta property="og:description" content="导语
+续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。
+
+如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的">
+<meta property="og:image" content="http://yoursite.com/assets/watch/hardware.png">
+<meta property="og:image" content="http://yoursite.com/assets/watch/framework.png">
+<meta property="og:image" content="http://yoursite.com/assets/watch/UI.png">
+<meta property="og:image" content="http://yoursite.com/assets/watch/gpio.png">
+<meta property="og:image" content="http://yoursite.com/assets/watch/seqence.png">
+<meta property="og:image" content="http://yoursite.com/assets/watch/Message.png">
+<meta property="og:image" content="http://yoursite.com/assets/watch/AMS.png">
+<meta property="og:updated_time" content="2019-02-18T04:30:10.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="超低功耗操作系统的设计经验">
+<meta name="twitter:description" content="导语
+续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。
+
+如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的">
+<meta name="twitter:image" content="http://yoursite.com/assets/watch/hardware.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Fine" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/assets/blogImg/ever.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Fine</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">菜鸟的成长之路</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/随笔">随笔</a></li>
+				        
+							<li><a href="/page">关于我</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Ever-Never" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="https://weibo.com/EverNeverNCWU" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/2D-engine/" style="font-size: 10px;">2D engine</a> <a href="/tags/AMSD/" style="font-size: 10px;">AMSD</a> <a href="/tags/APDU/" style="font-size: 10px;">APDU</a> <a href="/tags/BLE/" style="font-size: 10px;">BLE</a> <a href="/tags/ISD/" style="font-size: 10px;">ISD</a> <a href="/tags/MCU/" style="font-size: 10px;">MCU</a> <a href="/tags/NFC/" style="font-size: 10px;">NFC</a> <a href="/tags/SensorHub/" style="font-size: 10px;">SensorHub</a> <a href="/tags/TPS/" style="font-size: 10px;">TPS</a> <a href="/tags/UI-Framework/" style="font-size: 10px;">UI Framework</a> <a href="/tags/Volte/" style="font-size: 10px;">Volte</a> <a href="/tags/binder/" style="font-size: 10px;">binder</a> <a href="/tags/binder-node/" style="font-size: 10px;">binder node</a> <a href="/tags/binder-proxy/" style="font-size: 10px;">binder proxy</a> <a href="/tags/binder-thread-pool/" style="font-size: 10px;">binder thread pool</a> <a href="/tags/coron/" style="font-size: 10px;">coron</a> <a href="/tags/dd/" style="font-size: 10px;">dd</a> <a href="/tags/eSE/" style="font-size: 10px;">eSE</a> <a href="/tags/fastboot/" style="font-size: 10px;">fastboot</a> <a href="/tags/gt-gui/" style="font-size: 10px;">gt_gui</a> <a href="/tags/gui/" style="font-size: 10px;">gui</a> <a href="/tags/libaroma/" style="font-size: 10px;">libaroma</a> <a href="/tags/mi3/" style="font-size: 10px;">mi3</a> <a href="/tags/patchrom/" style="font-size: 10px;">patchrom</a> <a href="/tags/recovery/" style="font-size: 10px;">recovery</a> <a href="/tags/recovery-fstab/" style="font-size: 10px;">recovery.fstab</a> <a href="/tags/reject/" style="font-size: 10px;">reject</a> <a href="/tags/smali/" style="font-size: 10px;">smali</a> <a href="/tags/tps/" style="font-size: 10px;">tps</a> <a href="/tags/window/" style="font-size: 10px;">window</a> <a href="/tags/windowmanger/" style="font-size: 10px;">windowmanger</a> <a href="/tags/加密算法/" style="font-size: 10px;">加密算法</a> <a href="/tags/合作开发/" style="font-size: 10px;">合作开发</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/线程调度/" style="font-size: 10px;">线程调度</a> <a href="/tags/解耦/" style="font-size: 10px;">解耦</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yun-percy.github.io">振云的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://Yusan.github.com/">雨伞的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">一个菜鸟程序员,非计算机专业毕业,对程序有浓厚的兴趣.</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Fine</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/assets/blogImg/ever.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Fine</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">菜鸟的成长之路</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/随笔">随笔</a></li>
+		        
+					<li><a href="/page">关于我</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Ever-Never" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/EverNeverNCWU" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="源语言：-Low-malfunction_operation_system" class="article article-type-源语言：" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/02/18/Low-malfunction_operation_system/" class="article-date">
+  	<time datetime="2019-02-18T03:13:00.000Z" itemprop="datePublished">2019年2月18日</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      超低功耗操作系统的设计经验
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MCU/">MCU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SensorHub/">SensorHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI-Framework/">UI Framework</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h3><blockquote>
+<p>续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。</p>
+</blockquote>
+<p>如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的效果，与几十年前的电子表有什么区别呢。3.用运算量更小的CPU？那些丰富的安卓手表应用就跑不起来了，还不如直接戴手环。行业里这几年无论是卡西欧、摩托罗拉、三星还是苹果，在智能手表的续航时长上一直没有实质性的突破。长期以来长续航与高颜值就是鱼和熊掌的关系。</p>
+<p>但软硬结合的架构设计以及操作系统层面的自研，其实可以很好的解决这个问题。</p>
+<p>本文从CPU的选取开始，然后介绍双核架构的必要性，再进一步阐述自研OS的软硬件架构、双核通信的设计与实现、UI框架、其他省电优化的关键点，逐步勾勒出既高颜值又省电易用的智能手表操作系统。</p>
+<a id="more"></a>
+<p>[TOC]</p>
+<p><strong>原文链接</strong><br><a href="https://mp.weixin.qq.com/s?__biz=MzA3NTYzODYzMg==&amp;mid=2653580042&amp;idx=1&amp;sn=4168f8b164a649ccb3d9427ef13b0c8c&amp;chksm=84b3b90db3c4301b8aeb0f1d090991b7b78ffcca49d6dc2e7189cd40069f62ff8afe4d1f6856&amp;mpshare=1&amp;scene=1&amp;srcid=0110euV96xqIXck3GXfZZA9h#rd" target="_blank" rel="external">超低功耗操作系统的设计经验</a> </p>
+<h3 id="一、CPU的选取"><a href="#一、CPU的选取" class="headerlink" title="一、CPU的选取"></a>一、CPU的选取</h3><p>突破口还是要从耗电的根本原因上挖掘。既然电池容量和密度在短时间内有明显的天花板，那么主要还是要从CPU以及屏幕的消耗着手。从产品的角度看，如果要颜值高，操控方便，那一定要上支持高分辨率和高亮度的屏幕，并且要带有Touchpad。这样从屏幕的维度去优化功耗，也会很受限。</p>
+<p>那我们重点看一下CPU。无论是MTK的2601还是高通的2100，在保证512MRAM和其他一些周边器件供电的情况下，待机底电流都会到1mA甚至更多。选取MTK的2601或者高通的2100，肯定达不到长续航且高颜值易操控的设计目标。为什么？因为什么功能都不用，5天下来也会消耗100-200毫安时的电量，留给用户使用的电量极为有限。</p>
+<p>一般情况下，智能手表的电池容量在300-500毫安时之间，容量越大手表的尺寸也就越大，这对于手表外观设计是一个极为挑战的事情，所以当下电池容量不可能很大。佳明这样的产品也只用200-300毫安时左右的电池，个头已经很大了。</p>
+<p>那如何选择CPU？需要在满足算力的前提下，尽量选低功耗的产品，在功耗和算力上做好平衡。比如需要考虑驱动起AMOLED屏幕。需要跑起哪些应用场景？是否需要考虑音乐播放等等。最高负荷的综合应用场景是怎样的？是不是跑步+GPS+心率+抬手亮屏+通知显示+微信消息+音乐播放+屏幕显示？满足需求的最小CPU算力和RAM是多少?</p>
+<h3 id="二、双核架构"><a href="#二、双核架构" class="headerlink" title="二、双核架构"></a>二、双核架构</h3><p>只是选取了低功耗的CPU，是否就可以做到长续航呢？答案是否定的。</p>
+<p>因为智能手表有很多功能需要一直运行，比如计步、心率测量等功能，这些功能需要的运算量又不是特别大，但目前行业里还没有针对智能手表主流场景优化得非常好的CPU，这往往要求对其运算单元进行非常细致的分层控制和功耗控制。功耗优化比较精细化的CPU是Apollo系列，可惜Apollo目前还不能完整驱动全智能手表的大部分经典功能。所以双核CPU架构是当下不得不面对的设计方向：一颗相对低功耗的大核，主打用户操控和UI渲染；另外一颗极低功耗的小核，主打长时间运行的各种算法和缓存。</p>
+<h3 id="三、自研OS"><a href="#三、自研OS" class="headerlink" title="三、自研OS"></a>三、自研OS</h3><p>要低功耗主CPU，还要双核架构，行业里去哪里找这样的开源OS？这种情况下只能自己设计与实现。</p>
+<p>我们从硬件架构开始着手，看看OS的架构应该是怎样的。介绍完OS整体架构之后，我们会进一步介绍OS中的几个关键设计（双核通信，UI框架等）以及典型功耗问题的解决思路和方法（实战经验）。</p>
+<h4 id="1-硬件架构"><a href="#1-硬件架构" class="headerlink" title="1.硬件架构"></a>1.硬件架构</h4><p>要满足产品定义（全彩屏、触屏操控、支持GPS、蓝牙、wifi、离线独立听歌、跑步、骑行、游泳、睡眠、久坐、计步、心率、离线微信支付、多表盘切换、微信消息浏览与提醒、日常使用5天以上等等），硬件架构应该大致如下：</p>
+<p>图里的名词缩写解释如下：</p>
+<p><img src="/assets/watch/hardware.png" alt=""> </p>
+<p>LCM + CTP ：      LCD显示模组 + 触摸屏</p>
+<p>XTAL：                 外部晶振</p>
+<p>Diplexer：            天线共用器</p>
+<p>MOSI ：               主机输入/从机输出数据线</p>
+<p>HRM ：               心率模组</p>
+<p>INT :                     中断</p>
+<p>MIPI、GPIO、SDIO、EMMC、WIFI、BT、UART、I2C、GSensor、GPS、RTC这些就不解释了，是常见且标准的硬件模块，网上可以方便查到。</p>
+<p>这个硬件架构的核心思想就是让更多的算法，运行在小核上。通过大量实践，我们发现计步、手势、久坐、睡眠、心率、GPS、游泳算法、跑步算法以及各种缓存逻辑，放在小核上运行，可以极大的减少大核的运行时间与次数（比如大核在需要展示某项运动的实时数据的时候才去请求小核上传此刻的运算结果）。通过CPU主频的限制，让小核的功耗有明确的上限，这就有了天然的隔离和保障。如果只是放在大核运行，一是浪费CPU资源，增加唤醒和运行时间；二是有bug的时候，大核CPU主频升高之后，很难快速定位是什么原因导致的。</p>
+<h4 id="2-OS架构"><a href="#2-OS架构" class="headerlink" title="2.OS架构"></a>2.OS架构</h4><p>相应的OS架构大致如下：</p>
+<p><img src="/assets/watch/framework.png" alt=""> </p>
+<p>我们解读一下这个架构的一些要点和特色，超级省电的同时不失应用开发的灵活性和丰富性：</p>
+<ul>
+<li><p>大核与小核各自有一个OS在运行，两个OS的中间层，硬件抽象层以及kernel非常近似，几乎一致。</p>
+</li>
+<li><p>硬件抽象层可以适配多个硬件平台。</p>
+</li>
+<li><p>中间层也分层了三层，最下面是基础的公共组件，比如蓝牙，消息打包与解包的库；中间层的中部围绕着核间通信（IPC）展开，中间层的上部则是业务需要的各种Task，需要经常与IPC通信，并调用底层蓝牙等接口。</p>
+</li>
+<li><p>系统的中间层以及上层Task之间需要通过Message进行互相通讯，但要平衡好效率和解耦的关系。实战中发现过度依赖Message通讯并不好，虽然表面上编译和接口调用解耦了，但当消息多的时候系统性能会受影响，一些业务也不容易得到及时响应。尤其是存储业务。让读写消息满天飞的存储Task显然不是一个好方案。</p>
+</li>
+<li><p>本OS为实模式操作系统，虽然多Task，但是都没有独立的虚拟地址空间，可以节约不少内存管理和进程管理的额外RAM和CPU开销。</p>
+</li>
+<li><p>UI Task仅有一个，负责绘制和上屏，并通过管理不同场景的上下文来绘制不同的“应用”。</p>
+</li>
+<li><p>中间层还有辅助切换“应用”的Task，管理“应用”的生命周期，我们叫AMS Task。实际上通过UI Task和AMS Task，我们做到了让不同的开发者开发不同的“应用”，本质上每个“应用”只是UI Task的一小部分。这是为什么“应用”需要打上引号的原因。这种设计方式让应用开发者感受到“应用”开发是各自独立的，也是节约RAM并让OS超低功耗的关键一步。小系统支持“大应用”。很多用户误以为我们的系统就是安卓系统，UI效果参考下图。</p>
+</li>
+</ul>
+<p><img src="/assets/watch/UI.png" alt=""> </p>
+<h4 id="3-双核通信的设计方案"><a href="#3-双核通信的设计方案" class="headerlink" title="3.双核通信的设计方案"></a>3.双核通信的设计方案</h4><h5 id="1-双核通信的硬件架构"><a href="#1-双核通信的硬件架构" class="headerlink" title="1)双核通信的硬件架构"></a>1)双核通信的硬件架构</h5><p>双核通信的硬件架构可以简单用下图来表示：<br><img src="/assets/watch/gpio.png" alt=""> </p>
+<p>读者可以注意一下图中中断信号的命名缩写，其中TOS表示to slave, TOM表示to master。</p>
+<h5 id="2-双核通信的逻辑时序"><a href="#2-双核通信的逻辑时序" class="headerlink" title="2)双核通信的逻辑时序"></a>2)双核通信的逻辑时序</h5><p>逻辑时序如下图：</p>
+<p><img src="/assets/watch/seqence.png" alt=""><br>图中的SEQ是时序的英文缩写。</p>
+<p>大核的下载时序由大核中的Proxy Task管理，其他Task如果需要传输指令或者数据到小核，就会与Proxy Task通信，Proxy Task会通过上图的时序逻辑完成一次通信过程。</p>
+<p>大核的上传时序由大核中的Stub Task管理，由StubTask接收从小核来的指令和数据，再分发给需要这些数据和指令的Task。</p>
+<p>图中的lock spi bus，wait TOS_ACK_PINto low, unlock spi bus这些流程是关键。研发过程中我们出现的大量稳定性问题与没有正确实现这些流程强相关。下一节会详细介绍这个深刻教训。</p>
+<h5 id="3-双核通信过程中遇到的难题"><a href="#3-双核通信过程中遇到的难题" class="headerlink" title="3)双核通信过程中遇到的难题"></a>3)双核通信过程中遇到的难题</h5><p>在双核通信模块的开发过程中，遇到的难题莫过于双核通信导致界面卡顿、功能无效的问题。比如：</p>
+<ul>
+<li><p>在计步/心率表盘界面左右滑动，概率性的UI卡住，操作无效；</p>
+</li>
+<li><p>在跑步过程中抬手亮屏查看运动数据的时候，概率性的UI卡住，运动记录的更新停止；</p>
+</li>
+<li><p>骑行过程中划到心率界面，概率性的UI卡死</p>
+</li>
+<li><p>长按物理键停止游泳的时候，概率性的UI卡死，无法退出游泳功能</p>
+</li>
+</ul>
+<p>对此我们在双核通信的核心代码中加入了各种离线日志，并在UI框架上加入了No Response提示，以便在问题复现的时候，能够立刻进行问题归类，对日志进行分析，尝试定位问题原因。</p>
+<p>得出的结论是，由于小核的Proxy Task（下载时序）被卡死，导致数据无法从一端发送到另一端，再加上双核通信的数据发送是串行的，此次发送异常，导致整个双核通信模块功能无效，UI模块在对双核通信指令入队的过程中，由于队列一直处于Full状态，也导致UI模块长时间无响应，导致卡死。</p>
+<p>对于这个问题，我们针对性地进行了几次改动，前后经历了一个月左右的时间：</p>
+<p><strong>3.1)</strong>首先我们怀疑是消息上传/下载太过于频繁造成的，故对一些在两个系统之间交互得比较频繁的消息进行了稀疏化，比如：</p>
+<p>在计步表盘、心率表盘之间来回切换的时候，不断有启动/停止计步消息上报、启动/停止心率数据上报、获取心率曲线等消息在运作，针对这些消息，我们进行了稀疏化操作，做了时间阈值，在这个阈值范围内不允许重复启动与停止等类型的消息。</p>
+<p>我们梳理了系统内各个业务，进行了一轮稀疏化处理，将问题复现几率大幅降低，但治标不治本，测试部门的反馈结果，还是有低概率会发生卡死。</p>
+<p><strong>3.2)</strong>之后，我们怀疑是Touchpad事件过于频繁，对消息队列造成了影响，对此我们的解决方案是：</p>
+<p>将Touchpad的Up/Down事件上报，修改为了手势上报，比如左滑、右滑、长按、单击等，大幅度的降低了Touchpad事件的数量，这个改动带来的效果是提升了UI的流畅度，但是并未解决卡死的问题。</p>
+<p><strong>3.3)</strong>最后在偶然间通过补充了更多的日志，发现了问题点，经过仔细梳理，找到了流程上的漏洞，才彻底解决了这个问题：</p>
+<p>问题主要出现在两个核间通信的时序上，两个核的握手流程的漏洞，造成了死循环现象。大核完成了一次消息透传后，通过拉高电平告诉小核，并开了while循环等待低电平到来，小核恢复状态后通过拉低电平去通知大核，然而这个时候又轮到小核透传消息，所以又把电平拉高了。由于时序的问题，这个电平拉高的操作抢在了大核的while循环（大核下载时序图中wait TOM_INT_PIN to low这一步）之前就发生了，所以这个循环一直等不到低电平的到来，卡死的问题就这么发生了。</p>
+<p>因为卡死问题，我们重新梳理的时序与流程，在小核wait TOS_ACK_PIN to low之前加了锁，在小核拉低TOM_INT_PIN电平之后再释放锁，这样避免了握手过程中被TOM_INT_PIN电平被拉高的可能。</p>
+<h5 id="4-消息封装与透传"><a href="#4-消息封装与透传" class="headerlink" title="4)消息封装与透传"></a>4)消息封装与透传</h5><p>上一节有聊到双核通信的时序问题，这里简要介绍双核通信中消息的封装与打包拆包。双核之间所有的数据与指令，我们都通过自定义消息来封装与透传。</p>
+<p>双核通信的消息封装与透传、解包逻辑如下:</p>
+<p><img src="/assets/watch/Message.png" alt=""> </p>
+<p>通过一系列的MessageID与TransferID的映射和转换，大核的Task可以和小核里运行的Task进行相互通信。Proxy Task和Stub Task中的一系列封装，让业务Task感受不到核间通信存在。</p>
+<h4 id="4-UI框架"><a href="#4-UI框架" class="headerlink" title="4.UI框架"></a>4.UI框架</h4><p>UI框架也是本次设计的核心。我们并没有采用商用的方案，而是选取了libaroma这个开源框架（纯c写的UI框架库），并在此基础上自研了类似安卓的AMS和WMS子系统。这样的设计思路主要考虑如下关键点：</p>
+<p><img src="/assets/watch/AMS.png" alt=""> </p>
+<ul>
+<li><p>UI框架是app群的关键基础，每一行代码都应该深度掌握。</p>
+</li>
+<li><p>项目周期太紧张，没有时间去谈商用方案，另外成本是考虑点，研发节奏也是一个考虑点。</p>
+</li>
+<li><p>完全开源框架方便定制和应对超低功耗的苛刻要求。超低功耗对RAM尺寸和CPU主频有极为苛刻的要求。我们最复杂的场景所对应的RAM资源控制在了4MB以内，主频控制在了208Mhz之下，这时候UI框架和绘制系统不深度掌握，是无法在短时间内完成项目的。另外libaroma本身是一个轻量级的GUI库。</p>
+</li>
+<li><p>Libaroma还比较初级，不能满足应用开发的需求，必须在此基础上加上MVC框架以及消息分发机制，就是类安卓的AMS（Activity Manager Service），我们将AMS运行在了AMS Task之中；另外转场动画的缺失使得我们必须自己封装窗口管理系统（WMS），我们放在了UI Task里。</p>
+</li>
+<li><p>AMS的封装有利于app开发工作的解耦以及并行展开。</p>
+</li>
+</ul>
+<p>下面是心率界面初始化的一段示例代码，这些回调涉及了界面的生命周期的管理，很像安卓的activity。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">LIBAROMA_CONTEXTlibaroma_hrm_context =</div><div class="line"></div><div class="line">&#123;</div><div class="line"></div><div class="line">.on_create =hrm_on_create,</div><div class="line"></div><div class="line">.on_resume =hrm_on_resume,</div><div class="line"></div><div class="line">.on_pause =hrm_on_pause,</div><div class="line"></div><div class="line">.on_destroy =hrm_on_destroy,</div><div class="line"></div><div class="line">.on_start =hrm_on_start ,</div><div class="line"></div><div class="line">.on_finger =hrm_on_finger,</div><div class="line"></div><div class="line">.event_handler =hrm_event_handler,</div><div class="line"></div><div class="line">…</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>为了减少调度负担，我们的OS是基于实模式的操作系统，尽管如此，通过我们自己封装的AMS+libaroma，应用开发者开发app的感受与虚模式的操作系统很接近，彼此之间互不影响，耦合的地方被我们藏了起来。</p>
+<p>AMS Task可以大致用下图来表现，蓝色虚线框内主要依赖libaroma提供的控件来扩展和绘制。每个“应用”都有自己的activity stack，所有“应用”的activity stack统一用LRUcache来管理，应对有限RAM资源的恶劣环境。</p>
+<p>基于这个app框架，开发了不少“应用”：</p>
+<p>几十种表盘、天气、通知、音乐、各种跑步app、健走、游泳、骑行、微信支付、秒表、倒计时、睡眠、设置、篮球直播等等，复杂一些的应用2000-3000行代码，简单一些的几百行就可以。相对比较复杂的，是吃CPU以及内存资源的音乐app和跑步听歌的场景，这时候需要打开GPS记录跑步轨迹，同时心率监测和音乐播放在同时进行，用户还在这个时候有可能收到微信通知以及进行抬手亮屏以查看跑步状态，切歌和阅读微信消息的操作。复杂场景下双核的威力就更能显现出来。</p>
+<h4 id="5-功耗收敛"><a href="#5-功耗收敛" class="headerlink" title="5.功耗收敛"></a>5.功耗收敛</h4><p>要使自研OS低功耗且稳定，除了因地制宜的硬件与软件设计之外，还需针对硬件电路，器件驱动以及OS层的各种问题进行联合排查和优化。核心方法就是通过针对性的测试以及相关的摘件实验来缩小范围，然后通过软硬件的设计、代码与电路的走查等方式抓住根本原因。下面是一些典型问题的经验总结。</p>
+<h5 id="1-大核CPU运行功耗过高"><a href="#1-大核CPU运行功耗过高" class="headerlink" title="1)大核CPU运行功耗过高"></a>1)大核CPU运行功耗过高</h5><p>现象描述：主CPU从休眠状态唤醒、功耗过高，运行状态的下功耗也比较高。</p>
+<p>分析方法：自研PCB与供应商开发板硬件相对比</p>
+<p>问题根因：某些所选用的电容器件容值不对</p>
+<p>解决方案：更换电容。</p>
+<h5 id="2-心率测量后功耗增加"><a href="#2-心率测量后功耗增加" class="headerlink" title="2)心率测量后功耗增加"></a>2)心率测量后功耗增加</h5><p>现象描述：自动心率开启后，功耗增加200uA。</p>
+<p>分析方法：硬件研发走查相关电路设计。</p>
+<p>原因分析：心率IC的中断信号为上升沿出发，上升沿触发的中断不应该加上拉电阻。</p>
+<p>解决方案：去掉心率IC 中断信号上面的上拉电阻。</p>
+<h5 id="3-BLE-在链接状态下的功耗过高"><a href="#3-BLE-在链接状态下的功耗过高" class="headerlink" title="3)BLE 在链接状态下的功耗过高"></a>3)BLE 在链接状态下的功耗过高</h5><p>现象描述：手表在连接Android手机或者IOS手机时，无法待机、功耗较高</p>
+<p>分析方法：通过测试进行排查，缩小范围，如果不连接蓝牙的时候，或者在蓝牙传输的时候，没有功耗明显过高的情况。所以怀疑是蓝牙在非传输状态下的通讯周期长短的问题。这个在很多产品中都有类似的经历。</p>
+<p>原因分析：BLE 连接间隔时间较短，BLE持续的通讯导致功耗过高。</p>
+<p>解决方案：动态调节BLE的连接间隔时间，在需要BLE通讯时将连接间隔调低，数据传输完成后，将连接间隔调高，让系统休眠下去。</p>
+<p>就是在ble的各种状态下要设置好正确的连接间隔。</p>
+<p>如下的示例代码中，红色部分不能少了：</p>
+<pre><code>static bt_status_t bt_app_common_event_callback(bt_msg_type_t msg, bt_status_t status, void *buff)   
+{
+    ……
+    switch (msg)    
+    {
+    ……
+    case BT_GAP_LE_CONNECT_IND:   /* 0x1000000a */
+        {
+        bt_gap_le_connection_ind_t *connection_ind = (bt_gap_le_connection_ind_t *)buff;
+        ble_conn_handle = connection_ind-&gt;connection_handle;
+        gattc_disc(FIRST_TIME_DISC);
+        global_ble_status = broadcast_ble_status(BLE_STATUS_CONNECTED);            
+        ble_app_stop_advertise_data();
+
+          ble_update_connection_interval(ble_conn_handle,BLE_CONN_LOW_POWER);
+    }
+    break;   
+    ……
+    ……
+</code></pre><h5 id="4-手表设置了密码过后，功耗增加"><a href="#4-手表设置了密码过后，功耗增加" class="headerlink" title="4)手表设置了密码过后，功耗增加"></a>4)手表设置了密码过后，功耗增加</h5><p>  现象描述：在手机APP 上面设置了手表密码之后，手表的功耗增加2mA</p>
+<p>分析方法：通过代码分析过程中涉及的所有硬件器件的状态。在这个过程中，相关代码打开了Capsensor这个硬件器件。</p>
+<p>原因分析：Capsensor 设置的模式为full-power mode ，这种模式下的功耗过高。</p>
+<p>解决方案：将Capsensor 设置为low-power mode。</p>
+<p>备注：由于后期测试Capsensor 测量不准，最终改为了HRM 红外去检测佩戴状态</p>
+<h5 id="5-开始游泳后，功耗增加"><a href="#5-开始游泳后，功耗增加" class="headerlink" title="5)开始游泳后，功耗增加"></a>5)开始游泳后，功耗增加</h5><p>现象描述：进入游泳模式，灭屏测试2分钟后，手表电流在3.xmA，可是退出游泳模式后回到表盘，手表待机电流功耗仍然3.xmA</p>
+<p>分析方法：将游泳算法屏蔽掉，问题消失。所以将问题定位在游泳算法的退出机制。</p>
+<p>原因分析：游泳算法被disable的时候没有正确置空游泳识别函数（之前是通过设置回调函数的方式挂载游泳识别函数），导致系统认为游泳识别的函数一直在被挂载，从而不停的执行游泳识别函数。</p>
+<p>如下是修改前后的示例代码（看加减号提示的那几行）：</p>
+<pre><code>pace_algo_task.c
+
+Case ALGO_CONFIG_DISALBE:
+
+{
+
+     endSwim(swimCallback)；
+
+-    Algorithm_select(ALGORITHM_SELECT_SWIM,0);
+
++    SWIMDetectCallBackRegister(NULL);
+
++    Algorithm_select(ALGORITHM_SELECT_SWIM,0);
+
+}
+
+Break;
+
+Default;
+</code></pre><h5 id="6-使用过程中功耗增加200uA"><a href="#6-使用过程中功耗增加200uA" class="headerlink" title="6)使用过程中功耗增加200uA"></a>6)使用过程中功耗增加200uA</h5><p>现象描述：放置一段时间、高耗电场景后、或者插入充电器开机，待机功耗增加</p>
+<p>分析方法：测试的时候经常发现插拔usb会有这个现象。通过摘件的方式把电量计 IC去掉的时候，发现问题消失。于是将问题目标缩小到电量计IC上。然后请供应商来一起帮助进一步分析和定位。</p>
+<p>原因分析：电量计 IC 驱动软件的初始化问题。</p>
+<p>解决办法：修改电量计IC的初始化代码</p>
+<h4 id="四、总结一下"><a href="#四、总结一下" class="headerlink" title="四、总结一下"></a>四、总结一下</h4><p>我们内部大量的功耗测试与验收数据证明了这种设计的有效性，项目落地之后大量的用户反馈也充分证明了这个低功耗高颜值方案的价值。在我们发布4个多月后某世界顶级厂商也发布了类似的产品。</p>
+<p>如何做到？除了常规的硬件器件选型和硬件设计之外，本文总结的经验如下：</p>
+<p>1.CPU选取需要尽可能平衡好功耗与算力的关系</p>
+<p>2.双核架构需要引入，充分利用小核做更多算法与缓存工作，也有利于解耦</p>
+<p>3.通过自研OS，可以将算力和RAM节约到极致。踏踏实实花7-8个月写大概30万行代码，可以收敛到稳定状态</p>
+<p>4.做好双核通信的设计与实现，解决稳定性和通信效率问题</p>
+<p>5.选择合适的UI框架，设计与封装AMS Task，应用开发可以独立展开，事半功倍</p>
+<p>6.根据器件的软硬件特性，需要从器件硬件电路，驱动和OS几个层面一起全面走查，逐一排查和解决功耗问题。</p>
+<h4 id="五、作者介绍"><a href="#五、作者介绍" class="headerlink" title="五、作者介绍"></a>五、作者介绍</h4><p><strong>黄石柱</strong>：真时科技研发副总裁，腾讯移动客户端与操作系统技术专家</p>
+<p>特别感谢如下同学，他们为操作系统的设计与实现付出了大量的智慧和心血，为此次总结提供了不少的宝贵意见和参考素材。</p>
+<p>1.<strong>张巨广</strong></p>
+<p>腾讯车联网系统架构师，真时科技操作系统研发负责人</p>
+<p>2.<strong>秦耕</strong></p>
+<p>真时科技操作系统研发负责人，腾讯操作系统研发高级工程师</p>
+<p>3.<strong>马伟富</strong></p>
+<p>真时科技驱动软件高级工程师，TCL驱动软件高级工程师</p>
+<p>4.<strong>张一凡</strong></p>
+<p>真时科技操作系统高级工程师，UI框架主设计师</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/18/volte/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">S8 Volte</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2019 Fine
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
