@@ -6,17 +6,13 @@
   <title>超低功耗操作系统的设计经验 | Fine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="导语
-续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。
-
-如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的">
+续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的效果">
 <meta property="og:type" content="article">
 <meta property="og:title" content="超低功耗操作系统的设计经验">
 <meta property="og:url" content="http://yoursite.com/2019/02/18/Low-malfunction_operation_system/index.html">
 <meta property="og:site_name" content="Fine">
 <meta property="og:description" content="导语
-续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。
-
-如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的">
+续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的效果">
 <meta property="og:image" content="http://yoursite.com/assets/watch/hardware.png">
 <meta property="og:image" content="http://yoursite.com/assets/watch/framework.png">
 <meta property="og:image" content="http://yoursite.com/assets/watch/UI.png">
@@ -24,13 +20,11 @@
 <meta property="og:image" content="http://yoursite.com/assets/watch/seqence.png">
 <meta property="og:image" content="http://yoursite.com/assets/watch/Message.png">
 <meta property="og:image" content="http://yoursite.com/assets/watch/AMS.png">
-<meta property="og:updated_time" content="2019-02-18T04:30:10.399Z">
+<meta property="og:updated_time" content="2019-02-18T06:50:55.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="超低功耗操作系统的设计经验">
 <meta name="twitter:description" content="导语
-续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。
-
-如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的">
+续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的效果">
 <meta name="twitter:image" content="http://yoursite.com/assets/watch/hardware.png">
   
     <link rel="alternative" href="/atom.xml" title="Fine" type="application/atom+xml">
@@ -242,11 +236,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h3><blockquote>
-<p>续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。</p>
+<p>续航时长一直是智能手表的最大痛点。目前的安卓智能手表，在正常使用的情况下，最多使用1-2天（那些宣称能使用5天以上的，其实要阉割很多功能，一般只能看时间和计步，与手环没有什么差别）。如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的效果，与几十年前的电子表有什么区别呢。3.用运算量更小的CPU？那些丰富的安卓手表应用就跑不起来了，还不如直接戴手环。行业里这几年无论是卡西欧、摩托罗拉、三星还是苹果，在智能手表的续航时长上一直没有实质性的突破。长期以来长续航与高颜值就是鱼和熊掌的关系。但软硬结合的架构设计以及操作系统层面的自研，其实可以很好的解决这个问题。本文从CPU的选取开始，然后介绍双核架构的必要性，再进一步阐述自研OS的软硬件架构、双核通信的设计与实现、UI框架、其他省电优化的关键点，逐步勾勒出既高颜值又省电易用的智能手表操作系统。</p>
 </blockquote>
-<p>如何解决这个问题？行业里没有太好的方案。1.加大电池容量？手表的个头不可能太大，人们需要戴的是手表而不是“手雷”。2.不用全触摸的真彩屏？可以，那就用按键和低功耗的屏幕吧，反正佳明就是这样，这样的操作与显示的效果，与几十年前的电子表有什么区别呢。3.用运算量更小的CPU？那些丰富的安卓手表应用就跑不起来了，还不如直接戴手环。行业里这几年无论是卡西欧、摩托罗拉、三星还是苹果，在智能手表的续航时长上一直没有实质性的突破。长期以来长续航与高颜值就是鱼和熊掌的关系。</p>
-<p>但软硬结合的架构设计以及操作系统层面的自研，其实可以很好的解决这个问题。</p>
-<p>本文从CPU的选取开始，然后介绍双核架构的必要性，再进一步阐述自研OS的软硬件架构、双核通信的设计与实现、UI框架、其他省电优化的关键点，逐步勾勒出既高颜值又省电易用的智能手表操作系统。</p>
 <a id="more"></a>
 <p>[TOC]</p>
 <p><strong>原文链接</strong><br><a href="https://mp.weixin.qq.com/s?__biz=MzA3NTYzODYzMg==&amp;mid=2653580042&amp;idx=1&amp;sn=4168f8b164a649ccb3d9427ef13b0c8c&amp;chksm=84b3b90db3c4301b8aeb0f1d090991b7b78ffcca49d6dc2e7189cd40069f62ff8afe4d1f6856&amp;mpshare=1&amp;scene=1&amp;srcid=0110euV96xqIXck3GXfZZA9h#rd" target="_blank" rel="external">超低功耗操作系统的设计经验</a> </p>
